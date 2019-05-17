@@ -3,7 +3,10 @@ package com.miage.bigdata;
 import com.google.gson.Gson;
 import com.miage.bigdata.controllers.TodoItemController;
 import com.miage.bigdata.model.TodoItem;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class App 
 {
     private static final Gson gson = new Gson();
@@ -13,6 +16,8 @@ public class App
 
     public static void main( String[] args )
     {
+        SpringApplication.run(App.class, args);
+
         TodoItem johnDoe = TodoItem.builder().name("John Doe").category("Category 1")
                 .complete(false).build();
 
