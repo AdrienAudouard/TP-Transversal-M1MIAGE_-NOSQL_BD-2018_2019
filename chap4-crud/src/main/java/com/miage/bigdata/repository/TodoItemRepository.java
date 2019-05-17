@@ -12,8 +12,10 @@ import com.microsoft.azure.documentdb.Document;
 import com.microsoft.azure.documentdb.DocumentClient;
 import com.microsoft.azure.documentdb.DocumentClientException;
 import com.microsoft.azure.documentdb.DocumentCollection;
+import org.springframework.stereotype.Repository;
 
-public class TodoItemRepository implements Repository {
+@Repository
+public class TodoItemRepository {
     // The name of our database.
     private static final String DATABASE_ID = "TestDB";
 
@@ -35,10 +37,10 @@ public class TodoItemRepository implements Repository {
     // retrieve self links.
     private static DocumentCollection collectionCache;
 
-    @Override
-    public TodoItem createTodoItem(TodoItem todoItem) {
+    public TodoItem createTodoItem(TodoItem item) {
+
         // Serialize the TodoItem as a JSON Document.
-        Document todoItemDocument = new Document(gson.toJson(todoItem));
+        Document todoItemDocument = new Document(gson.toJson(item));
 
         // Annotate the document as a TodoItem for retrieval (so that we can
         // store multiple entity types in the collection).
@@ -57,7 +59,6 @@ public class TodoItemRepository implements Repository {
         return gson.fromJson(todoItemDocument.toString(), TodoItem.class);
     }
 
-    @Override
     public TodoItem readTodoItem(String id) {
         // Retrieve the document by id using our helper method.
         Document todoItemDocument = getDocumentById(id);
@@ -70,7 +71,6 @@ public class TodoItemRepository implements Repository {
         }
     }
 
-    @Override
     public List<TodoItem> readTodoItems() {
         List<TodoItem> todoItems = new ArrayList<TodoItem>();
 
@@ -89,7 +89,25 @@ public class TodoItemRepository implements Repository {
         return todoItems;
     }
 
-    @Override
+    public TodoItem updateTodoItem(TodoItem todoItem) {
+        // Retrieve the document from the database
+        Document todoItemDocument = getDocumentById(todoItem.getId());
+
+        todoItemDocument.set("category", todoItem.getCategory());
+        todoItemDocument.set("name", todoItem.getName());
+
+        try {
+            // Persist/replace the updated document.
+            todoItemDocument = keyValueClient.replaceDocument(todoItemDocument,
+                    null).getResource();
+        } catch (DocumentClientException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return gson.fromJson(todoItemDocument.toString(), TodoItem.class);
+    }
+
     public TodoItem updateTodoItem(String id, boolean isComplete) {
         // Retrieve the document from the database
         Document todoItemDocument = getDocumentById(id);
@@ -112,7 +130,6 @@ public class TodoItemRepository implements Repository {
         return gson.fromJson(todoItemDocument.toString(), TodoItem.class);
     }
 
-    @Override
     public boolean deleteTodoItem(String id) {
         // DocumentDB refers to documents by self link rather than id.
 
