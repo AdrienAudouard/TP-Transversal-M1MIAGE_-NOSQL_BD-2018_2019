@@ -1,4 +1,4 @@
-package com.miage.bigdata.model;
+package com.miage.bigdata.entity;
 
 
 import lombok.*;

@@ -1,18 +1,19 @@
-package com.miage.bigdata.dao;
+package com.miage.bigdata.repository;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
-import com.miage.bigdata.model.TodoItem;
+import com.miage.bigdata.entity.TodoItem;
+import com.miage.bigdata.client.KeyValueClient;
 import com.microsoft.azure.documentdb.Database;
 import com.microsoft.azure.documentdb.Document;
 import com.microsoft.azure.documentdb.DocumentClient;
 import com.microsoft.azure.documentdb.DocumentClientException;
 import com.microsoft.azure.documentdb.DocumentCollection;
 
-public class DocDbDao implements TodoDao {
+public class TodoItemRepository implements Repository {
     // The name of our database.
     private static final String DATABASE_ID = "TestDB";
 
@@ -23,7 +24,7 @@ public class DocDbDao implements TodoDao {
     private static Gson gson = new Gson();
 
     // The DocumentDB Client
-    private static DocumentClient documentClient = DocumentClientFactory
+    private static DocumentClient keyValueClient = KeyValueClient
             .getDocumentClient();
 
     // Cache for the database object, so we don't have to query for it to
@@ -45,7 +46,7 @@ public class DocDbDao implements TodoDao {
 
         try {
             // Persist the document using the DocumentClient.
-            todoItemDocument = documentClient.createDocument(
+            todoItemDocument = keyValueClient.createDocument(
                     getTodoCollection().getSelfLink(), todoItemDocument, null,
                     false).getResource();
         } catch (DocumentClientException e) {
@@ -74,7 +75,7 @@ public class DocDbDao implements TodoDao {
         List<TodoItem> todoItems = new ArrayList<TodoItem>();
 
         // Retrieve the TodoItem documents
-        List<Document> documentList = documentClient
+        List<Document> documentList = keyValueClient
                 .queryDocuments(getTodoCollection().getSelfLink(),
                         "SELECT * FROM root r WHERE r.entityType = 'todoItem'",
                         null).getQueryIterable().toList();
@@ -101,7 +102,7 @@ public class DocDbDao implements TodoDao {
 
         try {
             // Persist/replace the updated document.
-            todoItemDocument = documentClient.replaceDocument(todoItemDocument,
+            todoItemDocument = keyValueClient.replaceDocument(todoItemDocument,
                     null).getResource();
         } catch (DocumentClientException e) {
             e.printStackTrace();
@@ -120,7 +121,7 @@ public class DocDbDao implements TodoDao {
 
         try {
             // Delete the document by self link.
-            documentClient.deleteDocument(todoItemDocument.getSelfLink(), null);
+            keyValueClient.deleteDocument(todoItemDocument.getSelfLink(), null);
         } catch (DocumentClientException e) {
             e.printStackTrace();
             return false;
@@ -132,7 +133,7 @@ public class DocDbDao implements TodoDao {
     private Database getTodoDatabase() {
         if (databaseCache == null) {
             // Get the database if it exists
-            List<Database> databaseList = documentClient
+            List<Database> databaseList = keyValueClient
                     .queryDatabases(
                             "SELECT * FROM root r WHERE r.id='" + DATABASE_ID
                                     + "'", null).getQueryIterable().toList();
@@ -147,7 +148,7 @@ public class DocDbDao implements TodoDao {
                     Database databaseDefinition = new Database();
                     databaseDefinition.setId(DATABASE_ID);
 
-                    databaseCache = documentClient.createDatabase(
+                    databaseCache = keyValueClient.createDatabase(
                             databaseDefinition, null).getResource();
                 } catch (DocumentClientException e) {
                     // TODO: Something has gone terribly wrong - the app wasn't
@@ -164,7 +165,7 @@ public class DocDbDao implements TodoDao {
     private DocumentCollection getTodoCollection() {
         if (collectionCache == null) {
             // Get the collection if it exists.
-            List<DocumentCollection> collectionList = documentClient
+            List<DocumentCollection> collectionList = keyValueClient
                     .queryCollections(
                             getTodoDatabase().getSelfLink(),
                             "SELECT * FROM root r WHERE r.id='" + COLLECTION_ID
@@ -180,7 +181,7 @@ public class DocDbDao implements TodoDao {
                     DocumentCollection collectionDefinition = new DocumentCollection();
                     collectionDefinition.setId(COLLECTION_ID);
 
-                    collectionCache = documentClient.createCollection(
+                    collectionCache = keyValueClient.createCollection(
                             getTodoDatabase().getSelfLink(),
                             collectionDefinition, null).getResource();
                 } catch (DocumentClientException e) {
@@ -197,7 +198,7 @@ public class DocDbDao implements TodoDao {
 
     private Document getDocumentById(String id) {
         // Retrieve the document using the DocumentClient.
-        List<Document> documentList = documentClient
+        List<Document> documentList = keyValueClient
                 .queryDocuments(getTodoCollection().getSelfLink(),
                         "SELECT * FROM root r WHERE r.id='" + id + "'", null)
                 .getQueryIterable().toList();

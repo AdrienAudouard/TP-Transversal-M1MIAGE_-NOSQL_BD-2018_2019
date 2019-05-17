@@ -1,11 +1,11 @@
-package com.miage.bigdata.dao;
+package com.miage.bigdata.repository;
 
 
-import com.miage.bigdata.model.TodoItem;
+import com.miage.bigdata.entity.TodoItem;
 
 import java.util.List;
 
-public interface TodoDao {
+public interface Repository {
     /**
      * @return A list of TodoItems
      */
