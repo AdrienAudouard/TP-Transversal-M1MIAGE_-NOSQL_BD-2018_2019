@@ -14,7 +14,7 @@ import com.microsoft.azure.documentdb.DocumentCollection;
 
 public class DocDbDao implements TodoDao {
     // The name of our database.
-    private static final String DATABASE_ID = "ToDoList";
+    private static final String DATABASE_ID = "TestDB";
 
     // The name of our collection.
     private static final String COLLECTION_ID = "items";
