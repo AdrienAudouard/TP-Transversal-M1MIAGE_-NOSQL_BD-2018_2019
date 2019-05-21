@@ -1,4 +1,4 @@
-package com.miage.bigdata;
+package com.miage.bigdata.mains;
 
 /**
  * Hello world!
