@@ -1,8 +1,8 @@
-package com.miage.bigdata.daos;
-
-import java.util.List;
+package com.miage.bigdata.daos.itemDao;
 
 import com.miage.bigdata.models.TodoItem;
+
+import java.util.List;
 
 public interface TodoDao {
     /**

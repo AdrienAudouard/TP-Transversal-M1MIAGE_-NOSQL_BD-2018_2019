@@ -1,7 +1,7 @@
 package com.miage.bigdata.controllers;
 
-import com.miage.bigdata.daos.TodoDao;
-import com.miage.bigdata.daos.TodoDaoFactory;
+import com.miage.bigdata.daos.itemDao.TodoDao;
+import com.miage.bigdata.daos.itemDao.TodoDaoFactory;
 import com.miage.bigdata.models.TodoItem;
 import lombok.NonNull;
 

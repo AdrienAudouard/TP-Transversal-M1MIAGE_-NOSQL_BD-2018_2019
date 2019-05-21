@@ -1,25 +1,17 @@
-package com.miage.bigdata.daos;
+package com.miage.bigdata.daos.dbDao;
+
+import com.google.gson.Gson;
+import com.miage.bigdata.daos.DocumentClientFactory;
+import com.miage.bigdata.daos.itemDao.TodoDao;
+import com.miage.bigdata.models.TodoItem;
+import com.microsoft.azure.documentdb.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gson.Gson;
-import com.miage.bigdata.models.TodoItem;
-import com.microsoft.azure.documentdb.Database;
-import com.microsoft.azure.documentdb.Document;
-import com.microsoft.azure.documentdb.DocumentClient;
-import com.microsoft.azure.documentdb.DocumentClientException;
-import com.microsoft.azure.documentdb.DocumentCollection;
-
-public class DocDbDao implements TodoDao {
-    // The name of our database.
-    private static final String DATABASE_ID = "TestDB";
-
+public class DocumentDbDao extends DbDao implements TodoDao {
     // The name of our collection.
     private static final String COLLECTION_ID = "TestCollection";
-
-    // We'll use Gson for POJO <=> JSON serialization for this example.
-    private static Gson gson = new Gson();
 
     // The DocumentDB Client
     private static DocumentClient documentClient = DocumentClientFactory

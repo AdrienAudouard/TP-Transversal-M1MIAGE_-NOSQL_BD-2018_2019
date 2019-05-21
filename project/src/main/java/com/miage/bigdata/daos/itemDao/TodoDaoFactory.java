@@ -1,14 +1,13 @@
-package com.miage.bigdata.daos;
+package com.miage.bigdata.daos.itemDao;
 
-import com.miage.bigdata.daos.DocDbDao;
-import com.miage.bigdata.daos.TodoDao;
+import com.miage.bigdata.daos.dbDao.DocumentDbDao;
 
 public class TodoDaoFactory {
     private static TodoDao myTodoDao;
 
     public static TodoDao getDao() {
         if (myTodoDao == null) {
-            myTodoDao = new DocDbDao();
+            myTodoDao = new DocumentDbDao();
         }
         return myTodoDao;
     }

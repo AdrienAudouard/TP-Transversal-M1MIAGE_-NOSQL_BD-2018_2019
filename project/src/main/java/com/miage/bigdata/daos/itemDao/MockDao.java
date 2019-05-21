@@ -1,14 +1,13 @@
-package com.miage.bigdata.daos;
+package com.miage.bigdata.daos.itemDao;
+
+import com.miage.bigdata.models.TodoItem;
+import lombok.NonNull;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.miage.bigdata.models.TodoItem;
-import lombok.NonNull;
-
-import org.apache.commons.lang3.StringUtils;
 
 
 public class MockDao implements TodoDao {
