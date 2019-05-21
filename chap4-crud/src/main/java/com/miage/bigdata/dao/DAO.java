@@ -5,7 +5,7 @@ import com.miage.bigdata.entity.TodoItem;
 
 import java.util.List;
 
-public interface Repository {
+public interface DAO {
     /**
      * @return A list of TodoItems
      */
