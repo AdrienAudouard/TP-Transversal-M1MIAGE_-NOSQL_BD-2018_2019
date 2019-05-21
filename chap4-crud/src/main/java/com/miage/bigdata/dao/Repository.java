@@ -1,4 +1,4 @@
-package com.miage.bigdata.repository;
+package com.miage.bigdata.dao;
 
 
 import com.miage.bigdata.entity.TodoItem;

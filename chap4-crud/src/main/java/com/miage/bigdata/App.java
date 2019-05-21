@@ -1,23 +1,19 @@
 package com.miage.bigdata;
 
 import com.google.gson.Gson;
-import com.miage.bigdata.service.TodoItemService;
+import com.miage.bigdata.controller.TodoItemController;
 import com.miage.bigdata.entity.TodoItem;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
-public class App 
+public class App
 {
     private static final Gson gson = new Gson();
-    private static TodoItemService todoItemService = new TodoItemService();
+    private static TodoItemController todoItemController = new TodoItemController();
     private static final String MESSAGE_ERROR_INVALID_METHOD = "{'error': 'Invalid method'}";
     private static String apiResponse = MESSAGE_ERROR_INVALID_METHOD;
 
     public static void main( String[] args )
     {
-        SpringApplication.run(App.class, args);
-        //testCrudItem();
+        testCrudItem();
     }
 
     public static void testCrudItem() {
@@ -27,7 +23,7 @@ public class App
         TodoItem jeanValjean = TodoItem.builder().name("Jean Valjean").category("Category 2")
                 .complete(true).build();
 
-        apiResponse = gson.toJson(todoItemService.createTodoItem(johnDoe));
+        apiResponse = gson.toJson(todoItemController.createTodoItem(johnDoe));
         System.out.println( "Create Todos 1: "+ apiResponse);
 
         //apiResponse = gson.toJson(todoItemService.createTodoItem(jeanValjean));

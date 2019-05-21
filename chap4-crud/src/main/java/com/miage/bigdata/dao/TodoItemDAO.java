@@ -1,4 +1,4 @@
-package com.miage.bigdata.repository;
+package com.miage.bigdata.dao;
 
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ import com.microsoft.azure.documentdb.DocumentCollection;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class TodoItemRepository {
+public class TodoItemDAO {
     // The name of our database.
     private static final String DATABASE_ID = "TestDB";
 

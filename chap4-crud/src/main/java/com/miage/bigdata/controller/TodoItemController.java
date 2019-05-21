@@ -1,54 +1,36 @@
 package com.miage.bigdata.controller;
 
-import com.miage.bigdata.entity.TodoItem;
-import com.miage.bigdata.service.TodoItemService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
 import java.util.List;
 
-@RestController
-@RequestMapping(value="/todos")
+import com.miage.bigdata.dao.TodoItemDAO;
+import com.miage.bigdata.entity.TodoItem;
+import lombok.NonNull;
+
 public class TodoItemController {
 
-    @Autowired
-    private TodoItemService service;
+    private TodoItemDAO dao = new TodoItemDAO();
 
-    @GetMapping("/example")
-    public String example() {
-        return "Hello User !! " + new Date();
+    public TodoItem createTodoItem(@NonNull TodoItem todoItem) {
+        return dao.createTodoItem(todoItem);
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<TodoItem>> getTodoItems() {
-        List<TodoItem> body = service.getTodoItems();
-        return new ResponseEntity<>(body, HttpStatus.ACCEPTED);
+    public boolean deleteTodoItem(@NonNull String id) {
+        return dao.deleteTodoItem(id);
     }
 
-    @RequestMapping(value ="/{id:.*}", method = RequestMethod.GET)
-    public ResponseEntity<TodoItem> getTodoItemById(@PathVariable(value="id") String id) {
-        TodoItem body = service.getTodoItemById(id);
-        return new ResponseEntity<>(body, HttpStatus.ACCEPTED);
+    public TodoItem getTodoItemById(@NonNull String id) {
+        return dao.readTodoItem(id);
     }
 
-    @RequestMapping(value ="/{id:.*}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleteTodoItem(@PathVariable(value="id") String id) {
-        service.deleteTodoItem(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public List<TodoItem> getTodoItems() {
+        return dao.readTodoItems();
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> createTodoItem(@RequestBody TodoItem todoItem) {
-        service.createTodoItem(todoItem);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public TodoItem updateTodoItem(@NonNull String id, boolean isComplete) {
+        return dao.updateTodoItem(id, isComplete);
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity<?> updateTodoItem(@RequestBody TodoItem todoItem) {
-        service.updateTodoItem(todoItem);
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    public TodoItem updateTodoItem(@NonNull TodoItem todoItem) {
+        return dao.updateTodoItem(todoItem);
     }
 }
