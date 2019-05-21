@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f50ed683-11ac-4402-816b-48983f829dab" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../examples/azure-comos-db-graph-java/azure-cosmos-db-graph-java-getting-started" beforeDir="false" afterPath="$PROJECT_DIR$/../examples/azure-comos-db-graph-java/azure-cosmos-db-graph-java-getting-started" afterDir="false" />
+    <list default="true" id="18de0c40-b985-43ee-99cf-34b96f7a26e4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/azure-cosmos-db-graph-java-getting-started" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../project/.idea/workspace.xml" afterDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/out/" />
-    <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,7 +12,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="260" />
@@ -21,17 +20,44 @@
     <option name="width" value="1400" />
     <option name="height" value="1000" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="azure-comos-db-graph-java" type="b2602c69:ProjectViewProjectNode" />
+              <item name="azure-comos-db-graph-java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="azure-comos-db-graph-java" type="b2602c69:ProjectViewProjectNode" />
+              <item name="azure-comos-db-graph-java" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="azure-comos-db-graph-java" type="b2602c69:ProjectViewProjectNode" />
+              <item name="azure-comos-db-graph-java" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="GetStarted" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../examples/azure-cosmos-db-graph-java-getting-started" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -50,17 +76,17 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f50ed683-11ac-4402-816b-48983f829dab" name="Default Changelist" comment="" />
-      <created>1558448032745</created>
+      <changelist id="18de0c40-b985-43ee-99cf-34b96f7a26e4" name="Default Changelist" comment="" />
+      <created>1558448734238</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1558448032745</updated>
-      <workItem from="1558448046525" duration="647000" />
+      <updated>1558448734238</updated>
+      <workItem from="1558448735941" duration="121000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="647000" />
+    <option name="totallyTimeSpent" value="121000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="0" width="1922" height="1055" extended-state="6" />
@@ -70,7 +96,7 @@
       <window_info id="UI Designer" />
       <window_info id="Capture Tool" />
       <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24973205" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" />
@@ -97,5 +123,21 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
