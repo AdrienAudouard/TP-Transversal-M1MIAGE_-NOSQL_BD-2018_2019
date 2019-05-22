@@ -2,38 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="18de0c40-b985-43ee-99cf-34b96f7a26e4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../.idea/TP-Transversal-M1MIAGE_-NOSQL_BD-2018_2019.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GetStarted/Program.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/remote.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../TP-BigData-M1-MIAGE/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../TP-BigData-M1-MIAGE/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../example/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../documentdb-java-todo-app-master/.classpath" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../example/.project" beforeDir="false" afterPath="$PROJECT_DIR$/../documentdb-java-todo-app-master/.project" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../example/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../documentdb-java-todo-app-master/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../example/WebContent/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/../documentdb-java-todo-app-master/WebContent/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../example/WebContent/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../documentdb-java-todo-app-master/WebContent/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../example/WebContent/assets/todo.js" beforeDir="false" afterPath="$PROJECT_DIR$/../documentdb-java-todo-app-master/WebContent/assets/todo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../example/WebContent/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../documentdb-java-todo-app-master/WebContent/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../example/media/documentdb-java-application/image1.png" beforeDir="false" afterPath="$PROJECT_DIR$/../documentdb-java-todo-app-master/media/documentdb-java-application/image1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../example/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../documentdb-java-todo-app-master/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../example/src/com/microsoft/azure/documentdb/sample/ApiServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../documentdb-java-todo-app-master/src/com/microsoft/azure/documentdb/sample/ApiServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../example/src/com/microsoft/azure/documentdb/sample/controller/TodoItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../documentdb-java-todo-app-master/src/com/microsoft/azure/documentdb/sample/controller/TodoItemController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../example/src/com/microsoft/azure/documentdb/sample/dao/DocDbDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../documentdb-java-todo-app-master/src/com/microsoft/azure/documentdb/sample/dao/DocDbDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../example/src/com/microsoft/azure/documentdb/sample/dao/DocumentClientFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/../documentdb-java-todo-app-master/src/com/microsoft/azure/documentdb/sample/dao/DocumentClientFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../example/src/com/microsoft/azure/documentdb/sample/dao/MockDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../documentdb-java-todo-app-master/src/com/microsoft/azure/documentdb/sample/dao/MockDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../example/src/com/microsoft/azure/documentdb/sample/dao/TodoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../documentdb-java-todo-app-master/src/com/microsoft/azure/documentdb/sample/dao/TodoDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../example/src/com/microsoft/azure/documentdb/sample/dao/TodoDaoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/../documentdb-java-todo-app-master/src/com/microsoft/azure/documentdb/sample/dao/TodoDaoFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../example/src/com/microsoft/azure/documentdb/sample/model/TodoItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/../documentdb-java-todo-app-master/src/com/microsoft/azure/documentdb/sample/model/TodoItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../example/tst/com/microsoft/azure/documentdb/sample/controller/TodoItemControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../documentdb-java-todo-app-master/tst/com/microsoft/azure/documentdb/sample/controller/TodoItemControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../project/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/azure-comos-db-graph-java.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../project/src/main/java/com/miage/bigdata/daos/clientsDao/ClientDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../project/src/main/java/com/miage/bigdata/daos/clientsDao/DocumentClientDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../project/src/main/java/com/miage/bigdata/daos/clientsDao/DocumentClientDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../project/src/main/java/com/miage/bigdata/daos/clientsDao/KeyValueClientDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../project/src/main/java/com/miage/bigdata/daos/clientsDao/KeyValueClientDao.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -72,6 +47,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -106,12 +82,12 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="426000" />
+    <option name="totallyTimeSpent" value="950000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="0" width="1922" height="1055" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25294748" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2561629" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
