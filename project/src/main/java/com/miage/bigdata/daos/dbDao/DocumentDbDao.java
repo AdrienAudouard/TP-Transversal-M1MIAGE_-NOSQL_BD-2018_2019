@@ -7,7 +7,7 @@ import com.mongodb.MongoClient;
 
 import java.util.List;
 
-public class DocumentDbDao extends ModelDao<Thing> implements ThingDao {
+public class DocumentDbDao extends ModelDbDao<Thing> implements ThingDao {
 
     private static MongoClient client;
 

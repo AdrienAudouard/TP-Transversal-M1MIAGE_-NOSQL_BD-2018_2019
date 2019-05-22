@@ -5,7 +5,7 @@ import com.microsoft.azure.documentdb.*;
 
 import java.util.List;
 
-public abstract class ModelDao<T> {
+public abstract class ModelDbDao<T> {
 
     // The name of our collection.
     protected static String collectionId;

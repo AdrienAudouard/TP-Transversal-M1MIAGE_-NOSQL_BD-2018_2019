@@ -8,7 +8,7 @@ import com.microsoft.azure.documentdb.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class KeyValueDbDao extends ModelDao<TodoItem> implements TodoDao {
+public class KeyValueDbDao extends ModelDbDao<TodoItem> implements TodoDao {
 
     // The DocumentDB Client
     private static DocumentClient client;
