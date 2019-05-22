@@ -6,7 +6,14 @@ public class TodoItem extends Item{
     private String id;
     private String name;
 
-    public TodoItem(String category, boolean complete, String id, String name) {
+    public TodoItem(String name, String category, boolean complete) {
+        this.category = category;
+        this.complete = complete;
+        this.name = name;
+    }
+
+
+    public TodoItem(String id, String name, String category, boolean complete) {
         this.category = category;
         this.complete = complete;
         this.id = id;

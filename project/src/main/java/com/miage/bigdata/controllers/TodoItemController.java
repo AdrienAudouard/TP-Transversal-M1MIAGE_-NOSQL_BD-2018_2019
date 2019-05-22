@@ -19,14 +19,13 @@ public class TodoItemController {
 
     private final TodoDao todoDao;
 
-    TodoItemController(TodoDao todoDao) {
+    private TodoItemController(TodoDao todoDao) {
         this.todoDao = todoDao;
     }
 
     public TodoItem createTodoItem(@NonNull String name,
                                    @NonNull String category, boolean isComplete) {
-        TodoItem todoItem = TodoItem.builder().name(name).category(category)
-                .complete(isComplete).build();
+        TodoItem todoItem = new TodoItem(name, category, isComplete);
         return todoDao.createTodoItem(todoItem);
     }
 
