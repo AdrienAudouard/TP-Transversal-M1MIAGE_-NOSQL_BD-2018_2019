@@ -1,10 +1,22 @@
 package com.miage.bigdata.daos.clientsDao;
 
-public class KeyValueClientDao extends ClientDao {
+import com.microsoft.azure.documentdb.DocumentClient;
+import com.microsoft.azure.documentdb.ConnectionPolicy;
+import com.microsoft.azure.documentdb.ConsistencyLevel;
 
-    public KeyValueClientDao() {
-        this.host = "https://db-keyvalue.documents.azure.com:443/";
-        this.masterKey = "cowNe6kZJssatZ7a41CJE8CTRAKyGpMsdUjcq5xXyxGSmD9Pn6yproGIZ02gd93udHLSvqTav94K0VNsEvcdGQ==";
+public class KeyValueClientDao {
+
+    private static String HOST = "https://db-keyvalue.documents.azure.com:443/";
+    private static String MASTER_KEY = "cowNe6kZJssatZ7a41CJE8CTRAKyGpMsdUjcq5xXyxGSmD9Pn6yproGIZ02gd93udHLSvqTav94K0VNsEvcdGQ==";
+    private static DocumentClient client = null;
+
+    public static DocumentClient getClient() {
+        if (client == null) {
+            client = new DocumentClient(HOST, MASTER_KEY,
+                    ConnectionPolicy.GetDefault(), ConsistencyLevel.Session);
+        }
+
+        return client;
     }
 
 }

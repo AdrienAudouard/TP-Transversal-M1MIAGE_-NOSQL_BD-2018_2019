@@ -26,22 +26,23 @@ public class TodoItemController {
     public TodoItem createTodoItem(@NonNull String name,
                                    @NonNull String category, boolean isComplete) {
         TodoItem todoItem = new TodoItem(name, category, isComplete);
-        return todoDao.createTodoItem(todoItem);
+        return todoDao.createItem(todoItem);
     }
 
     public boolean deleteTodoItem(@NonNull String id) {
-        return todoDao.deleteTodoItem(id);
+        return todoDao.deleteItem(id);
     }
 
     public TodoItem getTodoItemById(@NonNull String id) {
-        return todoDao.readTodoItem(id);
+        return todoDao.readItem(id);
     }
 
     public List<TodoItem> getTodoItems() {
-        return todoDao.readTodoItems();
+        return todoDao.readItems();
     }
 
-    public TodoItem updateTodoItem(@NonNull String id, boolean isComplete) {
-        return todoDao.updateTodoItem(id, isComplete);
+    public TodoItem updateTodoItem(@NonNull TodoItem todoItem) {
+
+        return todoDao.updateItem(todoItem);
     }
 }

@@ -8,30 +8,30 @@ public interface TodoDao {
     /**
      * @return A list of TodoItems
      */
-    public List<TodoItem> readTodoItems();
+    public List<TodoItem> readItems();
 
     /**
      * @param todoItem
      * @return whether the todoItem was persisted.
      */
-    public TodoItem createTodoItem(TodoItem todoItem);
+    public TodoItem createItem(TodoItem todoItem);
 
     /**
      * @param id
      * @return the TodoItem
      */
-    public TodoItem readTodoItem(String id);
+    public TodoItem readItem(String id);
 
     /**
-     * @param id
+     * @param todoItem
      * @return the TodoItem
      */
-    public TodoItem updateTodoItem(String id, boolean isComplete);
+    public TodoItem updateItem(TodoItem todoItem);
 
     /**
      *
      * @param id
      * @return whether the delete was successful.
      */
-    public boolean deleteTodoItem(String id);
+    public boolean deleteItem(String id);
 }

@@ -20,6 +20,8 @@ public class App
         TodoItemController todoItemController = TodoItemController.getInstance();
         List<TodoItem> todoItems = todoItemController.getTodoItems();
 
-        System.out.println("[TodosItem] getTodoItems : " + todoItems);
+        for (TodoItem todoItem : todoItems) {
+            System.out.println("[TodosItem] getTodoItems : " + todoItem.toString());
+        }
     }
 }
