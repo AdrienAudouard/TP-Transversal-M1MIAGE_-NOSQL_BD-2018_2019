@@ -9,13 +9,12 @@ import java.util.List;
 
 public abstract class ModelDbDao<T> implements ItemDao<T> {
 
-    // The name of our collection.
+    protected String entityType;
+
     protected String collectionId;
 
-    // The id of our collection.
     protected String databaseId;
 
-    // We'll use Gson for POJO <=> JSON serialization for this example.
     protected static Gson gson = new Gson();
 
     public abstract String getDatabaseID();

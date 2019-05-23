@@ -29,6 +29,10 @@ public class TodoItemController {
         return (TodoItem) todoDao.create(todoItem);
     }
 
+    public TodoItem createTodoItem(@NonNull TodoItem todoItem) {
+        return (TodoItem) todoDao.create(todoItem);
+    }
+
     public boolean deleteTodoItem(@NonNull String id) {
         return todoDao.delete(id);
     }

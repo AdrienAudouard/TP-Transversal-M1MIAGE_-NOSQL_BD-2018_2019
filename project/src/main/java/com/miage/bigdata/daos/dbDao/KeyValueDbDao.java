@@ -18,9 +18,10 @@ public class KeyValueDbDao<T> extends ModelDbDao {
 
     private Class<T> tClass;
 
-    public KeyValueDbDao(String collectionId, String databaseId, Class<T> tClass) {
+    public KeyValueDbDao(String collectionId, String databaseId, String entityType, Class<T> tClass) {
         this.collectionId = collectionId; //"items";
         this.databaseId = databaseId; //"TestDB";
+        this.entityType = entityType;
         this.tClass = tClass;
         client = new KeyValueClientDao().getClient();
     }
@@ -36,7 +37,7 @@ public class KeyValueDbDao<T> extends ModelDbDao {
 
         List<Document> documentList = client
                 .queryDocuments(getCollection().getSelfLink(),
-                        "SELECT * FROM root r WHERE r.entityType = 'todoItem'",
+                        "SELECT * FROM root r WHERE r.entityType = '"+ entityType +"'",
                         null).getQueryIterable().toList();
 
         for (Document item : documentList) {
@@ -50,7 +51,7 @@ public class KeyValueDbDao<T> extends ModelDbDao {
     public T create(Object item) {
         Document itemDocument = new Document(gson.toJson(item));
 
-        itemDocument.set("entityType", "todoItem");
+        itemDocument.set("entityType", entityType);
 
         try {
             itemDocument = client.createDocument(
