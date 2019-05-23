@@ -8,13 +8,23 @@ import lombok.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class KeyValueDbDao extends ModelDbDao {
+public class KeyValueDbDao<T> extends ModelDbDao {
 
     private DocumentClient client;
 
     private Database databaseCache;
 
     private DocumentCollection collectionCache;
+
+    private Class<T> tClass;
+
+    public KeyValueDbDao(String collectionId, String databaseId, Class<T> tClass) {
+        this.collectionId = collectionId; //"items";
+        this.databaseId = databaseId; //"TestDB";
+        this.tClass = tClass;
+        client = new KeyValueClientDao().getClient();
+    }
+
 
     public KeyValueDbDao(String collectionId, String databaseId) {
         this.collectionId = collectionId; //"items";
@@ -28,8 +38,8 @@ public class KeyValueDbDao extends ModelDbDao {
     }
 
     @Override
-    public List<Item> readAll() {
-        List<Item> items = new ArrayList<Item>();
+    public List<T> readAll() {
+        List<T> items = new ArrayList<>();
 
         List<Document> documentList = client
                 .queryDocuments(getCollection().getSelfLink(),
@@ -37,14 +47,14 @@ public class KeyValueDbDao extends ModelDbDao {
                         null).getQueryIterable().toList();
 
         for (Document item : documentList) {
-            items.add(gson.fromJson(item.toString(), Item.class));
+            items.add(gson.fromJson(item.toString(), tClass));
         }
 
         return items;
     }
 
     @Override
-    public Item create(Item item) {
+    public T create(Object item) {
         Document itemDocument = new Document(gson.toJson(item));
 
         itemDocument.set("entityType", "todoItem");
@@ -58,16 +68,15 @@ public class KeyValueDbDao extends ModelDbDao {
             return null;
         }
 
-        return gson.fromJson(itemDocument.toString(), Item.class);
+        return gson.fromJson(itemDocument.toString(), tClass);
     }
 
     @Override
-    public Item getByID(@NonNull String id) {
+    public T getByID(@NonNull String id) {
         Document todoItemDocument = getDocumentById(id);
 
         if (todoItemDocument != null) {
-            // De-serialize the document in to a TodoItem.
-            return gson.fromJson(todoItemDocument.toString(), Item.class);
+            return gson.fromJson(todoItemDocument.toString(), tClass);
         } else {
             return null;
         }
@@ -89,7 +98,7 @@ public class KeyValueDbDao extends ModelDbDao {
     }
 
     @Override
-    public Item update(@NonNull Item item) {
+    public T update(@NonNull Item item) {
         Document itemDocument = getDocumentById(item.getId());
 
         itemDocument.set("name", item.getName());
@@ -103,7 +112,7 @@ public class KeyValueDbDao extends ModelDbDao {
             return null;
         }
 
-        return gson.fromJson(itemDocument.toString(), Item.class);
+        return gson.fromJson(itemDocument.toString(), tClass);
     }
 
     @Override

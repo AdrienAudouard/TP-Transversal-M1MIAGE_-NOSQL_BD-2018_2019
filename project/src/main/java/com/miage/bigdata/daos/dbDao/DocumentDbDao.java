@@ -7,7 +7,7 @@ import lombok.NonNull;
 
 import java.util.List;
 
-public class DocumentDbDao extends ModelDbDao {
+public class DocumentDbDao<T> extends ModelDbDao {
 
     private MongoClient client;
 
@@ -24,12 +24,12 @@ public class DocumentDbDao extends ModelDbDao {
     }
 
     @Override
-    public List<Item> readAll() {
+    public List<T> readAll() {
         return null;
     }
 
     @Override
-    public Item create(Item item) {
+    public T create(Object item) {
         return null;
     }
 

@@ -1,6 +1,7 @@
 package com.miage.bigdata.daos.itemDao;
 
 import com.miage.bigdata.daos.dbDao.KeyValueDbDao;
+import com.miage.bigdata.models.TodoItem;
 
 public class TodoItemDaoFactory {
 
@@ -8,7 +9,7 @@ public class TodoItemDaoFactory {
 
     public static ItemDao getDao() {
         if (myDao == null) {
-            myDao = new KeyValueDbDao("items", "TestDB");
+            myDao = new KeyValueDbDao<TodoItem>("items", "TestDB");
         }
         return myDao;
     }

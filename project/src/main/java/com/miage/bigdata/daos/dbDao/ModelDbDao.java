@@ -7,7 +7,7 @@ import lombok.NonNull;
 
 import java.util.List;
 
-public abstract class ModelDbDao implements ItemDao {
+public abstract class ModelDbDao<T> implements ItemDao<T> {
 
     // The name of our collection.
     protected String collectionId;
@@ -20,15 +20,15 @@ public abstract class ModelDbDao implements ItemDao {
 
     public abstract String getDatabaseID();
 
-    public abstract List<Item> readAll();
+    public abstract List<T> readAll();
 
-    public abstract Item create(Item item);
+    public abstract T create(T item);
 
-    public abstract Item getByID(@NonNull String id);
+    public abstract T getByID(@NonNull String id);
 
     public abstract boolean delete(@NonNull String id);
 
-    public abstract Item update(@NonNull Item item);
+    public abstract T update(@NonNull Item item);
 
     public abstract String generateID();
 

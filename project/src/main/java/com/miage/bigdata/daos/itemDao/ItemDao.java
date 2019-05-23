@@ -5,19 +5,19 @@ import lombok.NonNull;
 
 import java.util.List;
 
-public interface ItemDao {
+public interface ItemDao<T> {
 
     String getDatabaseID();
 
-    List<Item> readAll();
+    List<T> readAll();
 
-    Item create(Item item);
+    T create(T item);
 
-    Item getByID(@NonNull String id);
+    T getByID(@NonNull String id);
 
     boolean delete(@NonNull String id);
 
-    Item update(@NonNull Item item);
+    T update(@NonNull Item item);
 
     String generateID();
 
