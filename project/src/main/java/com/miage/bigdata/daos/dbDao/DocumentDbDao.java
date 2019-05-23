@@ -1,7 +1,6 @@
 package com.miage.bigdata.daos.dbDao;
 
 import com.miage.bigdata.daos.clientsDao.DocumentClientDao;
-import com.miage.bigdata.models.Item;
 import com.mongodb.MongoClient;
 import lombok.NonNull;
 
@@ -34,7 +33,7 @@ public class DocumentDbDao<T> extends ModelDbDao {
     }
 
     @Override
-    public Item getByID(@NonNull String id) {
+    public T getByID(@NonNull String id) {
         return null;
     }
 
@@ -44,7 +43,7 @@ public class DocumentDbDao<T> extends ModelDbDao {
     }
 
     @Override
-    public Item update(@NonNull Item item) {
+    public T update(Object item) {
         return null;
     }
 

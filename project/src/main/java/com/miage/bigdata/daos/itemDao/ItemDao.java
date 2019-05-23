@@ -17,7 +17,7 @@ public interface ItemDao<T> {
 
     boolean delete(@NonNull String id);
 
-    T update(@NonNull Item item);
+    T update(@NonNull T item);
 
     String generateID();
 

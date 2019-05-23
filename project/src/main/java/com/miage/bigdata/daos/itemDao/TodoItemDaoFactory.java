@@ -9,7 +9,7 @@ public class TodoItemDaoFactory {
 
     public static ItemDao getDao() {
         if (myDao == null) {
-            myDao = new KeyValueDbDao<TodoItem>("items", "TestDB");
+            myDao = new KeyValueDbDao<TodoItem>("items", "TestDB", TodoItem.class);
         }
         return myDao;
     }

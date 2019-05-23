@@ -28,7 +28,7 @@ public abstract class ModelDbDao<T> implements ItemDao<T> {
 
     public abstract boolean delete(@NonNull String id);
 
-    public abstract T update(@NonNull Item item);
+    public abstract T update(@NonNull T item);
 
     public abstract String generateID();
 

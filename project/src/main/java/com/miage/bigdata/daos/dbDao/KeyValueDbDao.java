@@ -25,13 +25,6 @@ public class KeyValueDbDao<T> extends ModelDbDao {
         client = new KeyValueClientDao().getClient();
     }
 
-
-    public KeyValueDbDao(String collectionId, String databaseId) {
-        this.collectionId = collectionId; //"items";
-        this.databaseId = databaseId; //"TestDB";
-        client = new KeyValueClientDao().getClient();
-    }
-
     @Override
     public String getDatabaseID() {
         return null;
@@ -98,10 +91,11 @@ public class KeyValueDbDao<T> extends ModelDbDao {
     }
 
     @Override
-    public T update(@NonNull Item item) {
-        Document itemDocument = getDocumentById(item.getId());
+    public T update(@NonNull Object item) {
+        Item itemCast = (Item) item;
+        Document itemDocument = getDocumentById(itemCast.getId());
 
-        itemDocument.set("name", item.getName());
+        itemDocument.set("name", itemCast.getName());
 
         try {
             // Persist/replace the updated document.
