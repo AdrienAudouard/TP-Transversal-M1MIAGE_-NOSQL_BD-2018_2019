@@ -1,6 +1,7 @@
-package com.miage.bigdata.daos.itemDao;
+package com.miage.bigdata.daos.itemDao.keyValue;
 
-import com.miage.bigdata.daos.dbDao.KeyValueDbDao;
+import com.miage.bigdata.daos.dbDao.keyValue.KeyValueDbDao;
+import com.miage.bigdata.daos.itemDao.ObjectDao;
 import com.miage.bigdata.models.KeyValueItem;
 import com.microsoft.azure.documentdb.*;
 import lombok.NonNull;

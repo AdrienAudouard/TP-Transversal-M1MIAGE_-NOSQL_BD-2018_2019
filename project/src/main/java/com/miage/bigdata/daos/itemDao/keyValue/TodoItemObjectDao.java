@@ -1,6 +1,6 @@
-package com.miage.bigdata.daos.itemDao;
+package com.miage.bigdata.daos.itemDao.keyValue;
 
-import com.miage.bigdata.daos.dbDao.KeyValueDbDao;
+import com.miage.bigdata.daos.dbDao.keyValue.KeyValueDbDao;
 import com.miage.bigdata.models.TodoItem;
 
 public class TodoItemObjectDao extends KeyValueObjectDao<TodoItem> {

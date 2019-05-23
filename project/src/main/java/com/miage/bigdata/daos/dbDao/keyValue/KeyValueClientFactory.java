@@ -1,4 +1,4 @@
-package com.miage.bigdata.daos.dbDao;
+package com.miage.bigdata.daos.dbDao.keyValue;
 
 import com.microsoft.azure.documentdb.ConnectionPolicy;
 import com.microsoft.azure.documentdb.ConsistencyLevel;

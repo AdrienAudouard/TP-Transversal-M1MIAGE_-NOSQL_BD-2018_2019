@@ -1,7 +1,7 @@
 package com.miage.bigdata.controllers;
 
-import com.miage.bigdata.daos.dbDao.KeyValueDbDao;
-import com.miage.bigdata.daos.itemDao.TodoItemObjectDao;
+import com.miage.bigdata.daos.dbDao.keyValue.KeyValueDbDao;
+import com.miage.bigdata.daos.itemDao.keyValue.TodoItemObjectDao;
 
 public class TodoItemController {
     private KeyValueDbDao keyValueDbDao;

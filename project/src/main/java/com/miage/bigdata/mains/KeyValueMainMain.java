@@ -41,7 +41,7 @@ public class KeyValueMainMain
         System.out.println(todoItemController.getTodoItemObjectDao().update(item4).toString());
 
         System.out.println("------------ Delete all items ------------");
-        
+
         System.out.println(todoItemController.getTodoItemObjectDao().delete(
                 item.getId(),
                 item2.getId(),

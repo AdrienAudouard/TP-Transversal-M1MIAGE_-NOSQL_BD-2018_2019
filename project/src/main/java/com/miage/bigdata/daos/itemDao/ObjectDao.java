@@ -14,7 +14,7 @@ public abstract class ObjectDao<T extends Item, U extends DbDao> {
 
     protected U dbDao;
 
-    ObjectDao(U dbDao) {
+    public ObjectDao(U dbDao) {
         this.dbDao = dbDao;
     }
 

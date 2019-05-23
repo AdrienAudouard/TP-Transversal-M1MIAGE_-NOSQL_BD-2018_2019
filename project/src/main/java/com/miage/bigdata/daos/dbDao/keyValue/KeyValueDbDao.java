@@ -1,5 +1,6 @@
-package com.miage.bigdata.daos.dbDao;
+package com.miage.bigdata.daos.dbDao.keyValue;
 
+import com.miage.bigdata.daos.dbDao.DbDao;
 import com.microsoft.azure.documentdb.DocumentClient;
 
 public class KeyValueDbDao extends DbDao<DocumentClient> {
@@ -13,7 +14,7 @@ public class KeyValueDbDao extends DbDao<DocumentClient> {
     }
 
     @Override
-    boolean isConnected() {
+    public boolean isConnected() {
         return documentClient != null;
     }
 
