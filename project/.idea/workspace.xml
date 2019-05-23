@@ -2,21 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f50ed683-11ac-4402-816b-48983f829dab" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/miage/bigdata/controllers/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/miage/bigdata/controllers/TodoItemController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/clientsDao/DocumentClientDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/clientsDao/DocumentClientDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/dbDao/DocumentDbDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/dbDao/DocumentDbDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/itemDao/ThingDaoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/itemDao/ThingDaoFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/itemDao/TodoItemDaoFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/itemDao/TodoItemDaoFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/miage/bigdata/mains/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/miage/bigdata/mains/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/miage/bigdata/models/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/miage/bigdata/models/Item.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/miage/bigdata/models/Thing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/miage/bigdata/models/Thing.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/miage/bigdata/controllers/TodoItemController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/miage/bigdata/controllers/TodoItemController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/miage/bigdata/daos/dbDao/DocumentDbDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/miage/bigdata/daos/dbDao/DocumentDbDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/miage/bigdata/daos/dbDao/KeyValueDbDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/miage/bigdata/daos/dbDao/KeyValueDbDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/miage/bigdata/daos/dbDao/ModelDbDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/miage/bigdata/daos/dbDao/ModelDbDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/miage/bigdata/daos/itemDao/ThingDaoFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/miage/bigdata/daos/itemDao/ThingDaoFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/miage/bigdata/mains/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/miage/bigdata/mains/App.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/miage/bigdata/models/Thing.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/miage/bigdata/models/Thing.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -31,11 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/miage/bigdata/mains/App.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="547">
-              <caret line="47" column="39" selection-start-line="47" selection-start-column="39" selection-end-line="47" selection-end-column="39" />
+            <state relative-caret-position="112">
+              <caret line="28" column="25" lean-forward="true" selection-start-line="28" selection-start-column="25" selection-end-line="28" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -43,11 +33,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/dbDao/DocumentDbDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="26" column="21" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
+            <state relative-caret-position="192">
+              <caret line="42" column="12" selection-start-line="42" selection-start-column="12" selection-end-line="42" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -56,59 +46,25 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/miage/bigdata/controllers/Controller.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/miage/bigdata/models/Thing.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="10" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
+            <state relative-caret-position="105">
+              <caret line="7" column="27" lean-forward="true" selection-start-line="7" selection-start-column="27" selection-end-line="7" selection-end-column="27" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#883#884#0" expanded="true" />
-                <element signature="e#930#931#0" expanded="true" />
-                <element signature="e#979#980#0" expanded="true" />
-                <element signature="e#1020#1021#0" expanded="true" />
-                <element signature="e#1156#1157#0" expanded="true" />
-                <element signature="e#1209#1210#0" expanded="true" />
-                <element signature="e#1262#1263#0" expanded="true" />
-                <element signature="e#1302#1303#0" expanded="true" />
-                <element signature="e#1361#1362#0" expanded="true" />
-                <element signature="e#1415#1416#0" expanded="true" />
+                <element signature="e#174#175#0" expanded="true" />
+                <element signature="e#201#202#0" expanded="true" />
+                <element signature="e#233#234#0" expanded="true" />
+                <element signature="e#289#290#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/itemDao/ThingDaoFactory.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/miage/bigdata/models/TodoItem.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="39" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/itemDao/TodoItemDaoFactory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="38" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/itemDao/ItemDao.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="450">
+              <caret line="42" column="4" selection-start-line="42" selection-start-column="4" selection-end-line="44" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -146,6 +102,7 @@
       <find>getDocumentById</find>
       <find>getCollection</find>
       <find>getInstance</find>
+      <find>Item</find>
     </findStrings>
     <replaceStrings>
       <replace>collectionId</replace>
@@ -170,7 +127,6 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/clientsDao/ClientDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/clientsDao/KeyValueClientDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/clientsDao/DocumentClientDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/dbDao/ModelDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/itemDao/TodoDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/itemDao/ThingDao.java" />
@@ -187,12 +143,13 @@
         <option value="$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/itemDao/TodoItemDaoFactory.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/miage/bigdata/controllers/ThingController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/miage/bigdata/controllers/TodoItemController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/miage/bigdata/models/Thing.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/dbDao/DocumentDbDao.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/miage/bigdata/controllers/ControlTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/miage/bigdata/controllers/Control.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/miage/bigdata/controllers/Controller.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/miage/bigdata/mains/App.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/clientsDao/DocumentClientDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/miage/bigdata/models/Thing.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/dbDao/DocumentDbDao.java" />
       </list>
     </option>
   </component>
@@ -382,17 +339,6 @@
             </path>
             <path>
               <item name="bigdata" type="b2602c69:ProjectViewProjectNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="miage" type="462c0819:PsiDirectoryNode" />
-              <item name="bigdata" type="462c0819:PsiDirectoryNode" />
-              <item name="controllers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="bigdata" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
@@ -468,7 +414,7 @@
       <option name="presentableId" value="Default" />
       <updated>1558534524352</updated>
       <workItem from="1558534531238" duration="6154000" />
-      <workItem from="1558602001254" duration="15418000" />
+      <workItem from="1558602001254" duration="17315000" />
     </task>
     <task id="LOCAL-00002" summary="[orgaDAO] test crud keyvalue + document">
       <created>1558540785153</created>
@@ -505,11 +451,18 @@
       <option name="project" value="LOCAL" />
       <updated>1558616389707</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="[orgaDAO] generic controller OK">
+      <created>1558619540198</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1558619540198</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26531000" />
+    <option name="totallyTimeSpent" value="28428000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="28" width="1920" height="1018" extended-state="6" />
@@ -523,8 +476,8 @@
       <window_info id="UI Designer" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.3295325" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3295325" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3295325" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3295325" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3990878" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -556,21 +509,8 @@
     <MESSAGE value="[orgaDAO] new orga" />
     <MESSAGE value="[orgaDAO] new orga work" />
     <MESSAGE value="[orgaDAO] new orga crud todoitem + fail update" />
-    <option name="LAST_COMMIT_MESSAGE" value="[orgaDAO] new orga crud todoitem + fail update" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/dbDao/DocumentDbDao.java</url>
-          <line>37</line>
-          <properties class="com.miage.bigdata.daos.dbDao.DocumentDbDao" method="readAll">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="[orgaDAO] generic controller OK" />
+    <option name="LAST_COMMIT_MESSAGE" value="[orgaDAO] generic controller OK" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/TodoDao.java" />
@@ -653,69 +593,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/miage/bigdata/models/Item.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="28" column="10" selection-start-line="28" selection-start-column="10" selection-end-line="28" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/dbDao/ModelDbDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret line="11" column="31" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/clientsDao/KeyValueClientDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="40" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/clientsDao/DocumentClientDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="37" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/dbDao/KeyValueDbDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="46" column="8" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/miage/bigdata/models/TodoItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="42" column="4" selection-start-line="42" selection-start-column="4" selection-end-line="44" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/miage/bigdata/models/Thing.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="49" selection-start-line="12" selection-start-column="49" selection-end-line="12" selection-end-column="49" />
-          <folding>
-            <element signature="e#110#111#0" expanded="true" />
-            <element signature="e#141#142#0" expanded="true" />
-            <element signature="e#174#175#0" expanded="true" />
-            <element signature="e#201#202#0" expanded="true" />
-            <element signature="e#233#234#0" expanded="true" />
-            <element signature="e#289#290#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -726,30 +607,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/itemDao/TodoItemDaoFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="38" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/itemDao/ItemDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/itemDao/ThingDaoFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="39" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -789,10 +650,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/dbDao/DocumentDbDao.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/itemDao/TodoItemDaoFactory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="21" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
+        <state relative-caret-position="165">
+          <caret line="11" column="38" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/clientsDao/DocumentClientDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/clientsDao/KeyValueClientDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="40" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/itemDao/ThingDaoFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="39" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -801,7 +692,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/miage/bigdata/controllers/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
+        <state relative-caret-position="112">
           <caret line="11" column="10" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -819,10 +710,57 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/dbDao/KeyValueDbDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="46" column="8" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/miage/bigdata/models/TodoItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="42" column="4" selection-start-line="42" selection-start-column="4" selection-end-line="44" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/miage/bigdata/models/Item.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="28" column="10" selection-start-line="28" selection-start-column="10" selection-end-line="28" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/miage/bigdata/models/Thing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="27" lean-forward="true" selection-start-line="7" selection-start-column="27" selection-end-line="7" selection-end-column="27" />
+          <folding>
+            <element signature="e#174#175#0" expanded="true" />
+            <element signature="e#201#202#0" expanded="true" />
+            <element signature="e#233#234#0" expanded="true" />
+            <element signature="e#289#290#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/miage/bigdata/mains/App.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="547">
-          <caret line="47" column="39" selection-start-line="47" selection-start-column="39" selection-end-line="47" selection-end-column="39" />
+        <state relative-caret-position="112">
+          <caret line="28" column="25" lean-forward="true" selection-start-line="28" selection-start-column="25" selection-end-line="28" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/miage/bigdata/daos/dbDao/DocumentDbDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="42" column="12" selection-start-line="42" selection-start-column="12" selection-end-line="42" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

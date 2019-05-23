@@ -12,15 +12,7 @@ public class DocumentClientDao extends ClientDao<MongoClient> {
     @Override
     public MongoClient getClient() {
         MongoClientURI uri = new MongoClientURI(HOST);
-
-        try {
-            client = new MongoClient(uri);
-            return client;
-
-        } finally {
-            if (client != null) {
-                client.close();
-            }
-        }
+        client = new MongoClient(uri);
+        return client;
     }
 }

@@ -1,13 +1,12 @@
 package com.miage.bigdata.daos.dbDao;
 
 import com.miage.bigdata.daos.clientsDao.DocumentClientDao;
-import com.microsoft.azure.documentdb.Document;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import lombok.NonNull;
+import org.bson.Document;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +15,7 @@ public class DocumentDbDao<T> extends ModelDbDao {
 
     private MongoClient client;
     private MongoDatabase database;
-    private MongoCollection collection;
+    private MongoCollection<Document> collection;
 
     private Class<T> tClass;
 
@@ -37,12 +36,13 @@ public class DocumentDbDao<T> extends ModelDbDao {
     @Override
     public List<T> readAll() {
         List<T> items = new ArrayList<>();
-        FindIterable<Document> fi = collection.find();
-        MongoCursor<Document> cursor = fi.iterator();
 
-        while (cursor.hasNext()) {
-            items.add(gson.fromJson(cursor.next().toString(), tClass));
+        List<Document> list = collection.find().into(new ArrayList<>());
+        for (Document document : list) {
+            System.out.println(document.toString());
+            //items.add(gson.fromJson(document.toString(), tClass));
         }
+
         return items;
     }
 

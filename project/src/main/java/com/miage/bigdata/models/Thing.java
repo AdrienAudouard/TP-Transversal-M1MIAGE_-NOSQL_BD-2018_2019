@@ -1,8 +1,12 @@
 package com.miage.bigdata.models;
 
 public class Thing extends Item {
-    public Thing(String id, String name) {
-        super(id, name);
+    private String _id;
+
+    public Thing(String _id, String name) {
+        this._id = _id;
+        this.id = this._id;
+        this.name = name;
     }
 
     public Thing(String name) {
