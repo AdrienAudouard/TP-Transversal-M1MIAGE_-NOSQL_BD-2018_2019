@@ -1,6 +1,7 @@
 package com.miage.bigdata.daos.dbDao;
 
 import com.miage.bigdata.daos.clientsDao.DocumentClientDao;
+import com.mongodb.Cursor;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
@@ -37,12 +38,9 @@ public class DocumentDbDao<T> extends ModelDbDao {
     public List<T> readAll() {
         List<T> items = new ArrayList<>();
 
-        List<Document> list = collection.find().into(new ArrayList<>());
-        for (Document document : list) {
-            System.out.println(document.toString());
-            //items.add(gson.fromJson(document.toString(), tClass));
+        for (Document document : collection.find()) {
+            items.add(gson.fromJson(document.toJson(), tClass));
         }
-
         return items;
     }
 
