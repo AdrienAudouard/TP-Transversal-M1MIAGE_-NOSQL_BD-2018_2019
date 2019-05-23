@@ -1,23 +1,27 @@
 package com.miage.bigdata.models;
 
-public class TodoItem extends Item{
+public class TodoItem extends Item {
     private String category;
     private boolean complete;
-    private String id;
-    private String name;
-
-    public TodoItem(String name, String category, boolean complete) {
-        this.category = category;
-        this.complete = complete;
-        this.name = name;
-    }
-
 
     public TodoItem(String id, String name, String category, boolean complete) {
+        super(id, name);
         this.category = category;
         this.complete = complete;
-        this.id = id;
-        this.name = name;
+    }
+
+    public TodoItem(String name, String category, boolean complete) {
+        super(name);
+        this.category = category;
+        this.complete = complete;
+    }
+
+    protected TodoItem(String id, String name) {
+        super(id, name);
+    }
+
+    protected TodoItem(String name) {
+        super(name);
     }
 
     public String getCategory() {
@@ -34,22 +38,6 @@ public class TodoItem extends Item{
 
     public void setComplete(boolean complete) {
         this.complete = complete;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String toString() {

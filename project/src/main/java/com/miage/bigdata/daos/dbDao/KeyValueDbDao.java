@@ -1,117 +1,80 @@
 package com.miage.bigdata.daos.dbDao;
 
 import com.miage.bigdata.daos.clientsDao.KeyValueClientDao;
-import com.miage.bigdata.daos.itemDao.TodoDao;
-import com.miage.bigdata.models.TodoItem;
+import com.miage.bigdata.models.Item;
 import com.microsoft.azure.documentdb.*;
+import lombok.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class KeyValueDbDao extends ModelDbDao<TodoItem> implements TodoDao {
+public class KeyValueDbDao extends ModelDbDao {
 
-    // The DocumentDB Client
-    private static DocumentClient client;
+    private DocumentClient client;
 
-    public KeyValueDbDao() {
-        collectionId = "items";
-        databaseId = "TestDB";
+    private Database databaseCache;
+
+    private DocumentCollection collectionCache;
+
+    public KeyValueDbDao(String collectionId, String databaseId) {
+        this.collectionId = collectionId; //"items";
+        this.databaseId = databaseId; //"TestDB";
         client = new KeyValueClientDao().getClient();
     }
 
-    // Cache for the database object, so we don't have to query for it to
-    // retrieve self links.
-    private static Database databaseCache;
-
-    // Cache for the collection object, so we don't have to query for it to
-    // retrieve self links.
-    private static DocumentCollection collectionCache;
+    @Override
+    public String getDatabaseID() {
+        return null;
+    }
 
     @Override
-    public TodoItem createItem(TodoItem todoItem) {
-        // Serialize the TodoItem as a JSON Document.
-        Document todoItemDocument = new Document(gson.toJson(todoItem));
+    public List<Item> readAll() {
+        List<Item> items = new ArrayList<Item>();
 
-        // Annotate the document as a TodoItem for retrieval (so that we can
-        // store multiple entity types in the collection).
-        todoItemDocument.set("entityType", "todoItem");
+        List<Document> documentList = client
+                .queryDocuments(getCollection().getSelfLink(),
+                        "SELECT * FROM root r WHERE r.entityType = 'todoItem'",
+                        null).getQueryIterable().toList();
+
+        for (Document item : documentList) {
+            items.add(gson.fromJson(item.toString(), Item.class));
+        }
+
+        return items;
+    }
+
+    @Override
+    public Item create(Item item) {
+        Document itemDocument = new Document(gson.toJson(item));
+
+        itemDocument.set("entityType", "todoItem");
 
         try {
-            // Persist the document using the DocumentClient.
-            todoItemDocument = client.createDocument(
-                    getTodoCollection().getSelfLink(), todoItemDocument, null,
+            itemDocument = client.createDocument(
+                    getCollection().getSelfLink(), itemDocument, null,
                     false).getResource();
         } catch (DocumentClientException e) {
             e.printStackTrace();
             return null;
         }
 
-        return gson.fromJson(todoItemDocument.toString(), TodoItem.class);
+        return gson.fromJson(itemDocument.toString(), Item.class);
     }
 
-
     @Override
-    public TodoItem readItem(String id) {
-        // Retrieve the document by id using our helper method.
+    public Item getByID(@NonNull String id) {
         Document todoItemDocument = getDocumentById(id);
 
         if (todoItemDocument != null) {
             // De-serialize the document in to a TodoItem.
-            return gson.fromJson(todoItemDocument.toString(), TodoItem.class);
+            return gson.fromJson(todoItemDocument.toString(), Item.class);
         } else {
             return null;
         }
     }
 
     @Override
-    public List<TodoItem> readItems() {
-        List<TodoItem> todoItems = new ArrayList<TodoItem>();
-
-        // Retrieve the TodoItem documents
-        List<Document> documentList = client
-                .queryDocuments(getTodoCollection().getSelfLink(),
-                        "SELECT * FROM root r WHERE r.entityType = 'todoItem'",
-                        null).getQueryIterable().toList();
-
-        // De-serialize the documents in to TodoItems.
-        for (Document todoItemDocument : documentList) {
-            todoItems.add(gson.fromJson(todoItemDocument.toString(),
-                    TodoItem.class));
-        }
-
-        return todoItems;
-    }
-
-    @Override
-    public TodoItem updateItem(TodoItem todoItem) {
-        // Retrieve the document from the database
-        Document todoItemDocument = getDocumentById(todoItem.getId());
-
-        // You can update the document as a JSON document directly.
-        // For more complex operations - you could de-serialize the document in
-        // to a POJO, update the POJO, and then re-serialize the POJO back in to
-        // a document.
-        todoItemDocument.set("complete", todoItem.isComplete());
-        todoItemDocument.set("name", todoItem.getName());
-        todoItemDocument.set("category", todoItem.getCategory());
-
-        try {
-            // Persist/replace the updated document.
-            todoItemDocument = client.replaceDocument(todoItemDocument,
-                    null).getResource();
-        } catch (DocumentClientException e) {
-            e.printStackTrace();
-            return null;
-        }
-
-        return gson.fromJson(todoItemDocument.toString(), TodoItem.class);
-    }
-
-    @Override
-    public boolean deleteItem(String id) {
-        // DocumentDB refers to documents by self link rather than id.
-
-        // Query for the document to retrieve the self link.
+    public boolean delete(@NonNull String id) {
         Document todoItemDocument = getDocumentById(id);
 
         try {
@@ -125,7 +88,92 @@ public class KeyValueDbDao extends ModelDbDao<TodoItem> implements TodoDao {
         return true;
     }
 
-    private Database getTodoDatabase() {
+    @Override
+    public Item update(@NonNull Item item) {
+        Document itemDocument = getDocumentById(item.getId());
+
+        itemDocument.set("name", item.getName());
+
+        try {
+            // Persist/replace the updated document.
+            itemDocument = client.replaceDocument(itemDocument,
+                    null).getResource();
+        } catch (DocumentClientException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return gson.fromJson(itemDocument.toString(), Item.class);
+    }
+
+    @Override
+    public String generateID() {
+        return null;
+    }
+
+    @Override
+    public boolean createTable() {
+        return false;
+    }
+
+    @Override
+    public boolean populateTable() {
+        return false;
+    }
+
+    @Override
+    public boolean deleteTable() {
+        return false;
+    }
+
+    private Document getDocumentById(String id) {
+        List<Document> documentList = client
+                .queryDocuments(getCollection().getSelfLink(),
+                        "SELECT * FROM root r WHERE r.id='" + id + "'", null)
+                .getQueryIterable().toList();
+
+        if (documentList.size() > 0) {
+            return documentList.get(0);
+        } else {
+            return null;
+        }
+    }
+
+    private DocumentCollection getCollection() {
+        if (collectionCache == null) {
+            // Get the collection if it exists.
+            List<DocumentCollection> collectionList = client
+                    .queryCollections(
+                            getDatabase().getSelfLink(),
+                            "SELECT * FROM root r WHERE r.id='" + collectionId
+                                    + "'", null).getQueryIterable().toList();
+
+            if (collectionList.size() > 0) {
+                // Cache the collection object so we won't have to query for it
+                // later to retrieve the selfLink.
+                collectionCache = collectionList.get(0);
+            } else {
+                // Create the collection if it doesn't exist.
+                try {
+                    DocumentCollection collectionDefinition = new DocumentCollection();
+                    collectionDefinition.setId(collectionId);
+
+                    collectionCache = client.createCollection(
+                            getDatabase().getSelfLink(),
+                            collectionDefinition, null).getResource();
+                } catch (DocumentClientException e) {
+                    // TODO: Something has gone terribly wrong - the app wasn't
+                    // able to query or create the collection.
+                    // Verify your connection, endpoint, and key.
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return collectionCache;
+    }
+
+    private Database getDatabase() {
         if (databaseCache == null) {
             // Get the database if it exists
             List<Database> databaseList = client
@@ -155,53 +203,5 @@ public class KeyValueDbDao extends ModelDbDao<TodoItem> implements TodoDao {
         }
 
         return databaseCache;
-    }
-
-    private DocumentCollection getTodoCollection() {
-        if (collectionCache == null) {
-            // Get the collection if it exists.
-            List<DocumentCollection> collectionList = client
-                    .queryCollections(
-                            getTodoDatabase().getSelfLink(),
-                            "SELECT * FROM root r WHERE r.id='" + collectionId
-                                    + "'", null).getQueryIterable().toList();
-
-            if (collectionList.size() > 0) {
-                // Cache the collection object so we won't have to query for it
-                // later to retrieve the selfLink.
-                collectionCache = collectionList.get(0);
-            } else {
-                // Create the collection if it doesn't exist.
-                try {
-                    DocumentCollection collectionDefinition = new DocumentCollection();
-                    collectionDefinition.setId(collectionId);
-
-                    collectionCache = client.createCollection(
-                            getTodoDatabase().getSelfLink(),
-                            collectionDefinition, null).getResource();
-                } catch (DocumentClientException e) {
-                    // TODO: Something has gone terribly wrong - the app wasn't
-                    // able to query or create the collection.
-                    // Verify your connection, endpoint, and key.
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        return collectionCache;
-    }
-
-    private Document getDocumentById(String id) {
-        // Retrieve the document using the DocumentClient.
-        List<Document> documentList = client
-                .queryDocuments(getTodoCollection().getSelfLink(),
-                        "SELECT * FROM root r WHERE r.id='" + id + "'", null)
-                .getQueryIterable().toList();
-
-        if (documentList.size() > 0) {
-            return documentList.get(0);
-        } else {
-            return null;
-        }
     }
 }

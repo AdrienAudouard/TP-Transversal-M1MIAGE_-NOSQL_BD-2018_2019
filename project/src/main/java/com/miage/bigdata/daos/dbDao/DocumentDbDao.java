@@ -1,44 +1,70 @@
 package com.miage.bigdata.daos.dbDao;
 
 import com.miage.bigdata.daos.clientsDao.DocumentClientDao;
-import com.miage.bigdata.daos.itemDao.ThingDao;
-import com.miage.bigdata.models.Thing;
+import com.miage.bigdata.models.Item;
 import com.mongodb.MongoClient;
+import lombok.NonNull;
 
 import java.util.List;
 
-public class DocumentDbDao extends ModelDbDao<Thing> implements ThingDao {
+public class DocumentDbDao extends ModelDbDao {
 
-    private static MongoClient client;
+    private MongoClient client;
 
-    public DocumentDbDao() {
-        collectionId = "items";
-        databaseId = "TestDB";
+    public DocumentDbDao(String collectionId, String databaseId) {
+        this.collectionId = collectionId; //"items";
+        this.databaseId = databaseId; //"TestDB";
         client = new DocumentClientDao().getClient();
     }
 
+
     @Override
-    public Thing createItem(Thing item) {
+    public String getDatabaseID() {
         return null;
     }
 
     @Override
-    public Thing readItem(String id) {
+    public List<Item> readAll() {
         return null;
     }
 
     @Override
-    public List<Thing> readItems() {
+    public Item create(Item item) {
         return null;
     }
 
     @Override
-    public Thing updateItem(Thing item) {
+    public Item getByID(@NonNull String id) {
         return null;
     }
 
     @Override
-    public boolean deleteItem(String id) {
+    public boolean delete(@NonNull String id) {
+        return false;
+    }
+
+    @Override
+    public Item update(@NonNull Item item) {
+        return null;
+    }
+
+    @Override
+    public String generateID() {
+        return null;
+    }
+
+    @Override
+    public boolean createTable() {
+        return false;
+    }
+
+    @Override
+    public boolean populateTable() {
+        return false;
+    }
+
+    @Override
+    public boolean deleteTable() {
         return false;
     }
 }
