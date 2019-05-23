@@ -1,7 +1,7 @@
 package com.miage.bigdata.daos.itemDao;
 
-import com.miage.bigdata.daos.dbDao.DocumentDbDao;
-import com.miage.bigdata.models.DocumentItem;
+import com.miage.bigdata.daos.dbDao.KeyValueDbDao;
+import com.miage.bigdata.models.KeyValueItem;
 import com.microsoft.azure.documentdb.*;
 import lombok.NonNull;
 
@@ -9,7 +9,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class DocumentObjectDao<T extends DocumentItem> extends ObjectDao<T, DocumentDbDao> {
+public abstract class KeyValueObjectDao<T extends KeyValueItem> extends ObjectDao<T, KeyValueDbDao> {
     // The DocumentDB Client
     protected static DocumentClient documentClient;
 
@@ -25,7 +25,7 @@ public abstract class DocumentObjectDao<T extends DocumentItem> extends ObjectDa
 
     protected abstract String getEntityName();
 
-    public DocumentObjectDao(DocumentDbDao dbDao) {
+    public KeyValueObjectDao(KeyValueDbDao dbDao) {
         super(dbDao);
 
         documentClient = dbDao.connect();

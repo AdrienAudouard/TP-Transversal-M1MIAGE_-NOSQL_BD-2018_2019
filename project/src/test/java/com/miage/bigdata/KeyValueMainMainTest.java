@@ -5,9 +5,9 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 /**
- * Unit test for simple DocumentMain.
+ * Unit test for simple KeyValueMainMain.
  */
-public class DocumentMainTest
+public class KeyValueMainMainTest
 {
     /**
      * Rigorous Test :-)

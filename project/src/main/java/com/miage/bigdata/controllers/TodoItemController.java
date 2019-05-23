@@ -1,15 +1,15 @@
 package com.miage.bigdata.controllers;
 
-import com.miage.bigdata.daos.dbDao.DocumentDbDao;
+import com.miage.bigdata.daos.dbDao.KeyValueDbDao;
 import com.miage.bigdata.daos.itemDao.TodoItemObjectDao;
 
 public class TodoItemController {
-    private DocumentDbDao documentDbDao;
+    private KeyValueDbDao keyValueDbDao;
     private TodoItemObjectDao todoItemObjectDao;
 
     public TodoItemController() {
-        this.documentDbDao = new DocumentDbDao();
-        this.todoItemObjectDao = new TodoItemObjectDao(this.documentDbDao);
+        this.keyValueDbDao = new KeyValueDbDao();
+        this.todoItemObjectDao = new TodoItemObjectDao(this.keyValueDbDao);
     }
 
     public TodoItemObjectDao getTodoItemObjectDao() {

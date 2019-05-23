@@ -2,7 +2,7 @@ package com.miage.bigdata.models;
 
 import com.microsoft.azure.documentdb.Document;
 
-public abstract class DocumentItem extends Item {
+public abstract class KeyValueItem extends Item {
     protected String id;
 
     public String getId() {
@@ -13,7 +13,7 @@ public abstract class DocumentItem extends Item {
 
     @Override
     public String toString() {
-        return "DocumentItem{" +
+        return "KeyValueItem{" +
                 "id='" + id + '\'' +
                 "} " + super.toString();
     }

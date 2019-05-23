@@ -2,13 +2,13 @@ package com.miage.bigdata.daos.dbDao;
 
 import com.microsoft.azure.documentdb.DocumentClient;
 
-public class DocumentDbDao extends DbDao<DocumentClient> {
+public class KeyValueDbDao extends DbDao<DocumentClient> {
     private DocumentClient documentClient;
 
 
     @Override
     public DocumentClient connect() {
-        this.documentClient = DocumentClientFactory.getDocumentClient();
+        this.documentClient = KeyValueClientFactory.getDocumentClient();
         return this.documentClient;
     }
 

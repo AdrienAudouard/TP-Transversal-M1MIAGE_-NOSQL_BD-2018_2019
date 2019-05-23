@@ -1,10 +1,10 @@
 package com.miage.bigdata.daos.itemDao;
 
-import com.miage.bigdata.daos.dbDao.DocumentDbDao;
+import com.miage.bigdata.daos.dbDao.KeyValueDbDao;
 import com.miage.bigdata.models.TodoItem;
 
-public class TodoItemObjectDao extends DocumentObjectDao<TodoItem> {
-    public TodoItemObjectDao(DocumentDbDao dbDao) {
+public class TodoItemObjectDao extends KeyValueObjectDao<TodoItem> {
+    public TodoItemObjectDao(KeyValueDbDao dbDao) {
         super(dbDao);
     }
 

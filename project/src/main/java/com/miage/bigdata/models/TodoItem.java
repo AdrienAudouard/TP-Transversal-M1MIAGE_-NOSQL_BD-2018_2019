@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.microsoft.azure.documentdb.Document;
 
-public class TodoItem extends DocumentItem {
+public class TodoItem extends KeyValueItem {
     private String category;
     private boolean complete;
     private String name;
