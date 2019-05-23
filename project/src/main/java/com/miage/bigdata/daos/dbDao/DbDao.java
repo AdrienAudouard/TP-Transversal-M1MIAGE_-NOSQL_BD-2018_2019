@@ -7,6 +7,8 @@ import java.util.List;
 public abstract class DbDao<T> {
     protected List<ObjectDao> objectDaos;
 
+    protected T client;
+
     public abstract T connect();
 
     public abstract boolean isConnected();

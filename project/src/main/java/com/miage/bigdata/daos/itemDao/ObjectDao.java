@@ -83,8 +83,6 @@ public abstract class ObjectDao<T extends Item, U extends DbDao> {
      */
     protected abstract String generateID();
 
-    protected abstract T createFromJSON(String json);
-
     /**
      * Create the table or the equivalent in the DB
      * @return true if success

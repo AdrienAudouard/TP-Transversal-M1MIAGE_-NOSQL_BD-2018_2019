@@ -2,7 +2,7 @@ package com.miage.bigdata.daos.itemDao.keyValue;
 
 import com.miage.bigdata.daos.dbDao.keyValue.KeyValueDbDao;
 import com.miage.bigdata.daos.itemDao.ObjectDao;
-import com.miage.bigdata.models.KeyValueItem;
+import com.miage.bigdata.models.keyValue.KeyValueItem;
 import com.microsoft.azure.documentdb.*;
 import lombok.NonNull;
 
@@ -45,7 +45,7 @@ public abstract class KeyValueObjectDao<T extends KeyValueItem> extends ObjectDa
         // De-serialize the documents in to TodoItems.
         for (Document document : documentList) {
 
-            T item = createFromJSON(document.toString());
+            T item = instanciateItemFromJSON(document.toString());
             todoItems.add(item);
         }
 
@@ -59,7 +59,7 @@ public abstract class KeyValueObjectDao<T extends KeyValueItem> extends ObjectDa
 
         if (document != null) {
             // De-serialize the document in to a TodoItem.
-            return createFromJSON(document.toString());
+            return instanciateItemFromJSON(document.toString());
         } else {
             return null;
         }
@@ -84,7 +84,7 @@ public abstract class KeyValueObjectDao<T extends KeyValueItem> extends ObjectDa
             return null;
         }
 
-        T newItem = createFromJSON(document.toString());
+        T newItem = instanciateItemFromJSON(document.toString());
 
         return newItem;
     }
@@ -104,7 +104,7 @@ public abstract class KeyValueObjectDao<T extends KeyValueItem> extends ObjectDa
             return null;
         }
 
-        return createFromJSON(document.toString());
+        return instanciateItemFromJSON(document.toString());
     }
 
     @Override
@@ -205,7 +205,11 @@ public abstract class KeyValueObjectDao<T extends KeyValueItem> extends ObjectDa
     }
 
     @Override
-    protected T createFromJSON(String json) {
+    protected String getDatabaseID() {
+        return "TestDB";
+    }
+
+    protected T instanciateItemFromJSON(String json) {
         try {
             return getItemClass().getConstructor(String.class).newInstance(json);
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {

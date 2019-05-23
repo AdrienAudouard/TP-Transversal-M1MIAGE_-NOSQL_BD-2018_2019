@@ -1,4 +1,4 @@
-package com.miage.bigdata.models;
+package com.miage.bigdata.models.keyValue;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;

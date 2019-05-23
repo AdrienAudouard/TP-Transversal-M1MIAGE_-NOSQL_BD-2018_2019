@@ -1,7 +1,7 @@
 package com.miage.bigdata.mains;
 
 import com.miage.bigdata.controllers.TodoItemController;
-import com.miage.bigdata.models.TodoItem;
+import com.miage.bigdata.models.keyValue.TodoItem;
 
 /**
  * Hello world!
