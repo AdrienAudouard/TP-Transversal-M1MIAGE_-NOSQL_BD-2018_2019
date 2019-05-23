@@ -1,6 +1,7 @@
 package com.miage.bigdata.daos.itemDao;
 
 import com.miage.bigdata.daos.dbDao.DocumentDbDao;
+import com.miage.bigdata.models.Thing;
 
 public class ThingDaoFactory {
 
@@ -8,7 +9,7 @@ public class ThingDaoFactory {
 
     public static ItemDao getDao() {
         if (myDao == null) {
-            myDao = new DocumentDbDao("items", "TestDB");
+            myDao = new DocumentDbDao<>("things", "TestDoc", Thing.class);
         }
         return myDao;
     }
