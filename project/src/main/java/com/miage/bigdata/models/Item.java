@@ -1,4 +1,7 @@
 package com.miage.bigdata.models;
 
-abstract class Item {
+public abstract class Item {
+    public Item() {}
+
+    public Item(String json) { }
 }

@@ -1,4 +1,4 @@
-package com.miage.bigdata.daos.itemDao;
+package com.miage.bigdata.daos.itemDao.example;
 
 import com.miage.bigdata.models.TodoItem;
 
