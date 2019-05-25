@@ -1,17 +1,29 @@
 package com.miage.bigdata.mains;
 
 import com.miage.bigdata.controllers.ThingItemController;
+import com.miage.bigdata.daos.itemDao.document.ThingObjectDao;
 import com.miage.bigdata.models.document.ThingItem;
 
 public class DocumentMain {
 
     public static void main(String args[]) {
-        ThingItem thingItem1 = new ThingItem("1", "test");
-        ThingItem thingItem2 = new ThingItem("2", "test");
-        ThingItem thingItem3 = new ThingItem("3", "test");
-        ThingItem thingItem4 = new ThingItem("4", "test");
-
         ThingItemController thingItemController = new ThingItemController();
+        ThingObjectDao thingObjectDao = thingItemController.getThingObjectDao();
+
+        System.out.println("------------ Delete table ------------");
+
+        System.out.println("Success: " + thingObjectDao.deleteTable());
+
+        System.out.println("------------ Create table ------------");
+
+        System.out.println("Success: " + thingObjectDao.createTable());
+
+
+        ThingItem thingItem1 = new ThingItem(thingObjectDao.generateID(), "test");
+        ThingItem thingItem2 = new ThingItem(thingObjectDao.generateID(), "test");
+        ThingItem thingItem3 = new ThingItem(thingObjectDao.generateID(), "test");
+        ThingItem thingItem4 = new ThingItem(thingObjectDao.generateID(), "test");
+
 
         System.out.println("------------ Print all items ------------");
 

@@ -13,6 +13,7 @@ import org.bson.Document;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import static com.mongodb.client.model.Filters.eq;
@@ -20,6 +21,8 @@ import static com.mongodb.client.model.Filters.eq;
 public abstract class DocumentObjectDao<T extends DocumentItem> extends ObjectDao<T, DocumentDbDao> {
 
     protected MongoClient mongoClient;
+
+    protected int lastNextID;
 
     public DocumentObjectDao(DocumentDbDao dbDao) {
         super(dbDao);
@@ -85,6 +88,27 @@ public abstract class DocumentObjectDao<T extends DocumentItem> extends ObjectDa
         }
 
         return null;
+    }
+
+    @Override
+    public String generateID() {
+        List<T> list = this.readAll();
+
+        int newID = 1;
+
+        if (list.size() != 0) {
+            list.sort(Comparator.comparingInt(o -> Integer.parseInt(o.getId())));
+
+            newID = Integer.parseInt(list.get(list.size()-1).getId()) + 1;
+        }
+
+        if (newID <= lastNextID) {
+            newID= lastNextID + 1;
+        }
+
+        lastNextID = newID;
+
+        return Integer.toString(newID);
     }
 
     public abstract String getCollectionName();

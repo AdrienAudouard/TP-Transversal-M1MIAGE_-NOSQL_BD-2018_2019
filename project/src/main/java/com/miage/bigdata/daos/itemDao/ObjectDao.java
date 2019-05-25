@@ -81,7 +81,7 @@ public abstract class ObjectDao<T extends Item, U extends DbDao> {
     /**
      * @return Generate a new ID for the item
      */
-    protected abstract String generateID();
+    public abstract String generateID();
 
     /**
      * Create the table or the equivalent in the DB

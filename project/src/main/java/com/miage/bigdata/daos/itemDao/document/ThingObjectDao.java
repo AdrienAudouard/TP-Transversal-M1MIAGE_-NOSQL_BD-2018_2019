@@ -2,6 +2,7 @@ package com.miage.bigdata.daos.itemDao.document;
 
 import com.miage.bigdata.daos.dbDao.document.DocumentDbDao;
 import com.miage.bigdata.models.document.ThingItem;
+import com.mongodb.client.MongoCollection;
 
 public class ThingObjectDao extends DocumentObjectDao<ThingItem> {
     public ThingObjectDao(DocumentDbDao dbDao) {
@@ -14,13 +15,9 @@ public class ThingObjectDao extends DocumentObjectDao<ThingItem> {
     }
 
     @Override
-    protected String generateID() {
-        return null;
-    }
-
-    @Override
     public boolean createTable() {
-        return false;
+        this.getDatabase().createCollection(getCollectionName());
+        return true;
     }
 
     @Override
@@ -30,6 +27,13 @@ public class ThingObjectDao extends DocumentObjectDao<ThingItem> {
 
     @Override
     public boolean deleteTable() {
+        MongoCollection a = getCollection();
+
+        if (a != null) {
+            a.drop();
+            return true;
+        }
+
         return false;
     }
 

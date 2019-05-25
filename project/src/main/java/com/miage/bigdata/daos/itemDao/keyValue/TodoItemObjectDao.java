@@ -19,7 +19,7 @@ public class TodoItemObjectDao extends KeyValueObjectDao<TodoItem> {
     }
 
     @Override
-    protected String generateID() {
+    public String generateID() {
         return null;
     }
 
