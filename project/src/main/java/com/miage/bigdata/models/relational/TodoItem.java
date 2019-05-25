@@ -2,6 +2,7 @@ package com.miage.bigdata.models.relational;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.miage.bigdata.models.Item;
 import com.microsoft.azure.documentdb.Document;
 
 public class TodoItem extends RelationalItem {
@@ -72,5 +73,10 @@ public class TodoItem extends RelationalItem {
                 ", id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 "} " + super.toString();
+    }
+
+    @Override
+    public String getPathFileData() {
+        return Item.getResourcesPath() + "???";
     }
 }

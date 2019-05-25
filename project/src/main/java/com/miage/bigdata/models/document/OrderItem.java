@@ -1,5 +1,6 @@
 package com.miage.bigdata.models.document;
 
+import com.miage.bigdata.models.Item;
 import org.bson.Document;
 
 import java.util.ArrayList;
@@ -11,6 +12,8 @@ public class OrderItem extends DocumentItem {
     private Date orderDate;
     private Double totalPrice;
     private List<ProductItem> orderLines;
+
+    public OrderItem() {}
 
     public OrderItem(String id, String personId, Date orderDate, Double totalPrice, List<ProductItem> orderLines) {
         this.personId = personId;
@@ -61,5 +64,10 @@ public class OrderItem extends DocumentItem {
                 ", _id='" + _id + '\'' +
                 ", id='" + id + '\'' +
                 "} " + super.toString();
+    }
+
+    @Override
+    public String getPathFileData() {
+        return Item.getResourcesPath() + "order/Order.json";
     }
 }

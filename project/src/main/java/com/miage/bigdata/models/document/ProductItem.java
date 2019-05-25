@@ -1,5 +1,6 @@
 package com.miage.bigdata.models.document;
 
+import com.miage.bigdata.models.Item;
 import org.bson.Document;
 
 public class ProductItem extends DocumentItem {
@@ -78,5 +79,10 @@ public class ProductItem extends DocumentItem {
                 ", id='" + id + '\'' +
                 ", _id='" + _id + '\'' +
                 "} " + super.toString();
+    }
+
+    @Override
+    public String getPathFileData() {
+        return Item.getResourcesPath() + "???";
     }
 }

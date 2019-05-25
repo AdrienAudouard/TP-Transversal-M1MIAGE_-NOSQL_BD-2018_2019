@@ -8,7 +8,7 @@ import java.util.List;
 
 public abstract class Loader<T extends Item> {
 
-    public abstract List<T> load(Class<T> cl);
+    public abstract List<T> load(Class<T> cl, String path);
 
     protected T instanciateItemFromDocument(Class<T> cl, String type) {
         try {
