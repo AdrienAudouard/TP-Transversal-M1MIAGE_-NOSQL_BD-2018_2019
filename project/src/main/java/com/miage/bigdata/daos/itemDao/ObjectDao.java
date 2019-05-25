@@ -1,14 +1,14 @@
 package com.miage.bigdata.daos.itemDao;
 
 import com.google.gson.Gson;
-import com.miage.bigdata.daos.dbDao.DbDao;
+import com.miage.bigdata.daos.dbDao.ModelDbDao;
 import com.miage.bigdata.models.Item;
 import lombok.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class ObjectDao<T extends Item, U extends DbDao> {
+public abstract class ObjectDao<T extends Item, U extends ModelDbDao> {
     // We'll use Gson for POJO <=> JSON serialization for this example.
     protected static Gson gson = new Gson();
 

@@ -1,6 +1,6 @@
 package com.miage.bigdata.daos.itemDao.document;
 
-import com.miage.bigdata.daos.dbDao.document.DocumentDbDao;
+import com.miage.bigdata.daos.dbDao.document.DocumentModelDbDao;
 import com.miage.bigdata.daos.itemDao.ObjectDao;
 import com.miage.bigdata.models.document.DocumentItem;
 import com.mongodb.MongoClient;
@@ -18,13 +18,13 @@ import java.util.List;
 
 import static com.mongodb.client.model.Filters.eq;
 
-public abstract class DocumentObjectDao<T extends DocumentItem> extends ObjectDao<T, DocumentDbDao> {
+public abstract class DocumentObjectDao<T extends DocumentItem> extends ObjectDao<T, DocumentModelDbDao> {
 
     protected MongoClient mongoClient;
 
     protected int lastNextID;
 
-    public DocumentObjectDao(DocumentDbDao dbDao) {
+    public DocumentObjectDao(DocumentModelDbDao dbDao) {
         super(dbDao);
 
         this.mongoClient = dbDao.connect();
@@ -109,6 +109,28 @@ public abstract class DocumentObjectDao<T extends DocumentItem> extends ObjectDa
         lastNextID = newID;
 
         return Integer.toString(newID);
+    }
+
+    @Override
+    public boolean createTable() {
+        this.getDatabase().createCollection(getCollectionName());
+        return true;
+    }
+
+    @Override
+    public boolean populateTable() {
+        return false;
+    }
+
+    @Override
+    public boolean deleteTable() {
+        MongoCollection a = getCollection();
+
+        if (a != null) {
+            a.drop();
+        }
+
+        return true;
     }
 
     public abstract String getCollectionName();

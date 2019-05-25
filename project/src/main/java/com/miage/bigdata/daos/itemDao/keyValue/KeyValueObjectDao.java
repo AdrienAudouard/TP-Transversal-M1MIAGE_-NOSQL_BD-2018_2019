@@ -1,6 +1,6 @@
 package com.miage.bigdata.daos.itemDao.keyValue;
 
-import com.miage.bigdata.daos.dbDao.keyValue.KeyValueDbDao;
+import com.miage.bigdata.daos.dbDao.keyValue.KeyValueModelDbDao;
 import com.miage.bigdata.daos.itemDao.ObjectDao;
 import com.miage.bigdata.models.keyValue.KeyValueItem;
 import com.microsoft.azure.documentdb.*;
@@ -10,7 +10,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class KeyValueObjectDao<T extends KeyValueItem> extends ObjectDao<T, KeyValueDbDao> {
+public abstract class KeyValueObjectDao<T extends KeyValueItem> extends ObjectDao<T, KeyValueModelDbDao> {
     // The DocumentDB Client
     protected static DocumentClient documentClient;
 
@@ -26,7 +26,7 @@ public abstract class KeyValueObjectDao<T extends KeyValueItem> extends ObjectDa
 
     protected abstract String getEntityName();
 
-    public KeyValueObjectDao(KeyValueDbDao dbDao) {
+    public KeyValueObjectDao(KeyValueModelDbDao dbDao) {
         super(dbDao);
 
         documentClient = dbDao.connect();

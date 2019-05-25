@@ -6,7 +6,7 @@ public class TodoDaoFactory {
     public static TodoDao getDao() {
         /*
         if (myTodoDao == null) {
-            myTodoDao = new KeyValueDbDao();
+            myTodoDao = new KeyValueModelDbDao();
         }
         return myTodoDao; */
         return null;
