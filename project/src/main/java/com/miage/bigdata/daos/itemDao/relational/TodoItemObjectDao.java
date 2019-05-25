@@ -1,10 +1,10 @@
-package com.miage.bigdata.daos.itemDao.keyValue;
+package com.miage.bigdata.daos.itemDao.relational;
 
-import com.miage.bigdata.daos.dbDao.keyValue.KeyValueModelDbDao;
-import com.miage.bigdata.models.keyValue.TodoItem;
+import com.miage.bigdata.daos.dbDao.relational.RelationalModelDbDao;
+import com.miage.bigdata.models.relational.TodoItem;
 
-public class TodoItemObjectDao extends KeyValueObjectDao<TodoItem> {
-    public TodoItemObjectDao(KeyValueModelDbDao dbDao) {
+public class TodoItemObjectDao extends RelationalObjectDao<TodoItem> {
+    public TodoItemObjectDao(RelationalModelDbDao dbDao) {
         super(dbDao);
     }
 

@@ -1,18 +1,18 @@
 package com.miage.bigdata.mains;
 
 import com.miage.bigdata.controllers.ItemController;
-import com.miage.bigdata.controllers.KeyValueController;
-import com.miage.bigdata.models.keyValue.TodoItem;
+import com.miage.bigdata.controllers.RelationalController;
+import com.miage.bigdata.models.relational.TodoItem;
 
 /**
  * Hello world!
  *
  */
-public class KeyValueMainMain
+public class RolationalMain
 {
     public static void main( String[] args ) {
-        KeyValueController keyValueController = new KeyValueController();
-        ItemController<TodoItem> tdiController = keyValueController.getItemController(TodoItem.class);
+        RelationalController relationalController = new RelationalController();
+        ItemController<TodoItem> tdiController = relationalController.getItemController(TodoItem.class);
         
 
         System.out.println("------------ Print all items ------------");

@@ -1,10 +1,10 @@
-package com.miage.bigdata.models.keyValue;
+package com.miage.bigdata.models.relational;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.microsoft.azure.documentdb.Document;
 
-public class TodoItem extends KeyValueItem {
+public class TodoItem extends RelationalItem {
     private String category;
     private boolean complete;
     private String name;

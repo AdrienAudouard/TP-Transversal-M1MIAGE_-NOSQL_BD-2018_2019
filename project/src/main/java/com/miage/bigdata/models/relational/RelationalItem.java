@@ -1,14 +1,14 @@
-package com.miage.bigdata.models.keyValue;
+package com.miage.bigdata.models.relational;
 
 import com.miage.bigdata.models.Item;
 import com.microsoft.azure.documentdb.Document;
 
-public abstract class KeyValueItem extends Item {
+public abstract class RelationalItem extends Item {
     public abstract Document updateDocument(Document document);
 
     @Override
     public String toString() {
-        return "KeyValueItem{" +
+        return "RelationalItem{" +
                 "id='" + id + '\'' +
                 "} " + super.toString();
     }

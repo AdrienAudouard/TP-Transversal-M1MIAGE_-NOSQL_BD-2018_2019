@@ -1,8 +1,8 @@
-package com.miage.bigdata.daos.itemDao.keyValue;
+package com.miage.bigdata.daos.itemDao.relational;
 
-import com.miage.bigdata.daos.dbDao.keyValue.KeyValueModelDbDao;
+import com.miage.bigdata.daos.dbDao.relational.RelationalModelDbDao;
 import com.miage.bigdata.daos.itemDao.ObjectDao;
-import com.miage.bigdata.models.keyValue.KeyValueItem;
+import com.miage.bigdata.models.relational.RelationalItem;
 import com.microsoft.azure.documentdb.*;
 import lombok.NonNull;
 
@@ -10,7 +10,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class KeyValueObjectDao<T extends KeyValueItem> extends ObjectDao<T, KeyValueModelDbDao> {
+public abstract class RelationalObjectDao<T extends RelationalItem> extends ObjectDao<T, RelationalModelDbDao> {
     // The DocumentDB Client
     protected static DocumentClient documentClient;
 
@@ -26,7 +26,7 @@ public abstract class KeyValueObjectDao<T extends KeyValueItem> extends ObjectDa
 
     protected abstract String getEntityName();
 
-    public KeyValueObjectDao(KeyValueModelDbDao dbDao) {
+    public RelationalObjectDao(RelationalModelDbDao dbDao) {
         super(dbDao);
 
         documentClient = dbDao.connect();

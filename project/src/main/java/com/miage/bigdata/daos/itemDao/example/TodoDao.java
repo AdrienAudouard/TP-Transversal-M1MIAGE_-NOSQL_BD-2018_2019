@@ -1,6 +1,6 @@
 package com.miage.bigdata.daos.itemDao.example;
 
-import com.miage.bigdata.models.keyValue.TodoItem;
+import com.miage.bigdata.models.relational.TodoItem;
 
 import java.util.List;
 
