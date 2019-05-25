@@ -6,7 +6,6 @@ import org.bson.Document;
 
 public class ThingItem extends DocumentItem {
     private String name;
-    private String _id;
 
     public ThingItem(String id, String name) {
         this.name = name;
@@ -17,17 +16,12 @@ public class ThingItem extends DocumentItem {
         JsonParser jsonParser = new JsonParser();
         JsonObject jo = (JsonObject)jsonParser.parse(json);
 
-        this.id = jo.get("id").toString();
         this._id = jo.get("_id").toString();
         this.name = jo.get("name").toString();
     }
 
     public ThingItem(Document document) {
         this(document.toJson());
-    }
-
-    public String getMongoID() {
-        return _id;
     }
 
     public void setName(String name) {

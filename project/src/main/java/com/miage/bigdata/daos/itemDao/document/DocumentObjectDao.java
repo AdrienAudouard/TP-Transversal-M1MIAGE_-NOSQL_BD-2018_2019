@@ -32,9 +32,13 @@ public abstract class DocumentObjectDao<T extends DocumentItem> extends ObjectDa
 
     @Override
     public T create(@NonNull T item) {
-        MongoCollection collection = getCollection();
+        MongoCollection<Document> collection = getCollection();
 
-        collection.insertOne(item.toDocument());
+        Document d = item.toDocument();
+
+        collection.insertOne(d);
+
+        item.setMongoID(d.getObjectId("_id").toString());
 
         return item;
     }
@@ -47,6 +51,7 @@ public abstract class DocumentObjectDao<T extends DocumentItem> extends ObjectDa
 
         for (Object o : collection.find()) {
             Document document = (Document) o;
+
             list.add(instanciateItemFromDocument(document));
         }
 

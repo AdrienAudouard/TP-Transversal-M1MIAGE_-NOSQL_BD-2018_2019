@@ -2,12 +2,46 @@ package com.miage.bigdata.mains;
 
 import com.miage.bigdata.controllers.DocumentController;
 import com.miage.bigdata.controllers.ItemController;
-import com.miage.bigdata.models.document.ThingItem;
+import com.miage.bigdata.models.document.OrderItem;
+import com.miage.bigdata.models.document.ProductItem;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 public class DocumentMain {
 
     public static void main(String args[]) {
         DocumentController documentController = new DocumentController();
+        ItemController<ProductItem> piController = documentController.getItemController(ProductItem.class);
+        ItemController<OrderItem> oiController = documentController.getItemController(OrderItem.class);
+
+        System.out.println(piController.readAll());
+        System.out.println(oiController.readAll());
+
+        piController.deleteTable();
+        oiController.deleteTable();
+
+        piController.createTable();
+        oiController.createTable();
+
+        ProductItem p1 = new ProductItem(oiController.generateID(), "t1", 10, "", "");
+        ProductItem p2 = new ProductItem(oiController.generateID(), "t2", 10, "", "");
+
+        System.out.println(piController.create(p1, p2));
+
+        ArrayList<ProductItem> list = new ArrayList<>();
+        list.add(p1);
+        list.add(p2);
+
+        OrderItem orderItem = new OrderItem(oiController.generateID(),
+                "1",
+                new Date(),
+                10.0,
+                list);
+
+        oiController.create(orderItem);
+
+        /*
         ItemController<ThingItem> tiController = documentController.getItemController(ThingItem.class);
 
         System.out.println("------------ Delete table ------------");
@@ -49,6 +83,8 @@ public class DocumentMain {
                 thingItem2.getId(),
                 thingItem3.getId(),
                 thingItem4.getId()));
+
+         */
 
     }
 }

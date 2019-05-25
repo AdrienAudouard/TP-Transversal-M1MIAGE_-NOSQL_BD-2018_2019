@@ -38,7 +38,7 @@ public abstract class ObjectDao<T extends Item, U extends ModelDbDao> {
      * @param items
      * @return Items created
      */
-    public List<T> create(@NonNull T ...items) {
+    public final List<T> create(@NonNull T ...items) {
         ArrayList<T> arrayList = new ArrayList<>();
 
         for (T item : items) {
@@ -62,7 +62,7 @@ public abstract class ObjectDao<T extends Item, U extends ModelDbDao> {
     public abstract boolean delete(@NonNull String id);
 
 
-    public boolean delete(@NonNull String ...ids) {
+    public final boolean delete(@NonNull String ...ids) {
         for (String id : ids) {
             if (!delete(id)) {
                 return false;

@@ -31,6 +31,7 @@ public class ProductItem extends DocumentItem {
         return new Document("title", title)
                 .append("price", price)
                 .append("imgURL", imgURL)
+                .append("id", id)
                 .append("brand", brand)
                 .append("asin", id);
     }
@@ -75,6 +76,7 @@ public class ProductItem extends DocumentItem {
                 ", imgURL='" + imgURL + '\'' +
                 ", brand='" + brand + '\'' +
                 ", id='" + id + '\'' +
+                ", _id='" + _id + '\'' +
                 "} " + super.toString();
     }
 }
