@@ -1,7 +1,6 @@
 package com.miage.bigdata.daos.loader;
 
 import com.miage.bigdata.models.Item;
-import org.bson.Document;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -20,4 +19,7 @@ public abstract class Loader<T extends Item> {
         return null;
     }
 
+    protected String getTypeDataFile(String path) {
+        return path.split(".")[1];
+    }
 }
