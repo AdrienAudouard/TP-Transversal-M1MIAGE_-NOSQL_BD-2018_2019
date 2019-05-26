@@ -203,6 +203,6 @@ public abstract class RelationalObjectDao<T extends RelationalItem> extends Obje
 
     @Override
     protected String getDatabaseID() {
-        return "TestDB";
+        return "ToDoList";
     }
 }
