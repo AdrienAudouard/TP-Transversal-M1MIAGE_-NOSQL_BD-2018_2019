@@ -8,21 +8,24 @@ public class InvoiceItem extends ColumnItem{
     private String personId;
     private Date orderDate;
     private Double totalPrice;
+    protected InvoiceLine orderLine;
 
-    public InvoiceItem(Row row) {
+    public InvoiceItem(Row row, Row lineRow) {
         super(row);
 
         personId = row.getString("personId");
         orderDate = row.getTimestamp("orderDate");
         totalPrice = row.getDouble("totalPrice");
         id = row.getString("orderId");
+        this.orderLine = new InvoiceLine(lineRow);
     }
 
-    public InvoiceItem(String id, String personId, Date orderDate, Double totalPrice) {
+    public InvoiceItem(String id, String personId, Date orderDate, Double totalPrice, InvoiceLine invoiceLine) {
         this.personId = personId;
         this.id = id;
         this.orderDate = orderDate;
         this.totalPrice = totalPrice;
+        this.orderLine = invoiceLine;
     }
 
     public String getPersonId() {
@@ -49,13 +52,18 @@ public class InvoiceItem extends ColumnItem{
         this.totalPrice = totalPrice;
     }
 
+    public InvoiceLine getOrderLine() {
+        return orderLine;
+    }
+
     @Override
     public String toString() {
         return "InvoiceItem{" +
                 "personId='" + personId + '\'' +
                 ", orderDate=" + orderDate +
                 ", totalPrice=" + totalPrice +
+                ", orderLine=" + orderLine +
                 ", id='" + id + '\'' +
-                "} " + super.toString();
+                "} ";
     }
 }

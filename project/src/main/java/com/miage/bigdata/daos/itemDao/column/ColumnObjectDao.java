@@ -22,9 +22,9 @@ public abstract class ColumnObjectDao<T extends ColumnItem> extends ObjectDao<T,
         return cassandraSession.prepare(query);
     }
 
-    protected T instanciateItemFromRow(Row row) {
+    protected T instanciateItemFromRow(Row row, Row lineRow) {
         try {
-            return getItemClass().getConstructor(Row.class).newInstance(row);
+            return getItemClass().getConstructor(Row.class, Row.class).newInstance(row, lineRow);
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             e.printStackTrace();
         }
