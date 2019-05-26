@@ -1,19 +1,26 @@
 package com.miage.bigdata.daos.dbDao.relational;
 
+import com.miage.bigdata.util.Configuration;
 import com.microsoft.azure.documentdb.ConnectionPolicy;
 import com.microsoft.azure.documentdb.ConsistencyLevel;
 import com.microsoft.azure.documentdb.DocumentClient;
 
-public class RelationalClientFactory {
-    private static final String HOST = "https://db-sql.documents.azure.com:443/";
-    private static final String MASTER_KEY = "I56cDiKmjV0nuKlYm96svd5Rrn4mKPaL2NfmPWXN0bcLNdr6xEiMwiocDwpWU4D6fEDTGY8TtfXMlclepTapOQ==";
+import java.io.IOException;
 
+public class RelationalClientFactory {
     private static DocumentClient documentClient;
 
     public static DocumentClient getDocumentClient() {
-        if (documentClient == null) {
-            documentClient = new DocumentClient(HOST, MASTER_KEY,
-                    ConnectionPolicy.GetDefault(), ConsistencyLevel.Session);
+        try {
+            String host = Configuration.RELATIONAL.getProperty("host");
+            String masterKey = Configuration.RELATIONAL.getProperty("masterkey");
+
+            if (documentClient == null) {
+                documentClient = new DocumentClient(host, masterKey,
+                        ConnectionPolicy.GetDefault(), ConsistencyLevel.Session);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         return documentClient;

@@ -14,7 +14,6 @@ public class RelationalMain
         RelationalController relationalController = new RelationalController();
         ItemController<TodoItem> tdiController = relationalController.getItemController(TodoItem.class);
         
-
         System.out.println("------------ Print all items ------------");
 
         System.out.println(tdiController.readAll().toString());
