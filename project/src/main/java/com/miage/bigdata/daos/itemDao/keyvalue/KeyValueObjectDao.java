@@ -2,12 +2,8 @@ package com.miage.bigdata.daos.itemDao.keyvalue;
 
 import com.google.common.collect.Lists;
 import com.miage.bigdata.daos.dbDao.keyvalue.KeyValueModelDbDao;
-import com.miage.bigdata.daos.dbDao.relational.RelationalModelDbDao;
 import com.miage.bigdata.daos.itemDao.ObjectDao;
-import com.miage.bigdata.models.keyvalue.FeedbackItem;
 import com.miage.bigdata.models.keyvalue.KeyValueItem;
-import com.miage.bigdata.models.relational.RelationalItem;
-import com.microsoft.azure.documentdb.*;
 import com.microsoft.azure.storage.StorageException;
 import com.microsoft.azure.storage.table.CloudTable;
 import com.microsoft.azure.storage.table.CloudTableClient;
@@ -15,8 +11,6 @@ import com.microsoft.azure.storage.table.TableOperation;
 import com.microsoft.azure.storage.table.TableQuery;
 import lombok.NonNull;
 
-import java.lang.reflect.InvocationTargetException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +33,8 @@ public abstract class KeyValueObjectDao<T extends KeyValueItem> extends ObjectDa
         CloudTable cloudTable = getTable();
 
         if (cloudTable != null) {
-            items.addAll(Lists.newArrayList(cloudTable.execute(new TableQuery<T>()))); // TODO check if this works : it does not, FIXME
+            TableQuery<KeyValueItem> readAllQuery = TableQuery.from(KeyValueItem.class); // TODO check if this works, probably doesn't
+            List<KeyValueItem> allKeyValueItems = Lists.newArrayList(cloudTable.execute(readAllQuery));
         }
 
         return items;
