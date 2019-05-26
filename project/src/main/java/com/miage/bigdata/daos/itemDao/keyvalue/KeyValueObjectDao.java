@@ -39,7 +39,7 @@ public abstract class KeyValueObjectDao<T extends KeyValueItem> extends ObjectDa
         CloudTable cloudTable = getTable();
 
         if (cloudTable != null) {
-            items.addAll(Lists.newArrayList(cloudTable.execute(new TableQuery<>()))); // TODO check if this works
+            items.addAll(Lists.newArrayList(cloudTable.execute(new TableQuery<T>()))); // TODO check if this works : it does not, FIXME
         }
 
         return items;
@@ -69,7 +69,7 @@ public abstract class KeyValueObjectDao<T extends KeyValueItem> extends ObjectDa
 
         if (cloudTable != null) {
             try {
-                TableOperation insertKeyValueItem = TableOperation.insert(item);
+                TableOperation insertKeyValueItem = TableOperation.insertOrReplace(item);
                 return cloudTable.execute(insertKeyValueItem).getResultAsType();
             } catch (StorageException e) {
                 e.printStackTrace();

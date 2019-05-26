@@ -17,9 +17,17 @@ public abstract class KeyValueItem extends Item implements TableEntity {
     private String eTag;
 
     //region Constructors
-    public KeyValueItem(String partitionKey, String rowKey) {
+    public KeyValueItem(String partitionKey, String rowKey, Date timestamp) {
         this.partitionKey = partitionKey;
         this.rowKey = rowKey;
+        this.timestamp = timestamp;
+    }
+
+    public KeyValueItem(String partitionKey, String rowKey, Date timestamp, String eTag) {
+        this.partitionKey = partitionKey;
+        this.rowKey = rowKey;
+        this.timestamp = timestamp;
+        this.eTag = eTag;
     }
     //endregion
 

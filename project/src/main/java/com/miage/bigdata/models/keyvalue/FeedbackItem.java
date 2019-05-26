@@ -16,12 +16,22 @@ public class FeedbackItem extends KeyValueItem {
     private String review;
 
     //region Constructors
-    public FeedbackItem(String partitionKey, String rowKey) {
-        super(partitionKey, rowKey);
+    public FeedbackItem(String partitionKey, String rowKey, Date timestamp) {
+        super(partitionKey, rowKey, timestamp);
     }
 
-    public FeedbackItem(String partitionKey, String rowKey, String rate, String review) {
-        super(partitionKey, rowKey);
+    public FeedbackItem(String partitionKey, String rowKey, Date timestamp, String eTag) {
+        super(partitionKey, rowKey, timestamp, eTag);
+    }
+
+    public FeedbackItem(String partitionKey, String rowKey, Date timestamp, String rate, String review) {
+        super(partitionKey, rowKey, timestamp);
+        this.rate = rate;
+        this.review = review;
+    }
+
+    public FeedbackItem(String partitionKey, String rowKey, Date timestamp, String eTag, String rate, String review) {
+        super(partitionKey, rowKey, timestamp, eTag);
         this.rate = rate;
         this.review = review;
     }
