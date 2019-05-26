@@ -29,7 +29,7 @@ public class XmlLoader<T> extends Loader {
     }*/
 
     @Override
-    public List<T> load(Class cl, String path) {
+    public List<T> load(Class cl, String path, String[] properties) {
         try {
             XMLInputFactory xif = XMLInputFactory.newFactory();
             XMLStreamReader xsr = xif.createXMLStreamReader(new FileReader(path));
