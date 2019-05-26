@@ -1,21 +1,29 @@
 package com.miage.bigdata.models.document;
 
+import com.google.gson.annotations.SerializedName;
 import com.miage.bigdata.models.Item;
 import org.bson.Document;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class OrderItem extends DocumentItem {
+
+    @SerializedName("PersonId")
     private String personId;
-    private Date orderDate;
+
+    @SerializedName("OrderDate")
+    private String orderDate;
+
+    @SerializedName("TotalPrice")
     private Double totalPrice;
+
+    @SerializedName("Orderline")
     private List<ProductItem> orderLines;
 
     public OrderItem() {}
 
-    public OrderItem(String id, String personId, Date orderDate, Double totalPrice, List<ProductItem> orderLines) {
+    public OrderItem(String id, String personId, String orderDate, Double totalPrice, List<ProductItem> orderLines) {
         this.personId = personId;
         this.id = id;
         this.orderDate = orderDate;
@@ -27,7 +35,7 @@ public class OrderItem extends DocumentItem {
         super(document);
 
         personId = document.getString("personId");
-        orderDate = document.getDate("orderDate");
+        orderDate = document.getString("orderDate");
         totalPrice = document.getDouble("totalPrice");
         orderLines = (List<ProductItem>) document.get("orderLines");
     }

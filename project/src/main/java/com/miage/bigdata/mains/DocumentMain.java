@@ -35,7 +35,7 @@ public class DocumentMain {
 
         OrderItem orderItem = new OrderItem(oiController.generateID(),
                 "1",
-                new Date(),
+                new Date().toString(),
                 10.0,
                 list);
 
