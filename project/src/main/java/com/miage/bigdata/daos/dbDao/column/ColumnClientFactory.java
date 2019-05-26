@@ -15,23 +15,22 @@ import java.io.InputStream;
 import java.security.*;
 import java.security.cert.CertificateException;
 
-public class ColumnClientFactory {
+class ColumnClientFactory {
     private final static String contactPoint = "db-column.cassandra.cosmos.azure.com";
     private final static String password = "tPDf9rs4GaFQkrBFxjVsuIV6Q2zBPfxOXN3Sa5PnbK0F4u2Izu32DZYo7au8Hfr5uOC5PzTPCVpt2RcqI2p9vQ==";
     private final static String keyspace = "miage";
     private final static String username = "db-column";
     private final static String keystorePath = System.getProperty("java.home") + "/lib/security/cacerts";
     private final static String keystorePwd = "changeit";
-    private static File sslKeyStoreFile = null;
     private static Session session;
 
     public static Session getCassandraSession() {
         if (session == null) {
-            SSLContext sc = null;
+            SSLContext sc;
             final KeyManagerFactory kmf;
 
             try {
-                sslKeyStoreFile = new File(keystorePath);
+                File sslKeyStoreFile = new File(keystorePath);
 
                 final KeyStore keyStore = KeyStore.getInstance("JKS");
 

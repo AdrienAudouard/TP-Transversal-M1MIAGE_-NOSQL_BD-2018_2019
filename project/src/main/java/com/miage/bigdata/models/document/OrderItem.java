@@ -7,10 +7,10 @@ import java.util.Date;
 import java.util.List;
 
 public class OrderItem extends DocumentItem {
-    private String personId;
-    private Date orderDate;
-    private Double totalPrice;
-    private List<ProductItem> orderLines;
+    private final String personId;
+    private final Date orderDate;
+    private final Double totalPrice;
+    private final List<ProductItem> orderLines;
 
     public OrderItem(String id, String personId, Date orderDate, Double totalPrice, List<ProductItem> orderLines) {
         this.personId = personId;

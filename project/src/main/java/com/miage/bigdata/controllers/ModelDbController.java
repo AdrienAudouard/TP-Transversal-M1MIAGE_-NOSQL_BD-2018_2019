@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 public abstract class ModelDbController<T extends ModelDbDao> {
     protected T dbDao;
-    protected HashMap<Class<? extends Item>, ItemController> itemControllers;
+    protected final HashMap<Class<? extends Item>, ItemController> itemControllers;
 
     public ModelDbController() {
         this.itemControllers = new HashMap<>();

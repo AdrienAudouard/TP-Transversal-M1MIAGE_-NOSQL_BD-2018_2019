@@ -17,7 +17,7 @@ public class InvoiceLine extends ColumnItem {
     }
 
     public InvoiceLine(Row row) {
-        super(row);
+        super();
         this.id = row.getString("productId");
         this.asin = row.getString("asin");
         this.title = row.getString("title");

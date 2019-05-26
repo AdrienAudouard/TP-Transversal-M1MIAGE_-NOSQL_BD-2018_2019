@@ -6,7 +6,6 @@ import com.miage.bigdata.models.relational.RelationalItem;
 import com.microsoft.azure.documentdb.*;
 import lombok.NonNull;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +33,7 @@ public abstract class RelationalObjectDao<T extends RelationalItem> extends Obje
 
     @Override
     public List<T> readAll() {
-        List<T> todoItems = new ArrayList<T>();
+        List<T> todoItems = new ArrayList<>();
 
         // Retrieve the TodoItem documents
         List<Document> documentList = documentClient
@@ -84,9 +83,7 @@ public abstract class RelationalObjectDao<T extends RelationalItem> extends Obje
             return null;
         }
 
-        T newItem = instanciateItemFromJSON(document.toString());
-
-        return newItem;
+        return instanciateItemFromJSON(document.toString());
     }
 
     @Override
@@ -207,15 +204,5 @@ public abstract class RelationalObjectDao<T extends RelationalItem> extends Obje
     @Override
     protected String getDatabaseID() {
         return "TestDB";
-    }
-
-    protected T instanciateItemFromJSON(String json) {
-        try {
-            return getItemClass().getConstructor(String.class).newInstance(json);
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-
-        return null;
     }
 }

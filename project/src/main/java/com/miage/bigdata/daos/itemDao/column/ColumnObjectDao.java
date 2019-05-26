@@ -9,8 +9,8 @@ import com.miage.bigdata.models.column.ColumnItem;
 
 import java.lang.reflect.InvocationTargetException;
 
-public abstract class ColumnObjectDao<T extends ColumnItem> extends ObjectDao<T, ColumnModelDbDao> {
-    protected Session cassandraSession;
+abstract class ColumnObjectDao<T extends ColumnItem> extends ObjectDao<T, ColumnModelDbDao> {
+    protected final Session cassandraSession;
 
     public ColumnObjectDao(ColumnModelDbDao dbDao) {
         super(dbDao);

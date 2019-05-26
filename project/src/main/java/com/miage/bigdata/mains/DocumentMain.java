@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class DocumentMain {
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         DocumentController documentController = new DocumentController();
         ItemController<ProductItem> piController = documentController.getItemController(ProductItem.class);
         ItemController<OrderItem> oiController = documentController.getItemController(OrderItem.class);

@@ -12,14 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InvoiceObjectDao extends ColumnObjectDao<InvoiceItem> {
-    private PreparedStatement insertInvoiceStatement;
-    private PreparedStatement insertLineStatement;
-    private PreparedStatement getLineStatement;
-    private PreparedStatement getByIdStatement;
-    private PreparedStatement deleteInvoiceStatement;
-    private PreparedStatement deleteLineStatement;
-    private PreparedStatement updateInvoiceStatement;
-    private PreparedStatement updateLineStatement;
+    private final PreparedStatement insertInvoiceStatement;
+    private final PreparedStatement insertLineStatement;
+    private final PreparedStatement getLineStatement;
+    private final PreparedStatement getByIdStatement;
+    private final PreparedStatement deleteInvoiceStatement;
+    private final PreparedStatement deleteLineStatement;
+    private final PreparedStatement updateInvoiceStatement;
+    private final PreparedStatement updateLineStatement;
 
     public InvoiceObjectDao(ColumnModelDbDao dbDao) {
         super(dbDao);

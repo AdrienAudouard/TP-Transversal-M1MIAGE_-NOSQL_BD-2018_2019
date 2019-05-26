@@ -8,10 +8,10 @@ public class InvoiceItem extends ColumnItem{
     private String personId;
     private Date orderDate;
     private Double totalPrice;
-    protected InvoiceLine orderLine;
+    protected final InvoiceLine orderLine;
 
     public InvoiceItem(Row row, Row lineRow) {
-        super(row);
+        super();
 
         personId = row.getString("personId");
         orderDate = row.getTimestamp("orderDate");

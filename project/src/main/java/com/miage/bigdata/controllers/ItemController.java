@@ -7,7 +7,7 @@ import lombok.NonNull;
 import java.util.List;
 
 public class ItemController<T extends Item> {
-    protected ObjectDao objectDao;
+    protected final ObjectDao objectDao;
 
     public ItemController(ObjectDao objectDao) {
         this.objectDao = objectDao;
@@ -33,7 +33,8 @@ public class ItemController<T extends Item> {
         return (T) objectDao.create(item);
     }
 
-    public List<T> create(@NonNull T ... items) {
+    @SafeVarargs
+    public final List<T> create(@NonNull T... items) {
         return objectDao.create(items);
     }
 

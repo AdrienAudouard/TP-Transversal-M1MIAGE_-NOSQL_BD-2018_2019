@@ -5,14 +5,15 @@ import com.miage.bigdata.daos.dbDao.ModelDbDao;
 import com.miage.bigdata.models.Item;
 import lombok.NonNull;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class ObjectDao<T extends Item, U extends ModelDbDao> {
     // We'll use Gson for POJO <=> JSON serialization for this example.
-    protected static Gson gson = new Gson();
+    protected static final Gson gson = new Gson();
 
-    protected U dbDao;
+    protected final U dbDao;
 
     public ObjectDao(U dbDao) {
         this.dbDao = dbDao;
@@ -38,6 +39,7 @@ public abstract class ObjectDao<T extends Item, U extends ModelDbDao> {
      * @param items
      * @return Items created
      */
+    @SafeVarargs
     public final List<T> create(@NonNull T ...items) {
         ArrayList<T> arrayList = new ArrayList<>();
 
@@ -114,5 +116,25 @@ public abstract class ObjectDao<T extends Item, U extends ModelDbDao> {
         deleteTable();
         createTable();
         populateTable();
+    }
+
+    protected <P> P instanciateItemFromJSON(String json, Class<P> cls) {
+        try {
+            return cls.getConstructor(String.class).newInstance(json);
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    protected T instanciateItemFromJSON(String json) {
+        try {
+            return getItemClass().getConstructor(String.class).newInstance(json);
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }
