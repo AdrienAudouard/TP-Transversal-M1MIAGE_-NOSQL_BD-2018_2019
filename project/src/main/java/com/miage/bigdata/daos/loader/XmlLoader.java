@@ -1,33 +1,63 @@
 package com.miage.bigdata.daos.loader;
 
-import com.miage.bigdata.models.Item;
-import com.miage.bigdata.models.column.InvoiceItem;
-import com.miage.bigdata.models.column.InvoicesItem;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.*;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
 import java.io.*;
+import java.util.Arrays;
 import java.util.List;
 
-public class XmlLoader<T extends Item> extends Loader<T> {
+public class XmlLoader<T> extends Loader {
 
-    @Override
+    /*@Override
     public List<T> load(Class<T> cl, String path) {
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(cl);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 
-            /*InvoicesItem result = (InvoicesItem) jaxbUnmarshaller.unmarshal(new File(path));
+            *//*InvoicesItem result = (InvoicesItem) jaxbUnmarshaller.unmarshal(new File(path));
             for (InvoiceItem invoiceItem : result.getInvoiceItems()) {
                 System.out.println(invoiceItem.toString());
-            }*/
+            }*//*
 
             return (List<T>) jaxbUnmarshaller.unmarshal(new File(path));
         } catch (JAXBException e) {
             e.printStackTrace();
         }
         return null;
+    }*/
+
+    @Override
+    public List<T> load(Class cl, String path) {
+        try {
+            XMLInputFactory xif = XMLInputFactory.newFactory();
+            XMLStreamReader xsr = xif.createXMLStreamReader(new FileReader(path));
+            xsr.nextTag();
+
+            JAXBContext jaxbContext = JAXBContext.newInstance(cl);
+            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+
+            JAXBElement result = jaxbUnmarshaller.unmarshal(xsr, cl);
+            T foo = (T) result.getValue();
+
+            return Arrays.asList(foo);
+        } catch (JAXBException | FileNotFoundException | XMLStreamException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
+    public T load(Class cl, String path, boolean isRootElement) {
+        if(isRootElement) {
+            try {
+                JAXBContext jaxbContext = JAXBContext.newInstance(cl);
+                Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+                return (T) jaxbUnmarshaller.unmarshal(new FileReader(path));
+            } catch (JAXBException | FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
 }

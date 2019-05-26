@@ -9,6 +9,9 @@ import java.util.List;
 @XmlRootElement(name = "Invoice.xml")
 public class InvoiceItem extends ColumnItem {
 
+    @XmlTransient
+    private String Invoices;
+
     private String personId;
     private String orderDate;
     private Double totalPrice;
