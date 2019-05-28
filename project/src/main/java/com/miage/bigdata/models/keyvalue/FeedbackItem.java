@@ -11,7 +11,7 @@ public class FeedbackItem extends KeyValueItem {
     }
 
     public FeedbackItem(String personId, String feedback) {
-        personId = personId;
+        this.personId = personId;
         this.feedback = feedback;
     }
 

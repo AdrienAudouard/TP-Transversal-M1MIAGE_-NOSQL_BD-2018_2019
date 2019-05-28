@@ -10,24 +10,6 @@ import java.util.List;
 
 public class XmlLoader<T> extends Loader {
 
-    /*@Override
-    public List<T> load(Class<T> cl, String path) {
-        try {
-            JAXBContext jaxbContext = JAXBContext.newInstance(cl);
-            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-
-            *//*InvoicesItem result = (InvoicesItem) jaxbUnmarshaller.unmarshal(new File(path));
-            for (InvoiceItem invoiceItem : result.getInvoiceItems()) {
-                System.out.println(invoiceItem.toString());
-            }*//*
-
-            return (List<T>) jaxbUnmarshaller.unmarshal(new File(path));
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }*/
-
     @Override
     public List<T> load(Class cl, String path, String[] properties) {
         try {
@@ -38,10 +20,10 @@ public class XmlLoader<T> extends Loader {
             JAXBContext jaxbContext = JAXBContext.newInstance(cl);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 
-            JAXBElement result = jaxbUnmarshaller.unmarshal(xsr, cl);
-            T foo = (T) result.getValue();
+            JAXBElement elements = jaxbUnmarshaller.unmarshal(xsr, cl);
+            T result = (T) elements.getValue();
 
-            return Arrays.asList(foo);
+            return Arrays.asList(result);
         } catch (JAXBException | FileNotFoundException | XMLStreamException e) {
             e.printStackTrace();
         }

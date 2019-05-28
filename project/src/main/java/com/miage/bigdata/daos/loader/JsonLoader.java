@@ -6,6 +6,7 @@ import com.miage.bigdata.models.Item;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,9 +16,10 @@ public class JsonLoader<T extends Item> extends Loader<T> {
 
     @Override
     public List load(Class cl, String path, String[] properties) {
+        T[] tList = (T[]) Array.newInstance(cl, 0);
         try {
             JsonReader reader = new JsonReader(new FileReader(path));
-            return Arrays.asList(gson.fromJson(reader, cl));
+            return Arrays.asList(gson.fromJson(reader, tList.getClass()));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
