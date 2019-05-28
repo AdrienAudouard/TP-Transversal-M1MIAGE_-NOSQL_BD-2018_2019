@@ -8,6 +8,8 @@ public abstract class DocumentItem extends Item {
 
     protected String _id;
 
+
+
     public DocumentItem() {
         super();
     }

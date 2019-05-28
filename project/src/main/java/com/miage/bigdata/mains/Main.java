@@ -6,6 +6,7 @@ import com.miage.bigdata.daos.loader.XmlLoader;
 import com.miage.bigdata.models.column.InvoiceItem;
 import com.miage.bigdata.models.column.InvoicesItem;
 import com.miage.bigdata.models.document.OrderItem;
+import com.miage.bigdata.models.document.ProductItem;
 import com.miage.bigdata.models.keyvalue.FeedbackItem;
 
 import java.lang.reflect.Field;
@@ -21,10 +22,14 @@ public class Main {
         }*/
 
         CsvLoader csvLoader = new CsvLoader();
-        List feedbackItems = csvLoader.load(FeedbackItem.class, new FeedbackItem().getPathFileData());
+        List productItems = csvLoader.load(ProductItem.class, new ProductItem().getPathFileData());
+        for (Object productItem : productItems) {
+            System.out.println("[CSV] product" + productItem);
+        }
+        /*List feedbackItems = csvLoader.load(FeedbackItem.class, new FeedbackItem().getPathFileData());
         for (Object feedbackItem : feedbackItems) {
             System.out.println("[CSV] feedback" + feedbackItem);
-        }
+        }*/
 
         /*XmlLoader xmlLoader = new XmlLoader();
         InvoicesItem invoiceItems = (InvoicesItem) xmlLoader.load(InvoicesItem.class, new InvoiceItem().getPathFileData(), true);
