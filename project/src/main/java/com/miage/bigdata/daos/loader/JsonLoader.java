@@ -15,7 +15,7 @@ public class JsonLoader<T extends Item> extends Loader<T> {
     private Gson gson = new Gson();
 
     @Override
-    public List load(Class cl, String path, String[] properties) {
+    public List load(Class cl, String path) {
         T[] tList = (T[]) Array.newInstance(cl, 0);
         try {
             JsonReader reader = new JsonReader(new FileReader(path));

@@ -11,7 +11,7 @@ import java.util.List;
 public class XmlLoader<T> extends Loader {
 
     @Override
-    public List<T> load(Class cl, String path, String[] properties) {
+    public List<T> load(Class cl, String path) {
         try {
             XMLInputFactory xif = XMLInputFactory.newFactory();
             XMLStreamReader xsr = xif.createXMLStreamReader(new FileReader(path));

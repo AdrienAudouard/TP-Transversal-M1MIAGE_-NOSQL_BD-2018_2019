@@ -15,39 +15,21 @@ public class Main {
 
     public static void main(String args[]) {
         /*JsonLoader jsonLoader = new JsonLoader();
-        List orderItems = jsonLoader.load(OrderItem.class, new OrderItem().getPathFileData(), null);
+        List orderItems = jsonLoader.load(OrderItem.class, new OrderItem().getPathFileData());
         for (Object orderItem : orderItems) {
             System.out.println("[JSON] order" + orderItem);
         }*/
 
-        /*CsvLoader csvLoader = new CsvLoader();
-        List feedbackItems = csvLoader.load(
-                FeedbackItem.class,
-                new FeedbackItem().getPathFileData(),
-                getColumns(FeedbackItem.class)
-        );
+        CsvLoader csvLoader = new CsvLoader();
+        List feedbackItems = csvLoader.load(FeedbackItem.class, new FeedbackItem().getPathFileData());
         for (Object feedbackItem : feedbackItems) {
             System.out.println("[CSV] feedback" + feedbackItem);
-        }*/
+        }
 
-        XmlLoader xmlLoader = new XmlLoader();
+        /*XmlLoader xmlLoader = new XmlLoader();
         InvoicesItem invoiceItems = (InvoicesItem) xmlLoader.load(InvoicesItem.class, new InvoiceItem().getPathFileData(), true);
         for (InvoiceItem invoiceItem : invoiceItems.getInvoiceItems()) {
             System.out.println("[XML] invoice" + invoiceItem);
-        }
+        }*/
     }
-
-    private static String[] getColumns(Class cl) {
-        Field[] fields = cl.getDeclaredFields();
-        String[] columns = new String[fields.length];
-
-        //for (int i = 0; i < fields.length; i++) {
-        for (int i = 0; i < fields.length; i++) {
-            columns[i] = fields[i].getName();
-            System.out.println("col: " + columns[i]);
-        }
-
-        return columns;
-    }
-
 }

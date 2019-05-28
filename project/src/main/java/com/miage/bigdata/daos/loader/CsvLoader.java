@@ -6,17 +6,18 @@ import com.opencsv.bean.ColumnPositionMappingStrategy;
 import com.opencsv.bean.CsvToBean;
 
 import java.io.*;
+import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class CsvLoader<T extends Item> extends Loader<T> {
 
     @Override
-    public List<T> load(Class<T> cl, String path, String[] properties) {
+    public List<T> load(Class<T> cl, String path) {
         try {
             ColumnPositionMappingStrategy<T> strategy = new ColumnPositionMappingStrategy<>();
             strategy.setType(cl);
-            strategy.setColumnMapping(properties);
+            strategy.setColumnMapping(getColumns(cl));
 
             CSVReader reader = new CSVReaderBuilder(new InputStreamReader(
                     new FileInputStream(path), StandardCharsets.UTF_8
@@ -34,5 +35,17 @@ public class CsvLoader<T extends Item> extends Loader<T> {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private static String[] getColumns(Class cl) {
+        Field[] fields = cl.getDeclaredFields();
+        String[] columns = new String[fields.length];
+
+        for (int i = 0; i < fields.length; i++) {
+            columns[i] = fields[i].getName();
+            System.out.println("col: " + columns[i]);
+        }
+
+        return columns;
     }
 }
