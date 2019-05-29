@@ -33,8 +33,9 @@ public abstract class KeyValueObjectDao<T extends KeyValueItem> extends ObjectDa
         CloudTable cloudTable = getTable();
 
         if (cloudTable != null) {
-            TableQuery<KeyValueItem> readAllQuery = TableQuery.from(KeyValueItem.class); // TODO check if this works, probably doesn't
-            List<KeyValueItem> allKeyValueItems = Lists.newArrayList(cloudTable.execute(readAllQuery));
+            TableQuery<T> readAllQuery = TableQuery.from(getItemClass()); // TODO check if this works
+            List<T> allKeyValueItems = Lists.newArrayList(cloudTable.execute(readAllQuery));
+            items.addAll(allKeyValueItems);
         }
 
         return items;
