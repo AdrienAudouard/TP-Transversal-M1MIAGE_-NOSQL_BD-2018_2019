@@ -18,8 +18,4 @@ public abstract class Loader<T extends Item> {
 
         return null;
     }
-
-    protected String getTypeDataFile(String path) {
-        return path.split(".")[1];
-    }
 }

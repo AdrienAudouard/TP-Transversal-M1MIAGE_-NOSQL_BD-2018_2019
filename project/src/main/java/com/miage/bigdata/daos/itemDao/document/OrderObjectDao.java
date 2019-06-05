@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderObjectDao extends DocumentObjectDao<OrderItem> {
+
+    public OrderObjectDao() {
+    }
+
     public OrderObjectDao(DocumentModelDbDao dbDao) {
         super(dbDao);
     }

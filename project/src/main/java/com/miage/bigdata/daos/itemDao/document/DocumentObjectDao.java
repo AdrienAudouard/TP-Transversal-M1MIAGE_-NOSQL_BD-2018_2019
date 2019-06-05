@@ -24,6 +24,9 @@ public abstract class DocumentObjectDao<T extends DocumentItem> extends ObjectDa
 
     protected int lastNextID;
 
+    public DocumentObjectDao() {
+    }
+
     public DocumentObjectDao(DocumentModelDbDao dbDao) {
         super(dbDao);
 

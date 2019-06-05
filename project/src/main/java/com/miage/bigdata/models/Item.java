@@ -21,5 +21,7 @@ public abstract class Item {
         return resourcesPath;
     }
 
-    public abstract String getPathFileData();
+    public String getPathFileData() {
+        return null;
+    }
 }

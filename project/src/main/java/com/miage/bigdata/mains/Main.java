@@ -1,5 +1,6 @@
 package com.miage.bigdata.mains;
 
+import com.miage.bigdata.daos.itemDao.document.OrderObjectDao;
 import com.miage.bigdata.daos.loader.CsvLoader;
 import com.miage.bigdata.daos.loader.JsonLoader;
 import com.miage.bigdata.daos.loader.XmlLoader;
@@ -21,11 +22,12 @@ public class Main {
             System.out.println("[JSON] order" + orderItem);
         }*/
 
-        CsvLoader csvLoader = new CsvLoader();
+        /*CsvLoader csvLoader = new CsvLoader();
         List productItems = csvLoader.load(ProductItem.class, new ProductItem().getPathFileData());
         for (Object productItem : productItems) {
             System.out.println("[CSV] product" + productItem);
-        }
+        }*/
+
         /*List feedbackItems = csvLoader.load(FeedbackItem.class, new FeedbackItem().getPathFileData());
         for (Object feedbackItem : feedbackItems) {
             System.out.println("[CSV] feedback" + feedbackItem);
@@ -36,5 +38,10 @@ public class Main {
         for (InvoiceItem invoiceItem : invoiceItems.getInvoiceItems()) {
             System.out.println("[XML] invoice" + invoiceItem);
         }*/
+
+        List orderItems = new OrderObjectDao().loadDataFile();
+        for (Object orderItem : orderItems) {
+            System.out.println("[JSON][OrderObjectDao] order" + orderItem);
+        }
     }
 }
