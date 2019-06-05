@@ -9,8 +9,7 @@ import java.util.List;
 @XmlRootElement(name = "Invoice.xml")
 public class InvoiceItem extends ColumnItem {
 
-    @XmlTransient
-    private String Invoices;
+    private List<InvoiceItem> invoices;
 
     private String personId;
     private String orderDate;
@@ -31,6 +30,15 @@ public class InvoiceItem extends ColumnItem {
         this.personId = personId;
         this.orderDate = orderDate;
         this.totalPrice = totalPrice;
+    }
+
+    @XmlElement(name = "Invoices")
+    public List<InvoiceItem> getInvoices() {
+        return invoices;
+    }
+
+    public void setInvoices(List<InvoiceItem> invoices) {
+        this.invoices = invoices;
     }
 
     @XmlElement(name = "PersonId")
@@ -60,7 +68,7 @@ public class InvoiceItem extends ColumnItem {
         this.totalPrice = totalPrice;
     }
 
-    @XmlElement(name = "OrderLine")
+    @XmlAnyElement
     public List<ProductItem> getOrderLines() {
         return orderLines;
     }

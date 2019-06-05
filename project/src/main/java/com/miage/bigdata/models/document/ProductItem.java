@@ -5,7 +5,12 @@ import com.miage.bigdata.utils.CsvConfig;
 import com.opencsv.bean.HeaderColumnNameMappingStrategy;
 import org.bson.Document;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "Orderline")
 public class ProductItem extends DocumentItem {
+    private int productId;
     private String asin;
     private String title;
     private double price;
@@ -47,6 +52,14 @@ public class ProductItem extends DocumentItem {
         initCsvConfig();
     }
 
+    public ProductItem(int productId, String asin, String title, double price, String brand) {
+        this.productId = productId;
+        this.asin = asin;
+        this.title = title;
+        this.price = price;
+        this.brand = brand;
+    }
+
     @Override
     public Document toDocument() {
         return new Document("title", title)
@@ -57,6 +70,16 @@ public class ProductItem extends DocumentItem {
                 .append("asin", id);
     }
 
+    @XmlElement(name = "productId")
+    public int getProductId() {
+        return productId;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
+
+    @XmlElement(name = "asin")
     public String getAsin() {
         return asin;
     }
@@ -65,6 +88,7 @@ public class ProductItem extends DocumentItem {
         this.asin = asin;
     }
 
+    @XmlElement(name = "title")
     public String getTitle() {
         return title;
     }
@@ -73,6 +97,7 @@ public class ProductItem extends DocumentItem {
         this.title = title;
     }
 
+    @XmlElement(name = "price")
     public double getPrice() {
         return price;
     }
@@ -89,6 +114,7 @@ public class ProductItem extends DocumentItem {
         this.imgURL = imgURL;
     }
 
+    @XmlElement(name = "brand")
     public String getBrand() {
         return brand;
     }
