@@ -2,6 +2,9 @@ package com.miage.bigdata.daos.itemDao;
 
 import com.google.gson.Gson;
 import com.miage.bigdata.daos.dbDao.ModelDbDao;
+import com.miage.bigdata.daos.loader.CsvLoader;
+import com.miage.bigdata.daos.loader.JsonLoader;
+import com.miage.bigdata.daos.loader.XmlLoader;
 import com.miage.bigdata.models.Item;
 import lombok.NonNull;
 
@@ -13,7 +16,10 @@ public abstract class ObjectDao<T extends Item, U extends ModelDbDao> {
     // We'll use Gson for POJO <=> JSON serialization for this example.
     protected static final Gson gson = new Gson();
 
-    protected final U dbDao;
+    protected U dbDao;
+
+    public ObjectDao() {
+    }
 
     public ObjectDao(U dbDao) {
         this.dbDao = dbDao;
@@ -116,6 +122,40 @@ public abstract class ObjectDao<T extends Item, U extends ModelDbDao> {
         deleteTable();
         createTable();
         populateTable();
+    }
+
+    protected T instanciateItem() {
+        try {
+            return getItemClass().getConstructor().newInstance();
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List loadDataFile() {
+        List data = new ArrayList();
+        T self = instanciateItem();
+        String pathFileData = self.getPathFileData();
+        String typeDataFile = getTypeDataFile(self.getPathFileData());
+
+        switch (typeDataFile) {
+            case "csv":
+                data = new CsvLoader().load(self.getClass(), pathFileData);
+                break;
+            case "json":
+                data = new JsonLoader().load(self.getClass(), pathFileData);
+                break;
+            case "xml":
+                data = new XmlLoader().load(self.getClass(), pathFileData);
+                break;
+        }
+
+        return data;
+    }
+
+    private String getTypeDataFile(String path) {
+        return path.split("\\.")[1];
     }
 
     protected <P> P instanciateItemFromJSON(String json, Class<P> cls) {

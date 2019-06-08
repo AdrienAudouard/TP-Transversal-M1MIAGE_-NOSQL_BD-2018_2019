@@ -1,7 +1,7 @@
 package com.miage.bigdata.daos.dbDao.column;
 
 import com.datastax.driver.core.*;
-import com.miage.bigdata.util.Configuration;
+import com.miage.bigdata.utils.Configuration;
 
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;

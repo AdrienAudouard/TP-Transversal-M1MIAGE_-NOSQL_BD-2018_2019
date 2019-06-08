@@ -8,6 +8,8 @@ public class ProductObjectDao extends DocumentObjectDao<ProductItem> {
         super(dbDao);
     }
 
+    public ProductObjectDao() {}
+
     @Override
     public String getCollectionName() {
         return "product";

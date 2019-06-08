@@ -20,9 +20,12 @@ import static com.mongodb.client.model.Filters.eq;
 
 public abstract class DocumentObjectDao<T extends DocumentItem> extends ObjectDao<T, DocumentModelDbDao> {
 
-    protected final MongoClient mongoClient;
+    protected MongoClient mongoClient;
 
     protected int lastNextID;
+
+    public DocumentObjectDao() {
+    }
 
     public DocumentObjectDao(DocumentModelDbDao dbDao) {
         super(dbDao);

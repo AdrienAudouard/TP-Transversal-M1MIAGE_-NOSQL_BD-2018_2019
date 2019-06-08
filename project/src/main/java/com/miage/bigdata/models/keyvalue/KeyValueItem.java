@@ -1,7 +1,6 @@
 package com.miage.bigdata.models.keyvalue;
 
 import com.miage.bigdata.models.Item;
-import com.microsoft.azure.documentdb.Document;
 import com.microsoft.azure.storage.OperationContext;
 import com.microsoft.azure.storage.StorageException;
 import com.microsoft.azure.storage.table.EntityProperty;
@@ -75,8 +74,6 @@ public abstract class KeyValueItem extends Item implements TableEntity {
 
     }
     //endregion
-
-
 
     @Override
     public void readEntity(HashMap<String, EntityProperty> hashMap, OperationContext operationContext) throws StorageException {

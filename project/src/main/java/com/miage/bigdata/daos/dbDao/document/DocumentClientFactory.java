@@ -1,6 +1,6 @@
 package com.miage.bigdata.daos.dbDao.document;
 
-import com.miage.bigdata.util.Configuration;
+import com.miage.bigdata.utils.Configuration;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 

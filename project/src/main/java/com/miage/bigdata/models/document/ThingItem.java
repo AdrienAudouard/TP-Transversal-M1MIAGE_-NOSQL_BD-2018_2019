@@ -2,6 +2,7 @@ package com.miage.bigdata.models.document;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.miage.bigdata.models.Item;
 import org.bson.Document;
 
 public class ThingItem extends DocumentItem {
@@ -39,5 +40,10 @@ public class ThingItem extends DocumentItem {
     @Override
     public Document toDocument() {
         return new Document("id", id).append("name", name);
+    }
+
+    @Override
+    public String getPathFileData() {
+        return Item.getResourcesPath() + "???";
     }
 }

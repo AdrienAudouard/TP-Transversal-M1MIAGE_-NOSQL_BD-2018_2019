@@ -1,6 +1,6 @@
 package com.miage.bigdata.daos.dbDao.relational;
 
-import com.miage.bigdata.util.Configuration;
+import com.miage.bigdata.utils.Configuration;
 import com.microsoft.azure.documentdb.ConnectionPolicy;
 import com.microsoft.azure.documentdb.ConsistencyLevel;
 import com.microsoft.azure.documentdb.DocumentClient;

@@ -1,6 +1,6 @@
 package com.miage.bigdata.daos.dbDao.keyvalue;
 
-import com.miage.bigdata.util.Configuration;
+import com.miage.bigdata.utils.Configuration;
 import com.microsoft.azure.storage.CloudStorageAccount;
 import com.microsoft.azure.storage.table.CloudTableClient;
 

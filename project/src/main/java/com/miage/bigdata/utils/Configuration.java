@@ -1,4 +1,4 @@
-package com.miage.bigdata.util;
+package com.miage.bigdata.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
