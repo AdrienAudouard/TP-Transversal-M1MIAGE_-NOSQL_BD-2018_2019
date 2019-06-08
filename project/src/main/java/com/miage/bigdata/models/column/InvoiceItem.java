@@ -6,14 +6,16 @@ import com.miage.bigdata.models.Item;
 import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @XmlRootElement(name = "Invoice.xml")
 public class InvoiceItem extends ColumnItem{
     private String personId;
     private Date orderDate;
     private Double totalPrice;
-    protected InvoiceLine orderLine;
+    protected List<InvoiceLine> orderLine = new ArrayList<>();
 
     public InvoiceItem() {
     }
@@ -25,7 +27,15 @@ public class InvoiceItem extends ColumnItem{
         orderDate = row.getTimestamp("orderDate");
         totalPrice = row.getDouble("totalPrice");
         id = row.getString("orderId");
-        this.orderLine = new InvoiceLine(lineRow);
+        orderLine.add(new InvoiceLine(lineRow));
+    }
+
+    public InvoiceItem(String id, String personId, Date orderDate, Double totalPrice, List<InvoiceLine> orderLine) {
+        this.personId = personId;
+        this.id = id;
+        this.orderDate = orderDate;
+        this.totalPrice = totalPrice;
+        this.orderLine = orderLine;
     }
 
     public InvoiceItem(String id, String personId, Date orderDate, Double totalPrice, InvoiceLine invoiceLine) {
@@ -33,7 +43,7 @@ public class InvoiceItem extends ColumnItem{
         this.id = id;
         this.orderDate = orderDate;
         this.totalPrice = totalPrice;
-        this.orderLine = invoiceLine;
+        this.orderLine.add(invoiceLine);
     }
 
     public String getPersonId() {
@@ -64,11 +74,11 @@ public class InvoiceItem extends ColumnItem{
     }
 
     @XmlAnyElement
-    public InvoiceLine getOrderLine() {
+    public List<InvoiceLine> getOrderLine() {
         return orderLine;
     }
 
-    public void setOrderLine(InvoiceLine orderLine) {
+    public void setOrderLine(List<InvoiceLine> orderLine) {
         this.orderLine = orderLine;
     }
 
