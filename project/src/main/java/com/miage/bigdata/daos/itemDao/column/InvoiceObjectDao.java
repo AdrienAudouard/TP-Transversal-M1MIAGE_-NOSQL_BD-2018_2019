@@ -68,7 +68,7 @@ public class InvoiceObjectDao extends ColumnObjectDao<InvoiceItem> {
 
     @Override
     public InvoiceItem create(@NonNull InvoiceItem item) {
-        InvoiceLine invoiceLine = item.getOrderLine();
+        InvoiceLine invoiceLine = item.getOrderLine().get(0);
 
 
         BoundStatement boundStatement = new BoundStatement(insertInvoiceStatement);
@@ -118,13 +118,13 @@ public class InvoiceObjectDao extends ColumnObjectDao<InvoiceItem> {
 
     @Override
     public InvoiceItem update(@NonNull InvoiceItem item) {
-        InvoiceLine line = item.getOrderLine();
+        InvoiceLine line = item.getOrderLine().get(0);
         BoundStatement boundStatement = new BoundStatement(updateInvoiceStatement);
         cassandraSession.execute(boundStatement.bind(
                 item.getPersonId(),
                 item.getOrderDate(),
                 item.getTotalPrice(),
-                item.getOrderLine().getId(),
+                item.getOrderLine().get(0).getId(),
                 item.getId()));
 
         boundStatement = new BoundStatement(updateLineStatement);
