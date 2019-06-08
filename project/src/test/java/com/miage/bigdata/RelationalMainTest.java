@@ -1,13 +1,13 @@
 package com.miage.bigdata;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 
+import static org.junit.Assert.assertTrue;
+
 /**
- * Unit test for simple RolationalMain.
+ * Unit test for simple RelationalMain.
  */
-public class RolationalMainTest
+public class RelationalMainTest
 {
     /**
      * Rigorous Test :-)

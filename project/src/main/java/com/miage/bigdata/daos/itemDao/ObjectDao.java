@@ -14,7 +14,7 @@ import java.util.List;
 
 public abstract class ObjectDao<T extends Item, U extends ModelDbDao> {
     // We'll use Gson for POJO <=> JSON serialization for this example.
-    protected static Gson gson = new Gson();
+    protected static final Gson gson = new Gson();
 
     protected U dbDao;
 
@@ -45,6 +45,7 @@ public abstract class ObjectDao<T extends Item, U extends ModelDbDao> {
      * @param items
      * @return Items created
      */
+    @SafeVarargs
     public final List<T> create(@NonNull T ...items) {
         ArrayList<T> arrayList = new ArrayList<>();
 
@@ -155,5 +156,25 @@ public abstract class ObjectDao<T extends Item, U extends ModelDbDao> {
 
     private String getTypeDataFile(String path) {
         return path.split("\\.")[1];
+    }
+
+    protected <P> P instanciateItemFromJSON(String json, Class<P> cls) {
+        try {
+            return cls.getConstructor(String.class).newInstance(json);
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    protected T instanciateItemFromJSON(String json) {
+        try {
+            return getItemClass().getConstructor(String.class).newInstance(json);
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

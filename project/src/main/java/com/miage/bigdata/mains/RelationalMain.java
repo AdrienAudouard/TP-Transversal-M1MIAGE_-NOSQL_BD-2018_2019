@@ -8,13 +8,12 @@ import com.miage.bigdata.models.relational.TodoItem;
  * Hello world!
  *
  */
-public class RolationalMain
+public class RelationalMain
 {
     public static void main( String[] args ) {
         RelationalController relationalController = new RelationalController();
         ItemController<TodoItem> tdiController = relationalController.getItemController(TodoItem.class);
         
-
         System.out.println("------------ Print all items ------------");
 
         System.out.println(tdiController.readAll().toString());

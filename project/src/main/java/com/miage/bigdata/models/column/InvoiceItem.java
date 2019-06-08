@@ -1,61 +1,56 @@
 package com.miage.bigdata.models.column;
 
+import com.datastax.driver.core.Row;
 import com.miage.bigdata.models.Item;
-import com.miage.bigdata.models.document.ProductItem;
 
-import javax.xml.bind.annotation.*;
-import java.util.List;
+import javax.xml.bind.annotation.XmlAnyElement;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Date;
 
 @XmlRootElement(name = "Invoice.xml")
-public class InvoiceItem extends ColumnItem {
-
-    private List<InvoiceItem> invoices;
-
+public class InvoiceItem extends ColumnItem{
     private String personId;
-    private String orderDate;
+    private Date orderDate;
     private Double totalPrice;
-    private List<ProductItem> orderLines;
+    protected InvoiceLine orderLine;
 
     public InvoiceItem() {
     }
 
-    public InvoiceItem(String personId, String orderDate, Double totalPrice, List<ProductItem> orderLines) {
+    public InvoiceItem(Row row, Row lineRow) {
+        super();
+
+        personId = row.getString("personId");
+        orderDate = row.getTimestamp("orderDate");
+        totalPrice = row.getDouble("totalPrice");
+        id = row.getString("orderId");
+        this.orderLine = new InvoiceLine(lineRow);
+    }
+
+    public InvoiceItem(String id, String personId, Date orderDate, Double totalPrice, InvoiceLine invoiceLine) {
         this.personId = personId;
+        this.id = id;
         this.orderDate = orderDate;
         this.totalPrice = totalPrice;
-        this.orderLines = orderLines;
+        this.orderLine = invoiceLine;
     }
 
-    public InvoiceItem(String personId, String orderDate, Double totalPrice) {
-        this.personId = personId;
-        this.orderDate = orderDate;
-        this.totalPrice = totalPrice;
-    }
-
-    @XmlElement(name = "Invoices")
-    public List<InvoiceItem> getInvoices() {
-        return invoices;
-    }
-
-    public void setInvoices(List<InvoiceItem> invoices) {
-        this.invoices = invoices;
-    }
-
-    @XmlElement(name = "PersonId")
     public String getPersonId() {
         return personId;
     }
+
 
     public void setPersonId(String personId) {
         this.personId = personId;
     }
 
     @XmlElement(name = "OrderDate")
-    public String getOrderDate() {
+    public Date getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(String orderDate) {
+    public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
     }
 
@@ -69,12 +64,12 @@ public class InvoiceItem extends ColumnItem {
     }
 
     @XmlAnyElement
-    public List<ProductItem> getOrderLines() {
-        return orderLines;
+    public InvoiceLine getOrderLine() {
+        return orderLine;
     }
 
-    public void setOrderLines(List<ProductItem> orderLines) {
-        this.orderLines = orderLines;
+    public void setOrderLine(InvoiceLine orderLine) {
+        this.orderLine = orderLine;
     }
 
     @Override
@@ -83,7 +78,7 @@ public class InvoiceItem extends ColumnItem {
                 "personId='" + personId + '\'' +
                 ", orderDate=" + orderDate +
                 ", totalPrice=" + totalPrice +
-                ", orderLines=" + orderLines +
+                ", orderLines=" + orderLine +
                 ", id='" + id + '\'' +
                 "} " + super.toString();
     }

@@ -4,11 +4,15 @@ import com.miage.bigdata.models.Item;
 import com.miage.bigdata.utils.CsvConfig;
 import com.opencsv.bean.ColumnPositionMappingStrategy;
 
+import java.util.Date;
+
 public class FeedbackItem extends KeyValueItem {
     private String asin;
     private String personId;
     private String feedback;
     private CsvConfig csvConfig;
+    private String rate;
+    private String review;
 
     public FeedbackItem() {
         initCsvConfig();
@@ -25,6 +29,27 @@ public class FeedbackItem extends KeyValueItem {
         this.personId = personId;
         this.feedback = feedback;
         initCsvConfig();
+    }
+
+    //region Constructors
+    public FeedbackItem(String partitionKey, String rowKey, Date timestamp) {
+        super(partitionKey, rowKey, timestamp);
+    }
+
+    public FeedbackItem(String partitionKey, String rowKey, Date timestamp, String eTag) {
+        super(partitionKey, rowKey, timestamp, eTag);
+    }
+
+    public FeedbackItem(String partitionKey, String rowKey, Date timestamp, String rate, String review) {
+        super(partitionKey, rowKey, timestamp);
+        this.rate = rate;
+        this.review = review;
+    }
+
+    public FeedbackItem(String partitionKey, String rowKey, Date timestamp, String eTag, String rate, String review) {
+        super(partitionKey, rowKey, timestamp, eTag);
+        this.rate = rate;
+        this.review = review;
     }
 
     public String getAsin() {
