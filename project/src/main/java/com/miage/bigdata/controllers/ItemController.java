@@ -29,6 +29,10 @@ public class ItemController<T extends Item> {
         return objectDao.deleteTable();
     }
 
+    public boolean populateTable() {
+        return objectDao.populateTable();
+    }
+
     public T create(@NonNull T item) {
         return (T) objectDao.create(item);
     }
