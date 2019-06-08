@@ -1,7 +1,9 @@
 package com.miage.bigdata.mains;
 
+import com.miage.bigdata.daos.itemDao.column.InvoiceObjectDao;
 import com.miage.bigdata.daos.itemDao.document.OrderObjectDao;
 import com.miage.bigdata.daos.itemDao.document.ProductObjectDao;
+import com.miage.bigdata.daos.itemDao.keyvalue.FeedbackObjectDao;
 import com.miage.bigdata.daos.loader.CsvLoader;
 import com.miage.bigdata.daos.loader.XmlLoader;
 import com.miage.bigdata.models.column.InvoiceItem;
@@ -22,16 +24,14 @@ public class LoadDataFileMain {
             System.out.println("[CSV][ProductObjectDao] product" + productItem);
         }*/
 
-        /*CsvLoader csvLoader = new CsvLoader();
-        List feedbackItems = csvLoader.load(FeedbackItem.class, new FeedbackItem().getPathFileData());
+        /*List feedbackItems = new FeedbackObjectDao().loadDataFile();
         for (Object feedbackItem : feedbackItems) {
-            System.out.println("[CSV] feedback" + feedbackItem);
+            System.out.println("[CSV][FeedbackObjectDao] feedback" + feedbackItem);
         }*/
 
-        XmlLoader xmlLoader = new XmlLoader();
-        List invoiceItems = xmlLoader.load(InvoiceItem.class, new InvoiceItem().getPathFileData());
+        List invoiceItems = new InvoiceObjectDao().loadDataFile();
         for (Object invoiceItem : invoiceItems) {
-            System.out.println("[XML] invoice" + invoiceItem);
+            System.out.println("[XML][InvoiceObjectDao] invoice" + invoiceItem);
         }
     }
 }

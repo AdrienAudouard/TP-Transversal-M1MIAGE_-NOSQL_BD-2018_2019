@@ -21,6 +21,9 @@ public abstract class KeyValueObjectDao<T extends KeyValueItem> extends ObjectDa
 
     protected abstract CloudTable getTable();
 
+    public KeyValueObjectDao() {
+    }
+
     public KeyValueObjectDao(KeyValueModelDbDao dbDao) {
         super(dbDao);
 

@@ -12,14 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InvoiceObjectDao extends ColumnObjectDao<InvoiceItem> {
-    private final PreparedStatement insertInvoiceStatement;
-    private final PreparedStatement insertLineStatement;
-    private final PreparedStatement getLineStatement;
-    private final PreparedStatement getByIdStatement;
-    private final PreparedStatement deleteInvoiceStatement;
-    private final PreparedStatement deleteLineStatement;
-    private final PreparedStatement updateInvoiceStatement;
-    private final PreparedStatement updateLineStatement;
+    private PreparedStatement insertInvoiceStatement;
+    private PreparedStatement insertLineStatement;
+    private PreparedStatement getLineStatement;
+    private PreparedStatement getByIdStatement;
+    private PreparedStatement deleteInvoiceStatement;
+    private PreparedStatement deleteLineStatement;
+    private PreparedStatement updateInvoiceStatement;
+    private PreparedStatement updateLineStatement;
 
     public InvoiceObjectDao(ColumnModelDbDao dbDao) {
         super(dbDao);
@@ -37,6 +37,9 @@ public class InvoiceObjectDao extends ColumnObjectDao<InvoiceItem> {
         updateInvoiceStatement = this.prepareInsertStatement("UPDATE " + getDatabaseID() + " SET personId = ?, orderDate = ?, " +
                 "totalPrice = ?, orderLine = ? WHERE orderId = ?");
         updateLineStatement = this.prepareInsertStatement("UPDATE invoiceLine SET asin = ?, title = ?, price = ?, brand = ? WHERE productId = ?");
+    }
+
+    public InvoiceObjectDao() {
     }
 
     @Override

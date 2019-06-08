@@ -16,6 +16,9 @@ public class FeedbackObjectDao extends KeyValueObjectDao<FeedbackItem> {
         super(dbDao);
     }
 
+    public FeedbackObjectDao() {
+    }
+
     @Override
     protected String getTableName() {
         return "feedback";
