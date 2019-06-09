@@ -9,7 +9,16 @@ import com.miage.bigdata.models.column.ColumnItem;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-
+/**
+ * With Cassandra and Cosmos DB it's not possible to query data with a filter on a non indexed field.
+ * So it's only possible to filter on the primary key, Cosmos DB does not support yet index with Cassandra
+ *
+ * If we need a filter on a specific field, we must get all the table and filter the result. In this case,
+ * the best method is to use parallelStream, it provide the best performances on large list.
+ *
+ * Example: InvoiceObjectDao.getLinesByInvoice
+ *
+ */
 abstract class ColumnObjectDao<T extends ColumnItem> extends ObjectDao<T, ColumnModelDbDao> {
     protected Session cassandraSession;
 

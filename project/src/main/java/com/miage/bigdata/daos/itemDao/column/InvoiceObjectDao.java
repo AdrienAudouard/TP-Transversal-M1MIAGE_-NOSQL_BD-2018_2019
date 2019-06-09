@@ -13,6 +13,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * With Cassandra and Cosmos DB it's not possible to query data with a filter on a non indexed field.
+ * So it's only possible to filter on the primary key.
+ *
+ * If we need a filter on a specific field, we must get all the table and filter the result. In this case,
+ * the best method is to use parallelStream, it provide the best performances on large list.
+ *
+ * Example: InvoiceObjectDao.getLinesByInvoice
+ *
+ */
 public class InvoiceObjectDao extends ColumnObjectDao<InvoiceItem> {
     private PreparedStatement insertInvoiceStatement;
     private PreparedStatement insertLineStatement;

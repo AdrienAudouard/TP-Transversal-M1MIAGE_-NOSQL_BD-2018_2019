@@ -13,17 +13,24 @@ import com.miage.bigdata.models.keyvalue.FeedbackItem;
 import java.util.List;
 
 public class LoadDataFileMain {
+    private static DocumentController documentController = new DocumentController();
+    private static KeyValueController keyValueController = new KeyValueController();
+    private static ColumnController columnController = new ColumnController();
+
+    private static ItemController<OrderItem> orderItemItemController = documentController.getItemController(OrderItem.class);
+    private static ItemController<ProductItem> productItemItemController = documentController.getItemController(ProductItem.class);
+    private static ItemController<FeedbackItem> feedbackItemItemController = keyValueController.getItemController(FeedbackItem.class);
+    private static ItemController<InvoiceLine> invoiceLineItemController = columnController.getItemController(InvoiceLine.class);
+    private static ItemController<InvoiceItem> invoiceItemItemController = columnController.getItemController(InvoiceItem.class);
 
     public static void main(String args[]) {
-        //loadOrders();
+        initController();
 
-        //loadProducts();
+        loadOrders();
+
+        loadProducts();
 
         //loadFeedbacks();
-        ColumnController columnController = new ColumnController();
-        ItemController<InvoiceLine> ilController = columnController.getItemController(InvoiceLine.class);
-        ilController.deleteTable();
-        ilController.createTable();
 
         loadInvoices();
 
@@ -33,16 +40,26 @@ public class LoadDataFileMain {
         }*/
     }
 
+    public static void initController() {
+        ItemController[] controllers = new ItemController[]{orderItemItemController,
+                productItemItemController,
+                feedbackItemItemController,
+                invoiceItemItemController,
+                invoiceLineItemController
+        };
+
+        for (ItemController ctrl : controllers) {
+            ctrl.deleteTable();
+            ctrl.createTable();
+        }
+    }
+
     public static void loadOrders() {
         System.out.println("Loading Orders data on DB...");
-        DocumentController documentController = new DocumentController();
-        ItemController<OrderItem> controller = documentController.getItemController(OrderItem.class);
 
-        controller.deleteTable();
-        controller.createTable();
-        controller.populateTable();
+        orderItemItemController.populateTable();
 
-        List items = controller.readAll();
+        List items = orderItemItemController.readAll();
         for (Object item : items) {
             System.out.println("[Orders][Azure]: " + item);
         }
@@ -50,14 +67,10 @@ public class LoadDataFileMain {
 
     public static void loadProducts() {
         System.out.println("Loading Products data on DB...");
-        DocumentController documentController = new DocumentController();
-        ItemController<ProductItem> controller = documentController.getItemController(ProductItem.class);
 
-        controller.deleteTable();
-        controller.createTable();
-        controller.populateTable();
+        productItemItemController.populateTable();
 
-        List items = controller.readAll();
+        List items = productItemItemController.readAll();
         for (Object item : items) {
             System.out.println("[Products][Azure]: " + item);
         }
@@ -66,29 +79,22 @@ public class LoadDataFileMain {
     // TODO : Waiting Victor for run it
     public static void loadFeedbacks() {
         System.out.println("Loading Feedbacks data on DB...");
-        KeyValueController keyValueController = new KeyValueController();
-        ItemController<FeedbackItem> controller = keyValueController.getItemController(FeedbackItem.class);
 
-        //controller.deleteTable();
-        //controller.createTable();
-        controller.populateTable();
+        feedbackItemItemController.populateTable();
 
-        List items = controller.readAll();
+        List items = feedbackItemItemController.readAll();
         for (Object item : items) {
             System.out.println("[Feedbacks][Azure]: " + item);
         }
     }
 
     public static void loadInvoices() {
+
         System.out.println("Loading Invoices data on DB...");
-        ColumnController columnController = new ColumnController();
-        ItemController<InvoiceItem> controller = columnController.getItemController(InvoiceItem.class);
 
-        controller.deleteTable();
-        controller.createTable();
-        controller.populateTable();
+        invoiceItemItemController.populateTable();
 
-        List items = controller.readAll();
+        List items = invoiceItemItemController.readAll();
         for (Object item : items) {
             System.out.println("[Invoices][Azure]: " + item);
         }
