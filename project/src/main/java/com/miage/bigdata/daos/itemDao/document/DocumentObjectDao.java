@@ -50,6 +50,7 @@ public abstract class DocumentObjectDao<T extends DocumentItem> extends ObjectDa
         List<T> items = loadDataFile();
         for (T item : items) {
             if(item != null) {
+                item.setId(generateID());
                 create(item);
             }
         }

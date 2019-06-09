@@ -10,6 +10,7 @@ import com.miage.bigdata.daos.loader.CsvLoader;
 import com.miage.bigdata.daos.loader.XmlLoader;
 import com.miage.bigdata.models.column.InvoiceItem;
 import com.miage.bigdata.models.document.OrderItem;
+import com.miage.bigdata.models.document.ProductItem;
 import com.miage.bigdata.models.keyvalue.FeedbackItem;
 
 import java.util.List;
@@ -17,12 +18,9 @@ import java.util.List;
 public class LoadDataFileMain {
 
     public static void main(String args[]) {
-        loadOrders();
+        //loadOrders();
 
-        /*List orderItems = new OrderObjectDao().loadDataFile();
-        for (Object orderItem : orderItems) {
-            System.out.println("[JSON][OrderObjectDao] order" + orderItem);
-        }*/
+        loadProducts();
 
         /*List productItems = new ProductObjectDao().loadDataFile();
         for (Object productItem : productItems) {
@@ -43,15 +41,30 @@ public class LoadDataFileMain {
     public static void loadOrders() {
         System.out.println("Loading Orders data on DB:");
         DocumentController documentController = new DocumentController();
-        ItemController<OrderItem> oiController = documentController.getItemController(OrderItem.class);
+        ItemController<OrderItem> controller = documentController.getItemController(OrderItem.class);
 
-        oiController.deleteTable();
-        oiController.createTable();
-        oiController.populateTable();
+        controller.deleteTable();
+        controller.createTable();
+        controller.populateTable();
 
-        List orderItems = oiController.readAll();
-        for (Object orderItem : orderItems) {
-            System.out.println("[JSON][OrderObjectDao] order" + orderItem);
+        List items = controller.readAll();
+        for (Object item : items) {
+            System.out.println("[Orders][Azure]: " + item);
+        }
+    }
+
+    public static void loadProducts() {
+        System.out.println("Loading Products data on DB:");
+        DocumentController documentController = new DocumentController();
+        ItemController<ProductItem> controller = documentController.getItemController(ProductItem.class);
+
+        controller.deleteTable();
+        controller.createTable();
+        controller.populateTable();
+
+        List items = controller.readAll();
+        for (Object item : items) {
+            System.out.println("[Products][Azure]: " + item);
         }
     }
 }
