@@ -4,13 +4,8 @@ import com.miage.bigdata.controllers.ColumnController;
 import com.miage.bigdata.controllers.DocumentController;
 import com.miage.bigdata.controllers.ItemController;
 import com.miage.bigdata.controllers.KeyValueController;
-import com.miage.bigdata.daos.itemDao.column.InvoiceObjectDao;
-import com.miage.bigdata.daos.itemDao.document.OrderObjectDao;
-import com.miage.bigdata.daos.itemDao.document.ProductObjectDao;
-import com.miage.bigdata.daos.itemDao.keyvalue.FeedbackObjectDao;
-import com.miage.bigdata.daos.loader.CsvLoader;
-import com.miage.bigdata.daos.loader.XmlLoader;
 import com.miage.bigdata.models.column.InvoiceItem;
+import com.miage.bigdata.models.column.InvoiceLine;
 import com.miage.bigdata.models.document.OrderItem;
 import com.miage.bigdata.models.document.ProductItem;
 import com.miage.bigdata.models.keyvalue.FeedbackItem;
@@ -25,6 +20,10 @@ public class LoadDataFileMain {
         //loadProducts();
 
         //loadFeedbacks();
+        ColumnController columnController = new ColumnController();
+        ItemController<InvoiceLine> ilController = columnController.getItemController(InvoiceLine.class);
+        ilController.deleteTable();
+        ilController.createTable();
 
         loadInvoices();
 

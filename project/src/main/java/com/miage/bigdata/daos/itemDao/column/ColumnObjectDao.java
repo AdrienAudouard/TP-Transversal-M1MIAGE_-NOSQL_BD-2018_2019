@@ -8,6 +8,7 @@ import com.miage.bigdata.daos.itemDao.ObjectDao;
 import com.miage.bigdata.models.column.ColumnItem;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 abstract class ColumnObjectDao<T extends ColumnItem> extends ObjectDao<T, ColumnModelDbDao> {
     protected Session cassandraSession;
@@ -25,9 +26,9 @@ abstract class ColumnObjectDao<T extends ColumnItem> extends ObjectDao<T, Column
         return cassandraSession.prepare(query);
     }
 
-    protected T instanciateItemFromRow(Row row, Row lineRow) {
+    protected T instanciateItemFromRow(Row row, List<Row> lineRow) {
         try {
-            return getItemClass().getConstructor(Row.class, Row.class).newInstance(row, lineRow);
+            return getItemClass().getConstructor(Row.class, List.class).newInstance(row, lineRow);
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             e.printStackTrace();
         }

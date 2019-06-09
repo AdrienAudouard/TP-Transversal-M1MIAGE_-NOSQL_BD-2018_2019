@@ -2,16 +2,28 @@ package com.miage.bigdata.models.column;
 
 import com.datastax.driver.core.Row;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "Orderline")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class InvoiceLine extends ColumnItem {
+    @XmlElement(name = "asin")
     private String asin;
+    @XmlElement(name = "title")
     private String title;
+    @XmlElement(name = "price")
     private double price;
+    @XmlElement(name = "brand")
     private String brand;
+    @XmlElement(name = "productId")
     private int productId;
+
+    public InvoiceLine() {
+
+    }
 
     public InvoiceLine(String id, String asin, String title, double price, String brand) {
         this.asin = asin;
@@ -30,7 +42,6 @@ public class InvoiceLine extends ColumnItem {
         this.brand = row.getString("brand");
     }
 
-    @XmlElement(name = "asin")
     public String getAsin() {
         return asin;
     }
@@ -39,7 +50,6 @@ public class InvoiceLine extends ColumnItem {
         this.asin = asin;
     }
 
-    @XmlElement(name = "title")
     public String getTitle() {
         return title;
     }
@@ -48,7 +58,6 @@ public class InvoiceLine extends ColumnItem {
         this.title = title;
     }
 
-    @XmlElement(name = "price")
     public double getPrice() {
         return price;
     }
@@ -57,7 +66,6 @@ public class InvoiceLine extends ColumnItem {
         this.price = price;
     }
 
-    @XmlElement(name = "brand")
     public String getBrand() {
         return brand;
     }
@@ -66,13 +74,17 @@ public class InvoiceLine extends ColumnItem {
         this.brand = brand;
     }
 
-    @XmlElement(name = "productId")
     public int getProductId() {
         return productId;
     }
 
     public void setProductId(int productId) {
         this.productId = productId;
+    }
+
+    @Override
+    public String getId() {
+        return String.valueOf(getProductId());
     }
 
     @Override

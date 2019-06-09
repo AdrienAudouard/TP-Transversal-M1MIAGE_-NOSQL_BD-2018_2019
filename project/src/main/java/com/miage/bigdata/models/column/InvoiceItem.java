@@ -3,31 +3,37 @@ package com.miage.bigdata.models.column;
 import com.datastax.driver.core.Row;
 import com.miage.bigdata.models.Item;
 
-import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @XmlRootElement(name = "Invoice.xml")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class InvoiceItem extends ColumnItem{
+    @XmlElement(name = "PersonId")
     private String personId;
+    @XmlElement(name = "OrderDate")
     private Date orderDate;
+    @XmlElement(name = "TotalPrice")
     private Double totalPrice;
-    protected List<InvoiceLine> orderLine = new ArrayList<>();
+    @XmlElement(name = "Orderline")
+    private List<InvoiceLine> orderLine = new ArrayList<>();
 
     public InvoiceItem() {
     }
 
-    public InvoiceItem(Row row, Row lineRow) {
+    public InvoiceItem(Row row, List<Row> lines) {
         super();
 
         personId = row.getString("personId");
         orderDate = row.getTimestamp("orderDate");
         totalPrice = row.getDouble("totalPrice");
         id = row.getString("orderId");
-        orderLine.add(new InvoiceLine(lineRow));
+
+        for (Row line : lines) {
+            orderLine.add(new InvoiceLine(line));
+        }
     }
 
     public InvoiceItem(String id, String personId, Date orderDate, Double totalPrice, List<InvoiceLine> orderLine) {
@@ -55,7 +61,6 @@ public class InvoiceItem extends ColumnItem{
         this.personId = personId;
     }
 
-    @XmlElement(name = "OrderDate")
     public Date getOrderDate() {
         return orderDate;
     }
@@ -64,7 +69,6 @@ public class InvoiceItem extends ColumnItem{
         this.orderDate = orderDate;
     }
 
-    @XmlElement(name = "TotalPrice")
     public Double getTotalPrice() {
         return totalPrice;
     }
@@ -73,7 +77,6 @@ public class InvoiceItem extends ColumnItem{
         this.totalPrice = totalPrice;
     }
 
-    @XmlAnyElement
     public List<InvoiceLine> getOrderLine() {
         return orderLine;
     }

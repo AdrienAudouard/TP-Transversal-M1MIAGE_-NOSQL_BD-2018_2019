@@ -1,5 +1,6 @@
 package com.miage.bigdata.models;
 
+import javax.xml.bind.annotation.XmlElement;
 import java.io.File;
 
 public abstract class Item {
@@ -9,6 +10,7 @@ public abstract class Item {
 
     public Item(String json) { }
 
+    @XmlElement(name = "OrderId")
     public String getId() {
         return id;
     }
@@ -21,7 +23,7 @@ public abstract class Item {
         String resourcesPath = new File(".").getAbsolutePath();
         resourcesPath = resourcesPath.substring(0, resourcesPath.length() - 1);
         resourcesPath = resourcesPath.split("project/")[0];
-        resourcesPath += "resources/";
+        resourcesPath += "project/src/main/resources/datas/";
         return resourcesPath;
     }
 
