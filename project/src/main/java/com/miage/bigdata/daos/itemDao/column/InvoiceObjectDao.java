@@ -3,23 +3,24 @@ package com.miage.bigdata.daos.itemDao.column;
 import com.datastax.driver.core.BoundStatement;
 import com.datastax.driver.core.PreparedStatement;
 import com.datastax.driver.core.Row;
+import com.miage.bigdata.controllers.ColumnController;
+import com.miage.bigdata.controllers.ItemController;
 import com.miage.bigdata.daos.dbDao.column.ColumnModelDbDao;
 import com.miage.bigdata.models.column.InvoiceItem;
 import com.miage.bigdata.models.column.InvoiceLine;
-import lombok.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class InvoiceObjectDao extends ColumnObjectDao<InvoiceItem> {
-    private final PreparedStatement insertInvoiceStatement;
-    private final PreparedStatement insertLineStatement;
-    private final PreparedStatement getLineStatement;
-    private final PreparedStatement getByIdStatement;
-    private final PreparedStatement deleteInvoiceStatement;
-    private final PreparedStatement deleteLineStatement;
-    private final PreparedStatement updateInvoiceStatement;
-    private final PreparedStatement updateLineStatement;
+    private PreparedStatement insertInvoiceStatement;
+    private PreparedStatement insertLineStatement;
+    private PreparedStatement getLineStatement;
+    private PreparedStatement getByIdStatement;
+    private PreparedStatement deleteInvoiceStatement;
+    private PreparedStatement deleteLineStatement;
+    private PreparedStatement updateInvoiceStatement;
+    private PreparedStatement updateLineStatement;
 
     public InvoiceObjectDao(ColumnModelDbDao dbDao) {
         super(dbDao);
@@ -37,6 +38,9 @@ public class InvoiceObjectDao extends ColumnObjectDao<InvoiceItem> {
         updateInvoiceStatement = this.prepareInsertStatement("UPDATE " + getDatabaseID() + " SET personId = ?, orderDate = ?, " +
                 "totalPrice = ?, orderLine = ? WHERE orderId = ?");
         updateLineStatement = this.prepareInsertStatement("UPDATE invoiceLine SET asin = ?, title = ?, price = ?, brand = ? WHERE productId = ?");
+    }
+
+    public InvoiceObjectDao() {
     }
 
     @Override
@@ -67,7 +71,7 @@ public class InvoiceObjectDao extends ColumnObjectDao<InvoiceItem> {
     }
 
     @Override
-    public InvoiceItem create(@NonNull InvoiceItem item) {
+    public InvoiceItem create(InvoiceItem item) {
         InvoiceLine invoiceLine = item.getOrderLine().get(0);
 
 
@@ -90,7 +94,31 @@ public class InvoiceObjectDao extends ColumnObjectDao<InvoiceItem> {
     }
 
     @Override
-    public InvoiceItem getByID(@NonNull String id) {
+    public boolean populateTable() {
+        List<InvoiceItem> invoices = loadDataFile();
+        for (InvoiceItem invoice : invoices) {
+            if(invoice != null) {
+                invoice.setId(generateID());
+                List<InvoiceLine> orderLines = invoice.getOrderLine();
+
+                if(orderLines.size() > 0) {
+                    ColumnController columnController = new ColumnController();
+                    ItemController<InvoiceLine> ilController = columnController.getItemController(InvoiceLine.class);
+                    ilController.deleteTable();
+                    ilController.createTable();
+                    for (InvoiceLine orderLine : orderLines) {
+                        orderLine.setId(generateID());
+                        ilController.create(orderLine);
+                    }
+                }
+                create(invoice);
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public InvoiceItem getByID(String id) {
         BoundStatement boundStatement = new BoundStatement(getByIdStatement);
         Row row = cassandraSession.execute(boundStatement.bind(id)).one();
 
@@ -104,7 +132,7 @@ public class InvoiceObjectDao extends ColumnObjectDao<InvoiceItem> {
     }
 
     @Override
-    public boolean delete(@NonNull String id) {
+    public boolean delete(String id) {
         Row row = getLineById(id);
 
         BoundStatement boundStatement = new BoundStatement(deleteInvoiceStatement);
@@ -117,7 +145,7 @@ public class InvoiceObjectDao extends ColumnObjectDao<InvoiceItem> {
     }
 
     @Override
-    public InvoiceItem update(@NonNull InvoiceItem item) {
+    public InvoiceItem update(InvoiceItem item) {
         InvoiceLine line = item.getOrderLine().get(0);
         BoundStatement boundStatement = new BoundStatement(updateInvoiceStatement);
         cassandraSession.execute(boundStatement.bind(
@@ -166,11 +194,6 @@ public class InvoiceObjectDao extends ColumnObjectDao<InvoiceItem> {
         this.cassandraSession.execute(createLine);
 
         return true;
-    }
-
-    @Override
-    public boolean populateTable() {
-        return false;
     }
 
     @Override

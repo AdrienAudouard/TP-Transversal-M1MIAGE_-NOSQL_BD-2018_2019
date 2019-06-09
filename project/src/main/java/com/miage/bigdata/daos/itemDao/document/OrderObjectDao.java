@@ -1,10 +1,11 @@
 package com.miage.bigdata.daos.itemDao.document;
 
+import com.miage.bigdata.controllers.DocumentController;
+import com.miage.bigdata.controllers.ItemController;
 import com.miage.bigdata.daos.dbDao.document.DocumentModelDbDao;
 import com.miage.bigdata.models.document.OrderItem;
 import com.miage.bigdata.models.document.ProductItem;
 import com.mongodb.client.MongoCollection;
-import lombok.NonNull;
 import org.bson.Document;
 
 import java.util.ArrayList;
@@ -36,7 +37,31 @@ public class OrderObjectDao extends DocumentObjectDao<OrderItem> {
     }
 
     @Override
-    public OrderItem getByID(@NonNull String id) {
+    public boolean populateTable() {
+        List<OrderItem> orders = loadDataFile();
+        for (OrderItem order : orders) {
+            if(order != null) {
+                order.setId(generateID());
+                List<ProductItem> orderLines = order.getOrderLines();
+
+                if(orderLines.size() > 0) {
+                    DocumentController documentController = new DocumentController();
+                    ItemController<ProductItem> piController = documentController.getItemController(ProductItem.class);
+                    piController.deleteTable();
+                    piController.createTable();
+                    for (ProductItem orderLine : orderLines) {
+                        orderLine.setId(generateID());
+                        piController.create(orderLine);
+                    }
+                }
+                create(order);
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public OrderItem getByID(String id) {
         return super.getByID(id);
     }
 

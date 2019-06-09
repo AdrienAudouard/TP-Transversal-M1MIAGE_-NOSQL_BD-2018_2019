@@ -10,12 +10,15 @@ import com.miage.bigdata.models.column.ColumnItem;
 import java.lang.reflect.InvocationTargetException;
 
 abstract class ColumnObjectDao<T extends ColumnItem> extends ObjectDao<T, ColumnModelDbDao> {
-    protected final Session cassandraSession;
+    protected Session cassandraSession;
 
     public ColumnObjectDao(ColumnModelDbDao dbDao) {
         super(dbDao);
 
         this.cassandraSession = dbDao.connect();
+    }
+
+    public ColumnObjectDao() {
     }
 
     public PreparedStatement prepareInsertStatement(String query) {

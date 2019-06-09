@@ -8,7 +8,6 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
-import lombok.NonNull;
 import org.bson.Document;
 
 import java.lang.reflect.InvocationTargetException;
@@ -34,7 +33,7 @@ public abstract class DocumentObjectDao<T extends DocumentItem> extends ObjectDa
     }
 
     @Override
-    public T create(@NonNull T item) {
+    public T create(T item) {
         MongoCollection<Document> collection = getCollection();
 
         Document d = item.toDocument();
@@ -62,7 +61,7 @@ public abstract class DocumentObjectDao<T extends DocumentItem> extends ObjectDa
     }
 
     @Override
-    public boolean delete(@NonNull String id) {
+    public boolean delete(String id) {
         MongoCollection collection = getCollection();
 
         DeleteResult deleteResult = collection.deleteMany(eq("id", id));
@@ -71,7 +70,7 @@ public abstract class DocumentObjectDao<T extends DocumentItem> extends ObjectDa
     }
 
     @Override
-    public T getByID(@NonNull String id) {
+    public T getByID(String id) {
         MongoCollection collection = getCollection();
 
         Object o = collection.find(eq("id", id)).first();
@@ -86,7 +85,7 @@ public abstract class DocumentObjectDao<T extends DocumentItem> extends ObjectDa
     }
 
     @Override
-    public T update(@NonNull T item) {
+    public T update(T item) {
         MongoCollection collection = getCollection();
 
         UpdateResult updateResult = collection.replaceOne(eq("id", item.getId()), item.toDocument());
@@ -123,11 +122,6 @@ public abstract class DocumentObjectDao<T extends DocumentItem> extends ObjectDa
     public boolean createTable() {
         this.getDatabase().createCollection(getCollectionName());
         return true;
-    }
-
-    @Override
-    public boolean populateTable() {
-        return false;
     }
 
     @Override
