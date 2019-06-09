@@ -45,40 +45,16 @@ public abstract class DocumentObjectDao<T extends DocumentItem> extends ObjectDa
         return item;
     }
 
-    // TODO : bind datafile from loadDataFile, then creating table
     @Override
     public boolean populateTable() {
         List<T> items = loadDataFile();
         for (T item : items) {
-            create(item);
+            if(item != null) {
+                create(item);
+            }
         }
         return true;
     }
-    /*public boolean populateTable() {
-        MongoCollection<Document> collection = getCollection();
-        List<T> items = loadDataFile();
-        List<Document> documents = new ArrayList<>();
-
-        for (T item : items) {
-            Document doc = item.toDocument();
-            documents.add(doc);
-        }
-        collection.insertMany(documents);
-
-        return documents.size() > 0;
-    }*/
-
-    /*public boolean populateTable() {
-        MongoCollection<Document> collection = getCollection();
-        List<T> items = loadDataFile();
-
-        for (T item : items) {
-            Document doc = item.toDocument();
-            collection.insertOne(doc);
-            item.setMongoID(doc.getObjectId("_id").toString());
-        }
-
-    }*/
 
     @Override
     public List<T> readAll() {

@@ -63,6 +63,38 @@ public class OrderItem extends DocumentItem {
         return document;
     }
 
+    public String getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(String personId) {
+        this.personId = personId;
+    }
+
+    public String getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(String orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public List<ProductItem> getOrderLines() {
+        return orderLines;
+    }
+
+    public void setOrderLines(List<ProductItem> orderLines) {
+        this.orderLines = orderLines;
+    }
+
     @Override
     public String toString() {
         return "OrderItem{" +

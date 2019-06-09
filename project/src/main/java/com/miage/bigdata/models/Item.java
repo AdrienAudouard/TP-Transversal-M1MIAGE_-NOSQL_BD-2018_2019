@@ -13,6 +13,10 @@ public abstract class Item {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public static String getResourcesPath() {
         String resourcesPath = new File(".").getAbsolutePath();
         resourcesPath = resourcesPath.substring(0, resourcesPath.length() - 1);
