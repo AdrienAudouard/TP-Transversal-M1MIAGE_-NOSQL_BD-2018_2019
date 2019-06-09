@@ -3,8 +3,8 @@ package com.miage.bigdata.daos.itemDao.column;
 import com.datastax.driver.core.BoundStatement;
 import com.datastax.driver.core.PreparedStatement;
 import com.datastax.driver.core.Row;
-import com.miage.bigdata.controllers.ColumnController;
-import com.miage.bigdata.controllers.ItemController;
+import com.miage.bigdata.controllers.item.ItemController;
+import com.miage.bigdata.controllers.models.ModelController;
 import com.miage.bigdata.daos.dbDao.column.ColumnModelDbDao;
 import com.miage.bigdata.models.column.InvoiceItem;
 import com.miage.bigdata.models.column.InvoiceLine;
@@ -133,8 +133,8 @@ public class InvoiceObjectDao extends ColumnObjectDao<InvoiceItem> {
                 List<InvoiceLine> orderLines = invoice.getOrderLine();
 
                 if(orderLines.size() > 0) {
-                    ColumnController columnController = new ColumnController();
-                    ItemController<InvoiceLine> ilController = columnController.getItemController(InvoiceLine.class);
+                    ModelController modelController = new ModelController();
+                    ItemController<InvoiceLine> ilController = modelController.getItemController(InvoiceLine.class);
 
                     for (InvoiceLine orderLine : orderLines) {
                         orderLine.setId(generateID());

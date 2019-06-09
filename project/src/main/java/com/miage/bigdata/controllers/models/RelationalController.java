@@ -1,11 +1,12 @@
-package com.miage.bigdata.controllers;
+package com.miage.bigdata.controllers.models;
 
+import com.miage.bigdata.controllers.item.ItemController;
 import com.miage.bigdata.daos.dbDao.relational.RelationalModelDbDao;
 import com.miage.bigdata.daos.itemDao.relational.TodoItemObjectDao;
 import com.miage.bigdata.models.relational.TodoItem;
 
-public class RelationalController extends ModelDbController<RelationalModelDbDao> {
-    public RelationalController() {
+class RelationalController extends ModelDbController<RelationalModelDbDao> {
+    RelationalController() {
         super();
 
         this.dbDao = new RelationalModelDbDao();

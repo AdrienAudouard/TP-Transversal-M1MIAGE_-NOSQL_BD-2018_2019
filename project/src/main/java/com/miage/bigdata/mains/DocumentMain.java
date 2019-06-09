@@ -1,7 +1,7 @@
 package com.miage.bigdata.mains;
 
-import com.miage.bigdata.controllers.DocumentController;
-import com.miage.bigdata.controllers.ItemController;
+import com.miage.bigdata.controllers.item.ItemController;
+import com.miage.bigdata.controllers.models.ModelController;
 import com.miage.bigdata.models.document.OrderItem;
 import com.miage.bigdata.models.document.ProductItem;
 
@@ -11,9 +11,9 @@ import java.util.Date;
 public class DocumentMain {
 
     public static void main(String[] args) {
-        DocumentController documentController = new DocumentController();
-        ItemController<ProductItem> piController = documentController.getItemController(ProductItem.class);
-        ItemController<OrderItem> oiController = documentController.getItemController(OrderItem.class);
+        ModelController modelController = new ModelController();
+        ItemController<ProductItem> piController = modelController.getItemController(ProductItem.class);
+        ItemController<OrderItem> oiController = modelController.getItemController(OrderItem.class);
 
         System.out.println(piController.readAll());
         System.out.println(oiController.readAll());

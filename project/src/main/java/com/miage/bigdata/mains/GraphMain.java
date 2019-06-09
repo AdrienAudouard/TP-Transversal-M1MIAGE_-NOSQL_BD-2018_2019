@@ -1,7 +1,7 @@
 package com.miage.bigdata.mains;
 
-import com.miage.bigdata.controllers.GraphController;
-import com.miage.bigdata.controllers.GraphItemController;
+import com.miage.bigdata.controllers.item.GraphItemController;
+import com.miage.bigdata.controllers.models.ModelController;
 import com.miage.bigdata.models.graph.Person;
 import com.miage.bigdata.models.graph.Post;
 import com.miage.bigdata.models.graph.Tag;
@@ -10,10 +10,10 @@ import java.util.Date;
 
 public class GraphMain {
     public static void main(String[] args) throws InterruptedException {
-        GraphController graphController = new GraphController();
-        GraphItemController<Person> pController = (GraphItemController<Person>) graphController.getItemController(Person.class);
-        GraphItemController<Tag> tController = (GraphItemController<Tag>) graphController.getItemController(Tag.class);
-        GraphItemController<Post> poController = (GraphItemController<Post>) graphController.getItemController(Post.class);
+        ModelController modelController = new ModelController();
+        GraphItemController<Person> pController = (GraphItemController<Person>) modelController.getItemController(Person.class);
+        GraphItemController<Tag> tController = (GraphItemController<Tag>) modelController.getItemController(Tag.class);
+        GraphItemController<Post> poController = (GraphItemController<Post>) modelController.getItemController(Post.class);
 
         Person p1 = new Person("1", "adrien", "audouard", "male"
                 , new Date(), "Nice", "chrome", 1);

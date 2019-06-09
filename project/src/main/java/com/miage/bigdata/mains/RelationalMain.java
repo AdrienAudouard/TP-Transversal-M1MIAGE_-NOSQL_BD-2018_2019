@@ -1,7 +1,7 @@
 package com.miage.bigdata.mains;
 
-import com.miage.bigdata.controllers.ItemController;
-import com.miage.bigdata.controllers.RelationalController;
+import com.miage.bigdata.controllers.item.ItemController;
+import com.miage.bigdata.controllers.models.ModelController;
 import com.miage.bigdata.models.relational.TodoItem;
 
 /**
@@ -10,8 +10,8 @@ import com.miage.bigdata.models.relational.TodoItem;
  */
 public class RelationalMain {
     public static void main( String[] args ) {
-        RelationalController relationalController = new RelationalController();
-        ItemController<TodoItem> tdiController = relationalController.getItemController(TodoItem.class);
+        ModelController modelController = new ModelController();
+        ItemController<TodoItem> tdiController = modelController.getItemController(TodoItem.class);
 
         System.out.println("------------ Print all items ------------");
 

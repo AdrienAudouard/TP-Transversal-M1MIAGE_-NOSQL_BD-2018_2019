@@ -1,7 +1,7 @@
 package com.miage.bigdata.daos.itemDao.document;
 
-import com.miage.bigdata.controllers.DocumentController;
-import com.miage.bigdata.controllers.ItemController;
+import com.miage.bigdata.controllers.item.ItemController;
+import com.miage.bigdata.controllers.models.ModelController;
 import com.miage.bigdata.daos.dbDao.document.DocumentModelDbDao;
 import com.miage.bigdata.models.document.OrderItem;
 import com.miage.bigdata.models.document.ProductItem;
@@ -45,8 +45,8 @@ public class OrderObjectDao extends DocumentObjectDao<OrderItem> {
                 List<ProductItem> orderLines = order.getOrderLines();
 
                 if(orderLines.size() > 0) {
-                    DocumentController documentController = new DocumentController();
-                    ItemController<ProductItem> piController = documentController.getItemController(ProductItem.class);
+                    ModelController modelController = new ModelController();
+                    ItemController<ProductItem> piController = modelController.getItemController(ProductItem.class);
                     piController.deleteTable();
                     piController.createTable();
                     for (ProductItem orderLine : orderLines) {

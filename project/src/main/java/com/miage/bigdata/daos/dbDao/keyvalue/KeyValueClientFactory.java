@@ -17,7 +17,6 @@ public class KeyValueClientFactory {
             CloudStorageAccount storageAccount = null;
             try {
                 String connectionString = Configuration.KEY_VALUE.getProperty("connection");
-                System.out.println(connectionString);
                 storageAccount = CloudStorageAccount.parse(connectionString);
             } catch (URISyntaxException | InvalidKeyException | IOException e) {
                 e.printStackTrace();

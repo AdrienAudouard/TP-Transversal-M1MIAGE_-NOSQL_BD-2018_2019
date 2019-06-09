@@ -1,4 +1,4 @@
-package com.miage.bigdata.controllers;
+package com.miage.bigdata.controllers.item;
 
 import com.miage.bigdata.daos.itemDao.graph.GraphObjectDao;
 import com.miage.bigdata.models.graph.GraphItem;

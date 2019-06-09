@@ -1,7 +1,7 @@
 package com.miage.bigdata.mains;
 
-import com.miage.bigdata.controllers.ItemController;
-import com.miage.bigdata.controllers.KeyValueController;
+import com.miage.bigdata.controllers.item.ItemController;
+import com.miage.bigdata.controllers.models.ModelController;
 import com.miage.bigdata.models.keyvalue.FeedbackItem;
 
 import java.util.Date;
@@ -9,8 +9,8 @@ import java.util.Date;
 public class KeyValueMain {
 
     public static void main(String args[]) {
-        KeyValueController keyValueController = new KeyValueController();
-        ItemController<FeedbackItem> feedbackItemController = keyValueController.getItemController(FeedbackItem.class);
+        ModelController modelController = new ModelController();
+        ItemController<FeedbackItem> feedbackItemController = modelController.getItemController(FeedbackItem.class);
 
         //region Create
         System.out.println("------------ Create items ------------");

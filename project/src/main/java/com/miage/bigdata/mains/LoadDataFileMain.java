@@ -1,9 +1,7 @@
 package com.miage.bigdata.mains;
 
-import com.miage.bigdata.controllers.ColumnController;
-import com.miage.bigdata.controllers.DocumentController;
-import com.miage.bigdata.controllers.ItemController;
-import com.miage.bigdata.controllers.KeyValueController;
+import com.miage.bigdata.controllers.item.ItemController;
+import com.miage.bigdata.controllers.models.*;
 import com.miage.bigdata.models.column.InvoiceItem;
 import com.miage.bigdata.models.column.InvoiceLine;
 import com.miage.bigdata.models.document.OrderItem;
@@ -13,15 +11,13 @@ import com.miage.bigdata.models.keyvalue.FeedbackItem;
 import java.util.List;
 
 public class LoadDataFileMain {
-    private static DocumentController documentController = new DocumentController();
-    private static KeyValueController keyValueController = new KeyValueController();
-    private static ColumnController columnController = new ColumnController();
+    private static ModelController modelController = new ModelController();
 
-    private static ItemController<OrderItem> orderItemItemController = documentController.getItemController(OrderItem.class);
-    private static ItemController<ProductItem> productItemItemController = documentController.getItemController(ProductItem.class);
-    private static ItemController<FeedbackItem> feedbackItemItemController = keyValueController.getItemController(FeedbackItem.class);
-    private static ItemController<InvoiceLine> invoiceLineItemController = columnController.getItemController(InvoiceLine.class);
-    private static ItemController<InvoiceItem> invoiceItemItemController = columnController.getItemController(InvoiceItem.class);
+    private static ItemController<OrderItem> orderItemItemController = modelController.getItemController(OrderItem.class);
+    private static ItemController<ProductItem> productItemItemController = modelController.getItemController(ProductItem.class);
+    private static ItemController<FeedbackItem> feedbackItemItemController = modelController.getItemController(FeedbackItem.class);
+    private static ItemController<InvoiceLine> invoiceLineItemController = modelController.getItemController(InvoiceLine.class);
+    private static ItemController<InvoiceItem> invoiceItemItemController = modelController.getItemController(InvoiceItem.class);
 
     public static void main(String args[]) {
         initController();

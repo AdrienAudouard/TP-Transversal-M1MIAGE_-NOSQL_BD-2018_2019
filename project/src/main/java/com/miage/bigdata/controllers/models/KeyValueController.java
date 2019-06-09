@@ -1,11 +1,12 @@
-package com.miage.bigdata.controllers;
+package com.miage.bigdata.controllers.models;
 
+import com.miage.bigdata.controllers.item.ItemController;
 import com.miage.bigdata.daos.dbDao.keyvalue.KeyValueModelDbDao;
 import com.miage.bigdata.daos.itemDao.keyvalue.FeedbackObjectDao;
 import com.miage.bigdata.models.keyvalue.FeedbackItem;
 
-public class KeyValueController extends ModelDbController<KeyValueModelDbDao> {
-    public KeyValueController() {
+class KeyValueController extends ModelDbController<KeyValueModelDbDao> {
+    KeyValueController() {
         super();
 
         this.dbDao = new KeyValueModelDbDao();

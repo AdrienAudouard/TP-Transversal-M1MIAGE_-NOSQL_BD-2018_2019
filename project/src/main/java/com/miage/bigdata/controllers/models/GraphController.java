@@ -1,5 +1,6 @@
-package com.miage.bigdata.controllers;
+package com.miage.bigdata.controllers.models;
 
+import com.miage.bigdata.controllers.item.GraphItemController;
 import com.miage.bigdata.daos.dbDao.graph.GraphModelDbDao;
 import com.miage.bigdata.daos.itemDao.graph.PersonObjectDao;
 import com.miage.bigdata.daos.itemDao.graph.PostObjectDao;
@@ -8,8 +9,8 @@ import com.miage.bigdata.models.graph.Person;
 import com.miage.bigdata.models.graph.Post;
 import com.miage.bigdata.models.graph.Tag;
 
-public class GraphController extends ModelDbController<GraphModelDbDao> {
-    public GraphController() {
+class GraphController extends ModelDbController<GraphModelDbDao> {
+    GraphController() {
         super();
 
         this.dbDao = new GraphModelDbDao();
