@@ -10,17 +10,17 @@ import java.util.Properties;
 /**
  * Configuration utility to read the configurations from properties file
  */
-public class Configuration {
+public enum Configuration {
+    COLUMN("column.properties"),
+    DOCUMENT("document.properties"),
+    KEY_VALUE("keyvalue.properties"),
+    RELATIONAL("relational.properties");
+
     private static final Logger LOGGER = LoggerFactory.getLogger(Configuration.class);
-    private static Properties prop = null;
+    private Properties prop = null;
     private String fileName;
 
-    public static final Configuration COLUMN = new Configuration("column.properties");
-    public static final Configuration DOCUMENT = new Configuration("document.properties");
-    public static final Configuration KEY_VALUE = new Configuration("keyvalue.properties");
-    public static final Configuration RELATIONAL = new Configuration("relational.properties");
-
-    private Configuration(String fileName) {
+    Configuration(String fileName) {
         this.fileName = fileName;
     }
 
