@@ -6,7 +6,6 @@ import com.datastax.driver.core.Row;
 import com.miage.bigdata.daos.dbDao.column.ColumnModelDbDao;
 import com.miage.bigdata.models.column.InvoiceItem;
 import com.miage.bigdata.models.column.InvoiceLine;
-import lombok.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +69,7 @@ public class InvoiceObjectDao extends ColumnObjectDao<InvoiceItem> {
     }
 
     @Override
-    public InvoiceItem create(@NonNull InvoiceItem item) {
+    public InvoiceItem create(InvoiceItem item) {
         InvoiceLine invoiceLine = item.getOrderLine().get(0);
 
 
@@ -93,7 +92,7 @@ public class InvoiceObjectDao extends ColumnObjectDao<InvoiceItem> {
     }
 
     @Override
-    public InvoiceItem getByID(@NonNull String id) {
+    public InvoiceItem getByID(String id) {
         BoundStatement boundStatement = new BoundStatement(getByIdStatement);
         Row row = cassandraSession.execute(boundStatement.bind(id)).one();
 
@@ -107,7 +106,7 @@ public class InvoiceObjectDao extends ColumnObjectDao<InvoiceItem> {
     }
 
     @Override
-    public boolean delete(@NonNull String id) {
+    public boolean delete(String id) {
         Row row = getLineById(id);
 
         BoundStatement boundStatement = new BoundStatement(deleteInvoiceStatement);
@@ -120,7 +119,7 @@ public class InvoiceObjectDao extends ColumnObjectDao<InvoiceItem> {
     }
 
     @Override
-    public InvoiceItem update(@NonNull InvoiceItem item) {
+    public InvoiceItem update(InvoiceItem item) {
         InvoiceLine line = item.getOrderLine().get(0);
         BoundStatement boundStatement = new BoundStatement(updateInvoiceStatement);
         cassandraSession.execute(boundStatement.bind(

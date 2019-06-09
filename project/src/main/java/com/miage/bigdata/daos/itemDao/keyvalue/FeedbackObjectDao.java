@@ -1,12 +1,9 @@
 package com.miage.bigdata.daos.itemDao.keyvalue;
 
 import com.miage.bigdata.daos.dbDao.keyvalue.KeyValueModelDbDao;
-import com.miage.bigdata.daos.dbDao.relational.RelationalModelDbDao;
 import com.miage.bigdata.models.keyvalue.FeedbackItem;
-import com.miage.bigdata.models.relational.TodoItem;
 import com.microsoft.azure.storage.StorageException;
 import com.microsoft.azure.storage.table.CloudTable;
-import lombok.NonNull;
 
 import java.net.URISyntaxException;
 
@@ -38,7 +35,7 @@ public class FeedbackObjectDao extends KeyValueObjectDao<FeedbackItem> {
     }
 
     @Override
-    public FeedbackItem getByID(@NonNull String id) {
+    public FeedbackItem getByID(String id) {
         return null;
     }
 

@@ -9,7 +9,6 @@ import com.microsoft.azure.storage.table.CloudTable;
 import com.microsoft.azure.storage.table.CloudTableClient;
 import com.microsoft.azure.storage.table.TableOperation;
 import com.microsoft.azure.storage.table.TableQuery;
-import lombok.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +44,7 @@ public abstract class KeyValueObjectDao<T extends KeyValueItem> extends ObjectDa
     }
 
     @Override
-    public T getByID(@NonNull String id) {
+    public T getByID(String id) {
         //TODO FIXME as we need partition and row keys instead of a single id, something like @NonNull String partitionKey, @NonNull String rowKey
         CloudTable cloudTable = getTable();
 
@@ -63,7 +62,7 @@ public abstract class KeyValueObjectDao<T extends KeyValueItem> extends ObjectDa
     }
 
     @Override
-    public T create(@NonNull T item) {
+    public T create(T item) {
         CloudTable cloudTable = getTable();
 
         if (cloudTable != null) {
@@ -79,7 +78,7 @@ public abstract class KeyValueObjectDao<T extends KeyValueItem> extends ObjectDa
     }
 
     @Override
-    public T update(@NonNull T item) {
+    public T update(T item) {
         CloudTable cloudTable = getTable();
 
         if (cloudTable != null) {
@@ -95,7 +94,7 @@ public abstract class KeyValueObjectDao<T extends KeyValueItem> extends ObjectDa
     }
 
     @Override
-    public boolean delete(@NonNull String id) {
+    public boolean delete(String id) {
         CloudTable cloudTable = getTable();
 
         if (cloudTable != null) {

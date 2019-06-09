@@ -4,7 +4,6 @@ import com.miage.bigdata.daos.dbDao.relational.RelationalModelDbDao;
 import com.miage.bigdata.daos.itemDao.ObjectDao;
 import com.miage.bigdata.models.relational.RelationalItem;
 import com.microsoft.azure.documentdb.*;
-import lombok.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +51,7 @@ public abstract class RelationalObjectDao<T extends RelationalItem> extends Obje
     }
 
     @Override
-    public T getByID(@NonNull String id) {
+    public T getByID(String id) {
         // Retrieve the document by id using our helper method.
         Document document = getDocumentById(id);
 
@@ -65,7 +64,7 @@ public abstract class RelationalObjectDao<T extends RelationalItem> extends Obje
     }
 
     @Override
-    public T create(@NonNull T item) {
+    public T create(T item) {
         // Serialize the TodoItem as a JSON Document.
         Document document = new Document(gson.toJson(item));
 
@@ -87,7 +86,7 @@ public abstract class RelationalObjectDao<T extends RelationalItem> extends Obje
     }
 
     @Override
-    public T update(@NonNull T item) {
+    public T update(T item) {
         Document document = getDocumentById(item.getId());
 
         document = item.updateDocument(document);
@@ -105,7 +104,7 @@ public abstract class RelationalObjectDao<T extends RelationalItem> extends Obje
     }
 
     @Override
-    public boolean delete(@NonNull String id) {
+    public boolean delete(String id) {
         // Query for the document to retrieve the self link.
         Document todoItemDocument = getDocumentById(id);
 

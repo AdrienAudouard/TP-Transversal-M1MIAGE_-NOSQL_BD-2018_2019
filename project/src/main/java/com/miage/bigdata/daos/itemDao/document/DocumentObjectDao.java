@@ -8,7 +8,6 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
-import lombok.NonNull;
 import org.bson.Document;
 
 import java.lang.reflect.InvocationTargetException;
@@ -46,6 +45,41 @@ public abstract class DocumentObjectDao<T extends DocumentItem> extends ObjectDa
         return item;
     }
 
+    // TODO : bind datafile from loadDataFile, then creating table
+    @Override
+    public boolean populateTable() {
+        List<T> items = loadDataFile();
+        for (T item : items) {
+            create(item);
+        }
+        return true;
+    }
+    /*public boolean populateTable() {
+        MongoCollection<Document> collection = getCollection();
+        List<T> items = loadDataFile();
+        List<Document> documents = new ArrayList<>();
+
+        for (T item : items) {
+            Document doc = item.toDocument();
+            documents.add(doc);
+        }
+        collection.insertMany(documents);
+
+        return documents.size() > 0;
+    }*/
+
+    /*public boolean populateTable() {
+        MongoCollection<Document> collection = getCollection();
+        List<T> items = loadDataFile();
+
+        for (T item : items) {
+            Document doc = item.toDocument();
+            collection.insertOne(doc);
+            item.setMongoID(doc.getObjectId("_id").toString());
+        }
+
+    }*/
+
     @Override
     public List<T> readAll() {
         MongoCollection collection = getCollection();
@@ -62,7 +96,7 @@ public abstract class DocumentObjectDao<T extends DocumentItem> extends ObjectDa
     }
 
     @Override
-    public boolean delete(@NonNull String id) {
+    public boolean delete(String id) {
         MongoCollection collection = getCollection();
 
         DeleteResult deleteResult = collection.deleteMany(eq("id", id));
@@ -71,7 +105,7 @@ public abstract class DocumentObjectDao<T extends DocumentItem> extends ObjectDa
     }
 
     @Override
-    public T getByID(@NonNull String id) {
+    public T getByID(String id) {
         MongoCollection collection = getCollection();
 
         Object o = collection.find(eq("id", id)).first();
@@ -86,7 +120,7 @@ public abstract class DocumentObjectDao<T extends DocumentItem> extends ObjectDa
     }
 
     @Override
-    public T update(@NonNull T item) {
+    public T update(T item) {
         MongoCollection collection = getCollection();
 
         UpdateResult updateResult = collection.replaceOne(eq("id", item.getId()), item.toDocument());
@@ -125,42 +159,7 @@ public abstract class DocumentObjectDao<T extends DocumentItem> extends ObjectDa
         return true;
     }
 
-    // TODO : bind datafile from loadDataFile, then creating table
     @Override
-    public boolean populateTable() {
-        List<T> items = loadDataFile();
-        for (T item : items) {
-            create(item);
-        }
-        return true;
-    }
-    /*public boolean populateTable() {
-        MongoCollection<Document> collection = getCollection();
-        List<T> items = loadDataFile();
-        List<Document> documents = new ArrayList<>();
-
-        for (T item : items) {
-            Document doc = item.toDocument();
-            documents.add(doc);
-        }
-        collection.insertMany(documents);
-
-        return documents.size() > 0;
-    }*/
-
-    /*public boolean populateTable() {
-        MongoCollection<Document> collection = getCollection();
-        List<T> items = loadDataFile();
-
-        for (T item : items) {
-            Document doc = item.toDocument();
-            collection.insertOne(doc);
-            item.setMongoID(doc.getObjectId("_id").toString());
-        }
-
-    }*/
-
-        @Override
     public boolean deleteTable() {
         MongoCollection a = getCollection();
 

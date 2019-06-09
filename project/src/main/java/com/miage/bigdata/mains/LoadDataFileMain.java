@@ -47,8 +47,11 @@ public class LoadDataFileMain {
 
         oiController.deleteTable();
         oiController.createTable();
+        oiController.populateTable();
 
-        boolean ordersIsPopulated = oiController.populateTable();
-        System.out.println("ordersIsPopulated ? "+ ordersIsPopulated);
+        List orderItems = oiController.readAll();
+        for (Object orderItem : orderItems) {
+            System.out.println("[JSON][OrderObjectDao] order" + orderItem);
+        }
     }
 }

@@ -4,7 +4,6 @@ import com.miage.bigdata.daos.dbDao.document.DocumentModelDbDao;
 import com.miage.bigdata.models.document.OrderItem;
 import com.miage.bigdata.models.document.ProductItem;
 import com.mongodb.client.MongoCollection;
-import lombok.NonNull;
 import org.bson.Document;
 
 import java.util.ArrayList;
@@ -36,7 +35,7 @@ public class OrderObjectDao extends DocumentObjectDao<OrderItem> {
     }
 
     @Override
-    public OrderItem getByID(@NonNull String id) {
+    public OrderItem getByID(String id) {
         return super.getByID(id);
     }
 

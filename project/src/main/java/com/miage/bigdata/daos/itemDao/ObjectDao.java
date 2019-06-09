@@ -6,7 +6,6 @@ import com.miage.bigdata.daos.loader.CsvLoader;
 import com.miage.bigdata.daos.loader.JsonLoader;
 import com.miage.bigdata.daos.loader.XmlLoader;
 import com.miage.bigdata.models.Item;
-import lombok.NonNull;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -38,7 +37,7 @@ public abstract class ObjectDao<T extends Item, U extends ModelDbDao> {
     /**
      * @return Item created
      */
-    public abstract T create(@NonNull T item);
+    public abstract T create(T item);
 
     /**
      * Create all items
@@ -46,7 +45,7 @@ public abstract class ObjectDao<T extends Item, U extends ModelDbDao> {
      * @return Items created
      */
     @SafeVarargs
-    public final List<T> create(@NonNull T ...items) {
+    public final List<T> create(T ...items) {
         ArrayList<T> arrayList = new ArrayList<>();
 
         for (T item : items) {
@@ -60,17 +59,17 @@ public abstract class ObjectDao<T extends Item, U extends ModelDbDao> {
      * @param id
      * @return Item width id
      */
-    public abstract T getByID(@NonNull String id);
+    public abstract T getByID(String id);
 
     /**
      * Delete an item
      * @param id id of the item to delete
      * @return True if deleted else no
      */
-    public abstract boolean delete(@NonNull String id);
+    public abstract boolean delete(String id);
 
 
-    public final boolean delete(@NonNull String ...ids) {
+    public final boolean delete(String ...ids) {
         for (String id : ids) {
             if (!delete(id)) {
                 return false;
@@ -84,7 +83,7 @@ public abstract class ObjectDao<T extends Item, U extends ModelDbDao> {
      * @param item Item to update
      * @return Item updated
      */
-    public abstract T update(@NonNull T item);
+    public abstract T update(T item);
 
     /**
      * @return Generate a new ID for the item

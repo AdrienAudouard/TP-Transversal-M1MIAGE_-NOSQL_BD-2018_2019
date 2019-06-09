@@ -7,7 +7,6 @@ import com.miage.bigdata.models.graph.GraphItem;
 import com.miage.bigdata.models.graph.Person;
 import com.miage.bigdata.models.graph.Post;
 import com.miage.bigdata.models.graph.Tag;
-import lombok.NonNull;
 import org.apache.tinkerpop.gremlin.driver.Client;
 import org.apache.tinkerpop.gremlin.driver.Result;
 import org.apache.tinkerpop.gremlin.driver.ResultSet;
@@ -26,7 +25,7 @@ public abstract class GraphObjectDao<T extends GraphItem> extends ObjectDao<T, G
     }
 
     @Override
-    public T create(@NonNull T item) {
+    public T create(T item) {
         String query = item.getCreateQuery(getDatabaseID());
         ResultSet result = this.client.submit(query);
 
@@ -48,7 +47,7 @@ public abstract class GraphObjectDao<T extends GraphItem> extends ObjectDao<T, G
     }
 
     @Override
-    public T getByID(@NonNull String id) {
+    public T getByID(String id) {
         String query = "g.V('"+ id +"')";
         Result result = this.client.submit(query).one();
 
@@ -60,7 +59,7 @@ public abstract class GraphObjectDao<T extends GraphItem> extends ObjectDao<T, G
     }
 
     @Override
-    public boolean delete(@NonNull String id) {
+    public boolean delete(String id) {
         String query = "g.V('"+ id +"').drop()";
         this.client.submit(query).one();
 
@@ -68,7 +67,7 @@ public abstract class GraphObjectDao<T extends GraphItem> extends ObjectDao<T, G
     }
 
     @Override
-    public T update(@NonNull T item) {
+    public T update(T item) {
         String query = item.getUpdateQuery();
 
         client.submit(query);
