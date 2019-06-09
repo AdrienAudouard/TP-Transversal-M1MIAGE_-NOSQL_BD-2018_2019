@@ -20,15 +20,15 @@ public class LoadDataFileMain {
     private static ItemController<InvoiceItem> invoiceItemItemController = modelController.getItemController(InvoiceItem.class);
 
     public static void main(String args[]) {
-        initController();
+        //initController();
 
-        loadOrders();
+        //loadOrders();
 
-        loadProducts();
+        //loadProducts();
 
-        //loadFeedbacks();
+        loadFeedbacks();
 
-        loadInvoices();
+        //loadInvoices();
 
         /*List invoiceItems = new InvoiceObjectDao().loadDataFile();
         for (Object invoiceItem : invoiceItems) {

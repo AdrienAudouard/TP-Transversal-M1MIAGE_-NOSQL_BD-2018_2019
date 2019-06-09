@@ -3,20 +3,28 @@ package com.miage.bigdata.models.keyvalue;
 import com.miage.bigdata.models.Item;
 import com.microsoft.azure.storage.OperationContext;
 import com.microsoft.azure.storage.StorageException;
+import com.microsoft.azure.storage.StorageExtendedErrorInformation;
 import com.microsoft.azure.storage.table.EntityProperty;
 import com.microsoft.azure.storage.table.TableEntity;
+import com.microsoft.azure.storage.table.TableServiceEntity;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 import java.util.HashMap;
 
 public abstract class KeyValueItem extends Item implements TableEntity {
-    private String partitionKey;
-    private String rowKey;
-    private Date timestamp;
-    private String eTag;
+    protected String partitionKey;
+    protected String rowKey;
+    protected Date timestamp;
+    protected String eTag;
 
     //region Constructors
-    public KeyValueItem() {
+    public KeyValueItem() {}
+
+    public KeyValueItem(String partitionKey, String rowKey) {
+        this.partitionKey = partitionKey;
+        this.rowKey = rowKey;
+        this.timestamp = new Date();
     }
 
     public KeyValueItem(String partitionKey, String rowKey, Date timestamp) {
@@ -53,6 +61,11 @@ public abstract class KeyValueItem extends Item implements TableEntity {
     public void setRowKey(String s) {
         rowKey = s;
     }
+
+    public String getFullKey() {
+        return partitionKey + "/" + rowKey;
+    }
+
     @Override
     public Date getTimestamp() {
         return timestamp;
@@ -71,25 +84,40 @@ public abstract class KeyValueItem extends Item implements TableEntity {
     @Override
     public void setEtag(String s) {
         eTag = s;
-
     }
     //endregion
 
+    //region Methods
     @Override
-    public void readEntity(HashMap<String, EntityProperty> hashMap, OperationContext operationContext) throws StorageException {
-        //TODO
+    public void readEntity(HashMap<String, EntityProperty> properties, OperationContext operationContext) throws StorageException {
+        try {
+            TableServiceEntity.readEntityWithReflection(this, properties, operationContext);
+        } catch (IllegalArgumentException illegalArgumentException) {
+            throw new StorageException("InvalidDocument", "The response received is invalid or improperly formatted.", 306, (StorageExtendedErrorInformation)null, illegalArgumentException);
+        } catch (IllegalAccessException illegalAccessException) {
+            throw new StorageException("InvalidDocument", "The entity threw an exception during deserialization.", 306, (StorageExtendedErrorInformation)null, illegalAccessException);
+        } catch (InvocationTargetException invocationTargetException) {
+            throw new StorageException("InternalError", "The entity threw an exception during deserialization.", 306, (StorageExtendedErrorInformation)null, invocationTargetException);
+        }
     }
 
     @Override
     public HashMap<String, EntityProperty> writeEntity(OperationContext operationContext) throws StorageException {
-        // TODO
-        return null;
+        try {
+            return TableServiceEntity.writeEntityWithReflection(this);
+        } catch (IllegalAccessException illegalAccessException) {
+            throw new StorageException("InternalError", "An attempt was made to access an inaccessible member of the entity during serialization.", 306, (StorageExtendedErrorInformation)null, illegalAccessException);
+        } catch (InvocationTargetException invocationTargetException) {
+            throw new StorageException("InternalError", "The entity threw an exception during serialization.", 306, (StorageExtendedErrorInformation)null, invocationTargetException);
+        }
     }
+
     @Override
     public String toString() {
         return "KeyValueItem{" +
                 "partitionKey='" + partitionKey + '\'' +
                 "rowKey='" + rowKey + '\'' +
-                "} " + super.toString();
+                "} ";
     }
+    //endregion
 }

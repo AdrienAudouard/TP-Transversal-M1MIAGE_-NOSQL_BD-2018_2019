@@ -4,6 +4,7 @@ import com.miage.bigdata.controllers.item.ItemController;
 import com.miage.bigdata.controllers.models.ModelController;
 import com.miage.bigdata.models.keyvalue.FeedbackItem;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class KeyValueMain {
@@ -15,11 +16,11 @@ public class KeyValueMain {
         //region Create
         System.out.println("------------ Create items ------------");
 
-        FeedbackItem fb1 = new FeedbackItem("partition1", "row1", new Date());
-        FeedbackItem fb2 = new FeedbackItem("partition1", "row2", new Date());
+        FeedbackItem fb1 = new FeedbackItem("product1", "user1", 4.5, "super");
+        FeedbackItem fb2 = new FeedbackItem("product1", "user2", 1.0, "déçu");
 
-        FeedbackItem fb3 = new FeedbackItem("partition2", "row1", new Date());
-        FeedbackItem fb4 = new FeedbackItem("partition2", "row2", new Date());
+        FeedbackItem fb3 = new FeedbackItem("product2", "user1", 0.5, "jamais reçu");
+        FeedbackItem fb4 = new FeedbackItem("product2", "user2", 3.0, "ok sans plus");
 
         System.out.println(feedbackItemController.create(fb1, fb2, fb3, fb4));
         //endregion
@@ -27,17 +28,21 @@ public class KeyValueMain {
         //region GetAll
         System.out.println("------------ Print all items ------------");
 
-        System.out.println(feedbackItemController.readAll().toString());
+        ArrayList<FeedbackItem> readFeedbackItems = new ArrayList<>(feedbackItemController.readAll());
+        System.out.println(readFeedbackItems.toString());
 
-        feedbackItemController.deleteTable();
+        //What were the roles of the lines below ?
+        //feedbackItemController.deleteTable();
+        //feedbackItemController.createTable();
 
-        feedbackItemController.createTable();
         //endregion
 
         //region DeleteAll
         System.out.println("------------ Delete all items ------------");
 
-        System.out.println(feedbackItemController.delete());
+        for (FeedbackItem itemToDelete : readFeedbackItems) {
+            System.out.print(feedbackItemController.delete(itemToDelete.getFullKey()) + " ");
+        }
         //endregion
     }
 }

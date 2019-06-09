@@ -6,14 +6,12 @@ import com.microsoft.azure.storage.StorageException;
 import com.microsoft.azure.storage.table.CloudTable;
 
 import java.net.URISyntaxException;
+import java.util.UUID;
 
 public class FeedbackObjectDao extends KeyValueObjectDao<FeedbackItem> {
     //TODO
     public FeedbackObjectDao(KeyValueModelDbDao dbDao) {
         super(dbDao);
-    }
-
-    public FeedbackObjectDao() {
     }
 
     @Override
@@ -27,6 +25,7 @@ public class FeedbackObjectDao extends KeyValueObjectDao<FeedbackItem> {
 
         try {
             cloudTable = cloudTableClient.getTableReference(getTableName());
+            cloudTable.createIfNotExists();
         } catch (URISyntaxException | StorageException e) {
             e.printStackTrace();
         }
@@ -35,17 +34,20 @@ public class FeedbackObjectDao extends KeyValueObjectDao<FeedbackItem> {
     }
 
     @Override
-    public FeedbackItem getByID(String id) {
-        return null;
-    }
-
-    @Override
     public String generateID() {
-        return null;
+        return UUID.randomUUID().toString() + "/" + UUID.randomUUID();
     }
 
     @Override
     public boolean createTable() {
+        try {
+            CloudTable cloudTable = cloudTableClient.getTableReference(getTableName());
+            cloudTable.create();
+            return true;
+        } catch (URISyntaxException | StorageException e) {
+            e.printStackTrace();
+        }
+
         return false;
     }
 
@@ -56,8 +58,15 @@ public class FeedbackObjectDao extends KeyValueObjectDao<FeedbackItem> {
 
     @Override
     public boolean deleteTable() {
-        return false;
-    }
+        try {
+            CloudTable cloudTable = cloudTableClient.getTableReference(getTableName());
+            cloudTable.deleteIfExists();
+            return true;
+        } catch (URISyntaxException | StorageException e) {
+            e.printStackTrace();
+        }
+
+        return false;    }
 
     @Override
     protected Class<FeedbackItem> getItemClass() {

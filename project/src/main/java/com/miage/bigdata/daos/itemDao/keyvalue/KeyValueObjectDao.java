@@ -20,9 +20,6 @@ public abstract class KeyValueObjectDao<T extends KeyValueItem> extends ObjectDa
 
     protected abstract CloudTable getTable();
 
-    public KeyValueObjectDao() {
-    }
-
     public KeyValueObjectDao(KeyValueModelDbDao dbDao) {
         super(dbDao);
 
@@ -44,25 +41,30 @@ public abstract class KeyValueObjectDao<T extends KeyValueItem> extends ObjectDa
     }
 
     @Override
-    public T getByID(String id) {
-        //TODO FIXME as we need partition and row keys instead of a single id, something like @NonNull String partitionKey, @NonNull String rowKey
+    public final T getByID(String fullKey) {
+        //FIXME since we're using a single string to contain partition key AND row key to preserve polymorphism
         CloudTable cloudTable = getTable();
+        String[] keys = fullKey.split("/");
 
-        if (cloudTable != null) {
-            try {
-                TableOperation retrieveKeyValueItem = TableOperation.retrieve(null, null, getItemClass());
-                return cloudTable.execute(retrieveKeyValueItem).getResultAsType();
-            } catch (StorageException e) {
-                e.printStackTrace();
+        if (cloudTable != null && keys.length == 2) {
+            String partitionKey = keys[0]; // product id
+            String rowKey = keys[1]; // user id
+
+            if (!partitionKey.isEmpty() && !rowKey.isEmpty()) {
+                try {
+                    TableOperation retrieveKeyValueItem = TableOperation.retrieve(partitionKey, rowKey, getItemClass());
+                    return cloudTable.execute(retrieveKeyValueItem).getResultAsType();
+                } catch (StorageException e) {
+                    e.printStackTrace();
+                }
             }
-            //TODO FIXME
         }
 
         return null;
     }
 
     @Override
-    public T create(T item) {
+    public final T create(T item) {
         CloudTable cloudTable = getTable();
 
         if (cloudTable != null) {
@@ -78,7 +80,7 @@ public abstract class KeyValueObjectDao<T extends KeyValueItem> extends ObjectDa
     }
 
     @Override
-    public T update(T item) {
+    public final T update(T item) {
         CloudTable cloudTable = getTable();
 
         if (cloudTable != null) {
@@ -94,15 +96,18 @@ public abstract class KeyValueObjectDao<T extends KeyValueItem> extends ObjectDa
     }
 
     @Override
-    public boolean delete(String id) {
+    public final boolean delete(String fullKey) {
+        //FIXME since we're using a single string to contain partition key AND row key to preserve polymorphism
         CloudTable cloudTable = getTable();
 
         if (cloudTable != null) {
             try {
-                KeyValueItem keyValueItem = getByID(id); // TODO FIXME as we need the partition and row keys instead of a single id
+                KeyValueItem keyValueItem = getByID(fullKey);
 
-                TableOperation deleteKeyValueItem = TableOperation.delete(keyValueItem);
-                return cloudTable.execute(deleteKeyValueItem).getResultAsType(); // TODO FIXME this probably won't return a boolean
+                if (keyValueItem != null) {
+                    TableOperation deleteKeyValueItem = TableOperation.delete(keyValueItem);
+                    return cloudTable.execute(deleteKeyValueItem).getResultAsType() != null;
+                }
             } catch (StorageException e) {
                 e.printStackTrace();
             }
@@ -112,7 +117,7 @@ public abstract class KeyValueObjectDao<T extends KeyValueItem> extends ObjectDa
     }
 
     @Override
-    protected String getDatabaseID() {
+    protected final String getDatabaseID() {
         return "TablesDB";
     }
 }
