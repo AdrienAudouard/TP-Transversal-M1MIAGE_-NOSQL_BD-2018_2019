@@ -100,7 +100,16 @@ public abstract class ObjectDao<T extends Item, U extends ModelDbDao> {
      * Add all elements in the Database
      * @return true if success
      */
-    public abstract boolean populateTable();
+    public boolean populateTable() {
+        List<T> items = loadDataFile();
+        for (T item : items) {
+            if(item != null) {
+                item.setId(generateID());
+                create(item);
+            }
+        }
+        return true;
+    }
 
     /**
      * Delete the table and all of his elements

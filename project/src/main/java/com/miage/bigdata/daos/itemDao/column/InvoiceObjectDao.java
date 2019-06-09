@@ -3,6 +3,8 @@ package com.miage.bigdata.daos.itemDao.column;
 import com.datastax.driver.core.BoundStatement;
 import com.datastax.driver.core.PreparedStatement;
 import com.datastax.driver.core.Row;
+import com.miage.bigdata.controllers.ColumnController;
+import com.miage.bigdata.controllers.ItemController;
 import com.miage.bigdata.daos.dbDao.column.ColumnModelDbDao;
 import com.miage.bigdata.models.column.InvoiceItem;
 import com.miage.bigdata.models.column.InvoiceLine;
@@ -92,6 +94,30 @@ public class InvoiceObjectDao extends ColumnObjectDao<InvoiceItem> {
     }
 
     @Override
+    public boolean populateTable() {
+        List<InvoiceItem> invoices = loadDataFile();
+        for (InvoiceItem invoice : invoices) {
+            if(invoice != null) {
+                invoice.setId(generateID());
+                List<InvoiceLine> orderLines = invoice.getOrderLine();
+
+                if(orderLines.size() > 0) {
+                    ColumnController columnController = new ColumnController();
+                    ItemController<InvoiceLine> ilController = columnController.getItemController(InvoiceLine.class);
+                    ilController.deleteTable();
+                    ilController.createTable();
+                    for (InvoiceLine orderLine : orderLines) {
+                        orderLine.setId(generateID());
+                        ilController.create(orderLine);
+                    }
+                }
+                create(invoice);
+            }
+        }
+        return true;
+    }
+
+    @Override
     public InvoiceItem getByID(String id) {
         BoundStatement boundStatement = new BoundStatement(getByIdStatement);
         Row row = cassandraSession.execute(boundStatement.bind(id)).one();
@@ -168,11 +194,6 @@ public class InvoiceObjectDao extends ColumnObjectDao<InvoiceItem> {
         this.cassandraSession.execute(createLine);
 
         return true;
-    }
-
-    @Override
-    public boolean populateTable() {
-        return false;
     }
 
     @Override
