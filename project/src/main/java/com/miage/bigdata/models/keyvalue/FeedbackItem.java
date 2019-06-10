@@ -70,14 +70,14 @@ public class FeedbackItem extends KeyValueItem {
     @Override
     public String toString() {
         return "FeedbackItem{" +
-                "rating='" + getRating() + '\'' +
-                "review='" + getReview() + '\'' +
+                "rating='" + getRating() + ",\'" +
+                "review='" + getReview() + "\'" +
                 "}, inherits " + super.toString();
     }
 
     @Override
     public String getPathFileData() {
-        return Item.getResourcesPath() + "feedback/Feedback.csv";
+        return Item.getDataPath() + "feedback/Feedback.csv";
     }
     //endregion
 }

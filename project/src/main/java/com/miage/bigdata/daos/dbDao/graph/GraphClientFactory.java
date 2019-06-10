@@ -1,5 +1,6 @@
 package com.miage.bigdata.daos.dbDao.graph;
 
+import com.miage.bigdata.models.Item;
 import org.apache.tinkerpop.gremlin.driver.Client;
 import org.apache.tinkerpop.gremlin.driver.Cluster;
 
@@ -12,7 +13,7 @@ public class GraphClientFactory {
     public static Client getClient() {
         if (client == null) {
             try {
-                Cluster cluster = Cluster.build(new File("src/main/resources/graph.yaml")).create();
+                Cluster cluster = Cluster.build(new File(Item.getConfigPath() + "graph.yaml")).create();
                 client = cluster.connect();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();

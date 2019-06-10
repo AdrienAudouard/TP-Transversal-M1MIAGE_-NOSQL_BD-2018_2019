@@ -123,7 +123,7 @@ public abstract class RelationalObjectDao<T extends RelationalItem> extends Obje
         // Retrieve the document using the DocumentClient.
         List<Document> documentList = documentClient
                 .queryDocuments(getCollection().getSelfLink(),
-                        "SELECT * FROM root r WHERE r.id='" + id + "'", null)
+                        "SELECT * FROM root r WHERE r.itemId='" + id + "'", null)
                 .getQueryIterable().toList();
 
         if (documentList.size() > 0) {

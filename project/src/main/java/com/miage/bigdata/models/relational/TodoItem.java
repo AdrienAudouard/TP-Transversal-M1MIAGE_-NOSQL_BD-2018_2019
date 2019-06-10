@@ -16,14 +16,14 @@ public class TodoItem extends RelationalItem {
 
         this.category = jo.get("category").toString();
         this.complete = jo.get("complete").getAsBoolean();
-        this.id = jo.get("id").toString();
+        this.itemId = jo.get("id").toString();
         this.name = jo.get("name").toString();
     }
 
     public TodoItem(String category, boolean complete, String id, String name) {
         this.category = category;
         this.complete = complete;
-        this.id = id;
+        this.itemId = id;
         this.name = name;
     }
 
@@ -44,7 +44,7 @@ public class TodoItem extends RelationalItem {
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.itemId = id;
     }
 
     public String getName() {
@@ -59,7 +59,7 @@ public class TodoItem extends RelationalItem {
     public Document updateDocument(Document document) {
         document.set("category", category);
         document.set("complete", complete);
-        document.set("id", id);
+        document.set("id", itemId);
         document.set("name", name);
 
         return document;
@@ -70,13 +70,13 @@ public class TodoItem extends RelationalItem {
         return "TodoItem{" +
                 "category='" + category + '\'' +
                 ", complete=" + complete +
-                ", id='" + id + '\'' +
+                ", id='" + itemId + '\'' +
                 ", name='" + name + '\'' +
                 "} " + super.toString();
     }
 
     @Override
     public String getPathFileData() {
-        return Item.getResourcesPath() + "???";
+        return Item.getDataPath() + "???";
     }
 }

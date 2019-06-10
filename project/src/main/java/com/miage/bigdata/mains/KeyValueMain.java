@@ -3,10 +3,8 @@ package com.miage.bigdata.mains;
 import com.miage.bigdata.controllers.item.ItemController;
 import com.miage.bigdata.controllers.models.ModelController;
 import com.miage.bigdata.models.keyvalue.FeedbackItem;
-import com.miage.bigdata.models.keyvalue.KeyValueItem;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class KeyValueMain {
@@ -14,54 +12,76 @@ public class KeyValueMain {
     private static ItemController<FeedbackItem> feedbackItemController = modelController.getItemController(FeedbackItem.class);
 
     public static void main(String args[]) {
-        deleteAllFeedbacks();
-        createExampleFeedbacks();
-        getAllFeedbacks();
-        updateExampleFeedbacks();
-        getAllFeedbacks();
+        System.out.println(deleteAllFeedbacks() ? "Success" : "Failed");
+        System.out.println(createExampleFeedbacks() ? "Success" : "Failed");
+        getAllFeedbacks().forEach(System.out::println);
+        System.out.println(updateExampleFeedbacks() ? "Success" : "Failed");
+        getAllFeedbacks().forEach(System.out::println);
     }
 
-    private static void createExampleFeedbacks() {
+    private static boolean createExampleFeedbacks() {
         System.out.println("------------ Create example feedback items ------------");
 
-        FeedbackItem fb1 = new FeedbackItem("product1", "user1", 4.5, "super");
-        FeedbackItem fb2 = new FeedbackItem("product1", "user2", 1.0, "déçu");
+        try {
+            FeedbackItem fb1 = new FeedbackItem("product1", "user1", 4.0, "super");
+            FeedbackItem fb2 = new FeedbackItem("product1", "user2", 2.0, "déçu");
 
-        FeedbackItem fb3 = new FeedbackItem("product2", "user1", 0.5, "jamais reçu");
-        FeedbackItem fb4 = new FeedbackItem("product2", "user2", 3.0, "ok sans plus");
+            FeedbackItem fb3 = new FeedbackItem("product2", "user1", 1.0, "jamais reçu");
+            FeedbackItem fb4 = new FeedbackItem("product2", "user2", 3.0, "ok sans plus");
 
-        System.out.println(feedbackItemController.create(fb1, fb2, fb3, fb4));
+            feedbackItemController.create(fb1, fb2, fb3, fb4);
+        }
+        catch (Exception exception) {
+            return false;
+        }
+
+        return true;
     }
 
     private static List<FeedbackItem> getAllFeedbacks() {
         System.out.println("------------ Get all feedback items ------------");
 
         ArrayList<FeedbackItem> readFeedbackItems = new ArrayList<>(feedbackItemController.readAll());
-        System.out.println(readFeedbackItems.toString());
 
         return readFeedbackItems;
     }
 
-    private static void updateExampleFeedbacks() {
+    private static boolean updateExampleFeedbacks() {
         System.out.println("------------ Update example feedback items ------------");
 
-        FeedbackItem fb1 = new FeedbackItem("product1", "user1", 5.0, "parfait depuis la réponse du support client");
-        FeedbackItem fb2 = new FeedbackItem("product1", "user2", 3.0, "en fait j'aime bien");
+        try {
+            for (FeedbackItem feedbackToUpdate : feedbackItemController.readAll()) {
+                double currentRating = feedbackToUpdate.getRating();
+                feedbackToUpdate.setRating(currentRating < 4 ? ++currentRating : currentRating);
 
-        FeedbackItem fb3 = new FeedbackItem("product2", "user1", 3.0, "bien reçu finalement juste long");
-        FeedbackItem fb4 = new FeedbackItem("product2", "user2", 1.0, "il s'est cassé au bout d'une semaine");
+                String currentReview = feedbackToUpdate.getReview();
+                feedbackToUpdate.setReview(currentReview + " (edited)");
 
-        System.out.println(feedbackItemController.update(fb1));
-        System.out.println(feedbackItemController.update(fb2));
-        System.out.println(feedbackItemController.update(fb3));
-        System.out.println(feedbackItemController.update(fb4));
+                feedbackItemController.update(feedbackToUpdate);
+            }
+        }
+        catch (Exception exception) {
+            return false;
+        }
+
+        return true;
     }
 
-    private static void deleteAllFeedbacks() {
+    private static boolean deleteAllFeedbacks() {
         System.out.println("------------ Delete all feedback items ------------");
 
-        for (FeedbackItem itemToDelete : getAllFeedbacks()) {
-            System.out.print(feedbackItemController.delete(itemToDelete.getFullKey()) + " ");
+        try {
+            //for (FeedbackItem feedbackToDelete : getAllFeedbacks()) {
+            //  feedbackItemController.delete(feedbackToDelete.getFullKey();
+            //}
+
+            feedbackItemController.deleteTable();
+            feedbackItemController.createTable();
         }
+        catch (Exception exception) {
+            return false;
+        }
+
+        return true;
     }
 }

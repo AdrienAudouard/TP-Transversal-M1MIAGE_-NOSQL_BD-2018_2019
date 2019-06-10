@@ -16,7 +16,7 @@ public abstract class DocumentItem extends Item {
         super();
 
         this._id = document.getObjectId("_id").toString();
-        this.id = document.getString("id");
+        this.itemId = document.getString("id");
     }
 
     public void setMongoID(String id) { this._id = id; }

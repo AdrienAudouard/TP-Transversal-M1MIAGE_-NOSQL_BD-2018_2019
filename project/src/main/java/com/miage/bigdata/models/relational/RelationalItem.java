@@ -9,7 +9,7 @@ public abstract class RelationalItem extends Item {
     @Override
     public String toString() {
         return "RelationalItem{" +
-                "id='" + id + '\'' +
+                "id='" + itemId + '\'' +
                 "} " + super.toString();
     }
 }

@@ -40,7 +40,7 @@ public class Post extends GraphItem {
     }
 
     public Post(String id, String location, String browserUsed, String content, int length) {
-        this.id = id;
+        this.itemId = id;
         this.createDate = new Date();
         this.location = location;
         this.browserUsed = browserUsed;
@@ -51,7 +51,7 @@ public class Post extends GraphItem {
     @Override
     public String getCreateQuery(String verticeName) {
         return "g.addV('" + verticeName + "')" +
-                ".property('id', '"+ id +"')" +
+                ".property('id', '"+ itemId +"')" +
                 ".property('content', '"+ content +"')" +
                 ".property('length', '"+ length +"')" +
                 ".property('createDate', '"+ createDate.toString() +"')" +
@@ -61,7 +61,7 @@ public class Post extends GraphItem {
 
     @Override
     public String getUpdateQuery() {
-        return "g.addV('"+ id +"')" +
+        return "g.addV('"+ itemId +"')" +
                 ".property('content', '"+ content +"')" +
                 ".property('length', '"+ length +"')" +
                 ".property('createDate', '"+ createDate.toString() +"')" +
@@ -77,7 +77,7 @@ public class Post extends GraphItem {
                 ", browserUsed='" + browserUsed + '\'' +
                 ", content='" + content + '\'' +
                 ", length=" + length +
-                ", id='" + id + '\'' +
+                ", id='" + itemId + '\'' +
                 "} ";
     }
 }

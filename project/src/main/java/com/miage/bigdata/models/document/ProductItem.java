@@ -28,7 +28,7 @@ public class ProductItem extends DocumentItem {
         this.price = price;
         this.imgURL = imgURL;
         this.brand = brand;
-        this.id = id;
+        this.itemId = id;
         initCsvConfig();
     }
 
@@ -37,7 +37,7 @@ public class ProductItem extends DocumentItem {
         this.price = price;
         this.imgURL = imgURL;
         this.brand = brand;
-        this.id = id;
+        this.itemId = id;
         initCsvConfig();
     }
 
@@ -48,7 +48,7 @@ public class ProductItem extends DocumentItem {
         this.price = document.getDouble("price");
         this.imgURL = document.getString("imgURL");
         this.brand = document.getString("brand");
-        this.id = document.getString("asin");
+        this.itemId = document.getString("asin");
         initCsvConfig();
     }
 
@@ -65,9 +65,9 @@ public class ProductItem extends DocumentItem {
         return new Document("title", title)
                 .append("price", price)
                 .append("imgURL", imgURL)
-                .append("id", id)
+                .append("id", itemId)
                 .append("brand", brand)
-                .append("asin", id);
+                .append("asin", itemId);
     }
 
     @XmlElement(name = "productId")
@@ -140,13 +140,13 @@ public class ProductItem extends DocumentItem {
                 ", price=" + price +
                 ", imgURL='" + imgURL + '\'' +
                 ", brand='" + brand + '\'' +
-                ", id='" + id + '\'' +
+                ", id='" + itemId + '\'' +
                 ", _id='" + _id + '\'' +
                 "} " + super.toString();
     }
 
     @Override
     public String getPathFileData() {
-        return Item.getResourcesPath() + "product/Product.csv";
+        return Item.getDataPath() + "product/Product.csv";
     }
 }

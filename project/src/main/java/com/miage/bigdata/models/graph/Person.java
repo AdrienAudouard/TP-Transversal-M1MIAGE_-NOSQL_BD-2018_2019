@@ -21,7 +21,7 @@ public class Person extends GraphItem {
     public Person(String id, String firstName, String lastName, String gender, Date birthdate, String location, String browserUsed, int place) {
         this.createDate = new Date();
         this.firstName = firstName;
-        this.id = id;
+        this.itemId = id;
         this.lastName = lastName;
         this.gender = gender;
         this.birthdate = birthdate;
@@ -131,7 +131,7 @@ public class Person extends GraphItem {
                 ", location='" + location + '\'' +
                 ", browserUsed='" + browserUsed + '\'' +
                 ", place=" + place +
-                ", id='" + id + '\'' +
+                ", id='" + itemId + '\'' +
                 "} ";
     }
 
@@ -140,7 +140,7 @@ public class Person extends GraphItem {
     @Override
     public String getCreateQuery(String verticeName) {
         return "g.addV('" + verticeName + "')" +
-                ".property('id', '"+ id +"')" +
+                ".property('id', '"+ itemId +"')" +
                 ".property('firstName', '"+ firstName +"')" +
                 ".property('lastName', '"+ lastName +"')" +
                 ".property('gender', '"+ gender +"')" +
@@ -153,7 +153,7 @@ public class Person extends GraphItem {
 
     @Override
     public String getUpdateQuery() {
-        return "g.V('"+ id +"')" +
+        return "g.V('"+ itemId +"')" +
                 ".property('firstName', '"+ firstName +"')" +
                 ".property('lastName', '"+ lastName +"')" +
                 ".property('gender', '"+ gender +"')" +

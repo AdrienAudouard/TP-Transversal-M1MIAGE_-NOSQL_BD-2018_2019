@@ -20,7 +20,7 @@ public class LoadDataFileMain {
     private static ItemController<InvoiceItem> invoiceItemItemController = modelController.getItemController(InvoiceItem.class);
 
     public static void main(String args[]) {
-        //initController();
+        initController();
 
         //loadOrders();
 

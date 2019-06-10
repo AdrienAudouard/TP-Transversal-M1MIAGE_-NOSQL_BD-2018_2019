@@ -27,7 +27,7 @@ public class InvoiceLine extends ColumnItem {
 
     public InvoiceLine(String id, String asin, String title, double price, String brand) {
         this.asin = asin;
-        this.id = id;
+        this.itemId = id;
         this.title = title;
         this.price = price;
         this.brand = brand;
@@ -35,7 +35,7 @@ public class InvoiceLine extends ColumnItem {
 
     public InvoiceLine(Row row) {
         super();
-        this.id = row.getString("productId");
+        this.itemId = row.getString("productId");
         this.asin = row.getString("asin");
         this.title = row.getString("title");
         this.price = row.getDouble("price");
@@ -94,7 +94,7 @@ public class InvoiceLine extends ColumnItem {
                 ", title='" + title + '\'' +
                 ", price=" + price +
                 ", brand='" + brand + '\'' +
-                ", id='" + id + '\'' +
+                ", id='" + itemId + '\'' +
                 "} " + super.toString();
     }
 }

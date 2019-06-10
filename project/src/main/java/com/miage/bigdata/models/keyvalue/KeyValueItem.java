@@ -9,39 +9,18 @@ import com.microsoft.azure.storage.table.TableEntity;
 import com.microsoft.azure.storage.table.TableServiceEntity;
 
 import java.lang.reflect.InvocationTargetException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashMap;
 
 public abstract class KeyValueItem extends Item implements TableEntity {
+    // region Properties
     protected String partitionKey;
     protected String rowKey;
     protected Date timestamp;
     protected String eTag;
 
-    //region Constructors
-    public KeyValueItem() {}
-
-    public KeyValueItem(String partitionKey, String rowKey) {
-        this.partitionKey = partitionKey;
-        this.rowKey = rowKey;
-        this.timestamp = new Date();
-    }
-
-    public KeyValueItem(String partitionKey, String rowKey, Date timestamp) {
-        this.partitionKey = partitionKey;
-        this.rowKey = rowKey;
-        this.timestamp = timestamp;
-    }
-
-    public KeyValueItem(String partitionKey, String rowKey, Date timestamp, String eTag) {
-        this.partitionKey = partitionKey;
-        this.rowKey = rowKey;
-        this.timestamp = timestamp;
-        this.eTag = eTag;
-    }
-    //endregion
-
-    // region Getters & Setters
     @Override
     public String getPartitionKey() {
         return partitionKey;
@@ -87,6 +66,30 @@ public abstract class KeyValueItem extends Item implements TableEntity {
     }
     //endregion
 
+    //region Constructors
+    public KeyValueItem() {}
+
+    public KeyValueItem(String partitionKey, String rowKey) {
+        this.partitionKey = partitionKey;
+        this.rowKey = rowKey;
+        this.timestamp = new Date();
+        this.timestamp = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
+    }
+
+    public KeyValueItem(String partitionKey, String rowKey, Date timestamp) {
+        this.partitionKey = partitionKey;
+        this.rowKey = rowKey;
+        this.timestamp = timestamp;
+    }
+
+    public KeyValueItem(String partitionKey, String rowKey, Date timestamp, String eTag) {
+        this.partitionKey = partitionKey;
+        this.rowKey = rowKey;
+        this.timestamp = timestamp;
+        this.eTag = eTag;
+    }
+    //endregion
+
     //region Methods
     @Override
     public void readEntity(HashMap<String, EntityProperty> properties, OperationContext operationContext) throws StorageException {
@@ -115,8 +118,10 @@ public abstract class KeyValueItem extends Item implements TableEntity {
     @Override
     public String toString() {
         return "KeyValueItem{" +
-                "partitionKey='" + partitionKey + '\'' +
-                "rowKey='" + rowKey + '\'' +
+                "partitionKey='" + partitionKey + ",\'" +
+                "rowKey='" + rowKey + ",\'" +
+                "timestamp='" + timestamp + ",\'" +
+                "eTag='" + eTag + "\'" +
                 "} ";
     }
     //endregion

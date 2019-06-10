@@ -11,10 +11,10 @@ import java.util.Properties;
  * Configuration utility to read the configurations from properties file
  */
 public enum Configuration {
-    COLUMN("column.properties"),
-    DOCUMENT("document.properties"),
-    KEY_VALUE("keyvalue.properties"),
-    RELATIONAL("relational.properties");
+    COLUMN("config/column.properties"),
+    DOCUMENT("config/document.properties"),
+    KEY_VALUE("config/keyvalue.properties"),
+    RELATIONAL("config/relational.properties");
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Configuration.class);
     private Properties prop = null;

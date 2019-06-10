@@ -4,10 +4,6 @@ import com.miage.bigdata.controllers.item.ItemController;
 import com.miage.bigdata.controllers.models.ModelController;
 import com.miage.bigdata.models.relational.TodoItem;
 
-/**
- * Hello world!
- *
- */
 public class RelationalMain {
     public static void main( String[] args ) {
         ModelController modelController = new ModelController();

@@ -8,7 +8,7 @@ public class Tag extends GraphItem {
 
     public Tag(String id, String title) {
         this.title = title;
-        this.id = id;
+        this.itemId = id;
     }
 
     public Tag(String json) {
@@ -24,13 +24,13 @@ public class Tag extends GraphItem {
     @Override
     public String getCreateQuery(String verticeName) {
         return "g.addV('" + verticeName + "')" +
-                ".property('id', '"+ id +"')" +
+                ".property('id', '"+ itemId +"')" +
                 ".property('title', '"+ title +"')";
     }
 
     @Override
     public String getUpdateQuery() {
-        return "g.V('"+ id +"')" +
+        return "g.V('"+ itemId +"')" +
                 ".property('title', '"+ title +"')";
     }
 
@@ -38,7 +38,7 @@ public class Tag extends GraphItem {
     public String toString() {
         return "Tag{" +
                 "title='" + title + '\'' +
-                ", id='" + id + '\'' +
+                ", id='" + itemId + '\'' +
                 "} ";
     }
 }

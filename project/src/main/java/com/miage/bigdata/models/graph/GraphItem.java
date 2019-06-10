@@ -14,7 +14,7 @@ public abstract class GraphItem extends Item {
 
         JsonObject jo = (JsonObject)jsonParser.parse(json);
 
-        this.id = jo.get("id").toString();
+        this.itemId = jo.get("id").toString();
     }
 
     public abstract String getCreateQuery(String verticeName);

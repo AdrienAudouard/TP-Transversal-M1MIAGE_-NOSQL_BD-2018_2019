@@ -10,7 +10,7 @@ public class ThingItem extends DocumentItem {
 
     public ThingItem(String id, String name) {
         this.name = name;
-        this.id = id;
+        this.itemId = id;
     }
 
     public ThingItem(String json) {
@@ -33,17 +33,17 @@ public class ThingItem extends DocumentItem {
     public String toString() {
         return "ThingItem{" +
                 "name='" + name + '\'' +
-                ", id='" + id + '\'' +
+                ", id='" + itemId + '\'' +
                 "} " + super.toString();
     }
 
     @Override
     public Document toDocument() {
-        return new Document("id", id).append("name", name);
+        return new Document("id", itemId).append("name", name);
     }
 
     @Override
     public String getPathFileData() {
-        return Item.getResourcesPath() + "???";
+        return Item.getDataPath() + "???";
     }
 }

@@ -29,7 +29,7 @@ public class InvoiceItem extends ColumnItem{
         personId = row.getString("personId");
         orderDate = row.getTimestamp("orderDate");
         totalPrice = row.getDouble("totalPrice");
-        id = row.getString("orderId");
+        itemId = row.getString("orderId");
 
         for (Row line : lines) {
             orderLine.add(new InvoiceLine(line));
@@ -38,7 +38,7 @@ public class InvoiceItem extends ColumnItem{
 
     public InvoiceItem(String id, String personId, Date orderDate, Double totalPrice, List<InvoiceLine> orderLine) {
         this.personId = personId;
-        this.id = id;
+        this.itemId = id;
         this.orderDate = orderDate;
         this.totalPrice = totalPrice;
         this.orderLine = orderLine;
@@ -46,7 +46,7 @@ public class InvoiceItem extends ColumnItem{
 
     public InvoiceItem(String id, String personId, Date orderDate, Double totalPrice, InvoiceLine invoiceLine) {
         this.personId = personId;
-        this.id = id;
+        this.itemId = id;
         this.orderDate = orderDate;
         this.totalPrice = totalPrice;
         this.orderLine.add(invoiceLine);
@@ -92,12 +92,12 @@ public class InvoiceItem extends ColumnItem{
                 ", orderDate=" + orderDate +
                 ", totalPrice=" + totalPrice +
                 ", orderLines=" + orderLine +
-                ", id='" + id + '\'' +
+                ", id='" + itemId + '\'' +
                 "} " + super.toString();
     }
 
     @Override
     public String getPathFileData() {
-        return Item.getResourcesPath() + "invoice/Invoice.xml";
+        return Item.getDataPath() + "invoice/Invoice.xml";
     }
 }
