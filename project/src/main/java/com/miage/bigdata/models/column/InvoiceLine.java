@@ -83,7 +83,7 @@ public class InvoiceLine extends ColumnItem {
     }
 
     @Override
-    public String getId() {
+    public String getItemId() {
         return String.valueOf(getProductId());
     }
 

@@ -105,15 +105,15 @@ public class InvoiceObjectDao extends ColumnObjectDao<InvoiceItem> {
         prepareStatements();
 
         BoundStatement boundStatement = new BoundStatement(insertInvoiceStatement);
-        cassandraSession.execute(boundStatement.bind(item.getId(),
+        cassandraSession.execute(boundStatement.bind(item.getItemId(),
                 item.getPersonId(),
                 item.getOrderDate(),
                 item.getTotalPrice()));
 
         for (InvoiceLine line : item.getOrderLine()) {
             boundStatement = new BoundStatement(insertLineStatement);
-            cassandraSession.execute(boundStatement.bind(line.getId(),
-                    item.getId(),
+            cassandraSession.execute(boundStatement.bind(line.getItemId(),
+                    item.getItemId(),
                     line.getAsin(),
                     line.getTitle(),
                     line.getPrice(),
@@ -137,7 +137,7 @@ public class InvoiceObjectDao extends ColumnObjectDao<InvoiceItem> {
                     ItemController<InvoiceLine> ilController = modelController.getItemController(InvoiceLine.class);
 
                     for (InvoiceLine orderLine : orderLines) {
-                        orderLine.setId(generateID());
+                        orderLine.setItemId(generateID());
                         ilController.create(orderLine);
                     }
                 }
@@ -186,7 +186,7 @@ public class InvoiceObjectDao extends ColumnObjectDao<InvoiceItem> {
                 item.getPersonId(),
                 item.getOrderDate(),
                 item.getTotalPrice(),
-                item.getId()));
+                item.getItemId()));
 
         for (InvoiceLine line : item.getOrderLine()) {
             boundStatement = new BoundStatement(updateLineStatement);
@@ -195,11 +195,11 @@ public class InvoiceObjectDao extends ColumnObjectDao<InvoiceItem> {
                     line.getTitle(),
                     line.getPrice(),
                     line.getBrand(),
-                    line.getId()
+                    line.getItemId()
             ));
         }
 
-        return getByID(item.getId());
+        return getByID(item.getItemId());
     }
 
     @Override

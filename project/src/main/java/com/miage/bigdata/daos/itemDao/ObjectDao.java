@@ -104,7 +104,7 @@ public abstract class ObjectDao<T extends Item, U extends ModelDbDao> {
         List<T> items = loadDataFile();
         for (T item : items) {
             if(item != null) {
-                item.setId(generateID());
+                item.setItemId(generateID());
                 create(item);
             }
         }

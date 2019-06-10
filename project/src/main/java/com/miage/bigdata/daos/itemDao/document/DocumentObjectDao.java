@@ -88,7 +88,7 @@ public abstract class DocumentObjectDao<T extends DocumentItem> extends ObjectDa
     public T update(T item) {
         MongoCollection collection = getCollection();
 
-        UpdateResult updateResult = collection.replaceOne(eq("id", item.getId()), item.toDocument());
+        UpdateResult updateResult = collection.replaceOne(eq("id", item.getItemId()), item.toDocument());
 
         if (updateResult.getModifiedCount() != 0) {
             return item;
@@ -104,9 +104,9 @@ public abstract class DocumentObjectDao<T extends DocumentItem> extends ObjectDa
         int newID = 1;
 
         if (list.size() != 0) {
-            list.sort(Comparator.comparingInt(o -> Integer.parseInt(o.getId())));
+            list.sort(Comparator.comparingInt(o -> Integer.parseInt(o.getItemId())));
 
-            newID = Integer.parseInt(list.get(list.size()-1).getId()) + 1;
+            newID = Integer.parseInt(list.get(list.size()-1).getItemId()) + 1;
         }
 
         if (newID <= lastNextID) {

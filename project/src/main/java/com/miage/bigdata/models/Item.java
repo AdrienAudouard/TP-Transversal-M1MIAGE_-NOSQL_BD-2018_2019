@@ -11,11 +11,11 @@ public abstract class Item {
     public Item(String json) { }
 
     @XmlElement(name = "OrderId")
-    public String getId() {
+    public String getItemId() {
         return itemId;
     }
 
-    public void setId(String itemId) {
+    public void setItemId(String itemId) {
         this.itemId = itemId;
     }
 

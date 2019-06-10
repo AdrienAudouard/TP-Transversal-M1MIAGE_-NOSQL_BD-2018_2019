@@ -77,45 +77,45 @@ public abstract class GraphObjectDao<T extends GraphItem> extends ObjectDao<T, G
     }
 
     public void addKnow(Person p1, Person p2) {
-        String query = "g.V('" + p1.getId() + "').addE('knows').to(g.V('" + p2.getId() + "'))";
+        String query = "g.V('" + p1.getItemId() + "').addE('knows').to(g.V('" + p2.getItemId() + "'))";
         this.client.submit(query);
     }
 
     public void addHas(Person p, Tag t) {
-        String query = "g.V('" + p.getId() + "').addE('has').to(g.V('" + t.getId() + "'))";
+        String query = "g.V('" + p.getItemId() + "').addE('has').to(g.V('" + t.getItemId() + "'))";
         this.client.submit(query);
     }
 
     public void addCreated(Post post, Person person) {
-        String query = "g.V('" + post.getId() + "').addE('created').to(g.V('" + person.getId() + "'))";
+        String query = "g.V('" + post.getItemId() + "').addE('created').to(g.V('" + person.getItemId() + "'))";
         this.client.submit(query);
     }
 
     public List<Person> createdBy(Post post) {
-        String query = "g.V('" + post.getId() + "').out('created').hasLabel('person')";
+        String query = "g.V('" + post.getItemId() + "').out('created').hasLabel('person')";
 
         return getPeopleFromQuery(query);
     }
 
     public List<Post> hasCreated(Person person) {
-        String query = "g.V('"+ person.getId() +"').in('created').hasLabel('post')";
+        String query = "g.V('"+ person.getItemId() +"').in('created').hasLabel('post')";
 
         return getPostsFromQuery(query);
     }
 
     public void addHas(Post p, Tag t) {
-        String query = "g.V('" + p.getId() + "').addE('has').to(g.V('" + t.getId() + "'))";
+        String query = "g.V('" + p.getItemId() + "').addE('has').to(g.V('" + t.getItemId() + "'))";
         this.client.submit(query);
     }
 
     public List<Person> peoplesHas(Tag tag) {
-        String query = "g.V('" + tag.getId() + "').in('has').hasLabel('person')";
+        String query = "g.V('" + tag.getItemId() + "').in('has').hasLabel('person')";
 
         return getPeopleFromQuery(query);
     }
 
     public List<Post> postHas(Tag tag) {
-        String query = "g.V('" + tag.getId() + "').in('has').hasLabel('post')";
+        String query = "g.V('" + tag.getItemId() + "').in('has').hasLabel('post')";
 
         return getPostsFromQuery(query);
     }
@@ -133,7 +133,7 @@ public abstract class GraphObjectDao<T extends GraphItem> extends ObjectDao<T, G
     }
 
     public List<Tag> tagsOn(Post p) {
-        return getTagsFromItemId(p.getId());
+        return getTagsFromItemId(p.getItemId());
     }
 
     private List<Tag> getTagsFromItemId(String id) {
@@ -151,7 +151,7 @@ public abstract class GraphObjectDao<T extends GraphItem> extends ObjectDao<T, G
     }
 
     public List<Tag> tagsOn(Person p) {
-        return getTagsFromItemId(p.getId());
+        return getTagsFromItemId(p.getItemId());
     }
 
     private List<Person> getPeopleFromQuery(String query) {
@@ -168,7 +168,7 @@ public abstract class GraphObjectDao<T extends GraphItem> extends ObjectDao<T, G
 
     // Return all the persons that knows p1
     public List<Person> knows(Person p1) {
-        String query = "g.V('" + p1.getId() + "').out('knows').hasLabel('person')";
+        String query = "g.V('" + p1.getItemId() + "').out('knows').hasLabel('person')";
 
         return getPeopleFromQuery(query);
     }

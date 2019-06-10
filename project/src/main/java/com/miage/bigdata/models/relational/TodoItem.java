@@ -43,7 +43,7 @@ public class TodoItem extends RelationalItem {
         this.complete = complete;
     }
 
-    public void setId(String id) {
+    public void setItemId(String id) {
         this.itemId = id;
     }
 

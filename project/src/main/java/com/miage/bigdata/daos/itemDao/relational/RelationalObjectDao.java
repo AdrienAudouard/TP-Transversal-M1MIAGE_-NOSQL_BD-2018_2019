@@ -87,7 +87,7 @@ public abstract class RelationalObjectDao<T extends RelationalItem> extends Obje
 
     @Override
     public T update(T item) {
-        Document document = getDocumentById(item.getId());
+        Document document = getDocumentById(item.getItemId());
 
         document = item.updateDocument(document);
 

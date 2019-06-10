@@ -40,11 +40,11 @@ public class RelationalMain {
         System.out.println("------------ Delete all items ------------");
 
         System.out.println("Success: " + tdiController.delete(
-                item.getId(),
-                item2.getId(),
-                item3.getId(),
-                item4.getId(),
-                item5.getId()
+                item.getItemId(),
+                item2.getItemId(),
+                item3.getItemId(),
+                item4.getItemId(),
+                item5.getItemId()
                 )
         );
     }

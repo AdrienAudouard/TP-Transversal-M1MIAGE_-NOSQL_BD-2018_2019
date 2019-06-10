@@ -52,7 +52,7 @@ public class OrderItem extends DocumentItem {
         ArrayList<Document> documents = new ArrayList<>();
 
         for (ProductItem orderLine : orderLines) {
-            Document dbRef = new Document("_id", orderLine.getId());
+            Document dbRef = new Document("_id", orderLine.getItemId());
             documents.add(dbRef);
         }
 

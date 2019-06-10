@@ -41,7 +41,7 @@ public class OrderObjectDao extends DocumentObjectDao<OrderItem> {
         List<OrderItem> orders = loadDataFile();
         for (OrderItem order : orders) {
             if(order != null) {
-                order.setId(generateID());
+                order.setItemId(generateID());
                 List<ProductItem> orderLines = order.getOrderLines();
 
                 if(orderLines.size() > 0) {
@@ -50,7 +50,7 @@ public class OrderObjectDao extends DocumentObjectDao<OrderItem> {
                     piController.deleteTable();
                     piController.createTable();
                     for (ProductItem orderLine : orderLines) {
-                        orderLine.setId(generateID());
+                        orderLine.setItemId(generateID());
                         piController.create(orderLine);
                     }
                 }
