@@ -2,6 +2,9 @@ package com.miage.bigdata.models.graph;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.miage.bigdata.models.Item;
+import com.miage.bigdata.utils.CsvConfig;
+import com.opencsv.bean.HeaderColumnNameMappingStrategy;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,6 +17,16 @@ public class Post extends GraphItem {
     private final String browserUsed;
     private final String content;
     private final int length;
+    private CsvConfig csvConfig;
+
+    public Post() {
+        initCsvConfig();
+
+        location = "";
+        browserUsed = "";
+        content = "";
+        length = 0;
+    }
 
     public Post(String json) {
         super(json);
@@ -21,6 +34,8 @@ public class Post extends GraphItem {
         JsonParser jsonParser = new JsonParser();
         JsonObject jo = (JsonObject)jsonParser.parse(json);
         JsonObject properties = jo.getAsJsonObject("properties");
+
+
 
         SimpleDateFormat format = new SimpleDateFormat(
                 "EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
@@ -79,5 +94,16 @@ public class Post extends GraphItem {
                 ", length=" + length +
                 ", id='" + itemId + '\'' +
                 "} ";
+    }
+
+    private void initCsvConfig() {
+        HeaderColumnNameMappingStrategy strategy = new HeaderColumnNameMappingStrategy<>();
+        strategy.setType(this.getClass());
+        csvConfig = new CsvConfig('|','\"',strategy);
+    }
+
+    @Override
+    public String getPathFileData() {
+        return Item.getDataPath() + "socialNetwork/post_0_0.csv";
     }
 }

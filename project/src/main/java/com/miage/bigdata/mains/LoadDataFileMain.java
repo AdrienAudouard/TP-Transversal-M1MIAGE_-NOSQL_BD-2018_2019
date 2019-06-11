@@ -1,11 +1,13 @@
 package com.miage.bigdata.mains;
 
+import com.miage.bigdata.controllers.item.GraphItemController;
 import com.miage.bigdata.controllers.item.ItemController;
 import com.miage.bigdata.controllers.models.*;
 import com.miage.bigdata.models.column.InvoiceItem;
 import com.miage.bigdata.models.column.InvoiceLine;
 import com.miage.bigdata.models.document.OrderItem;
 import com.miage.bigdata.models.document.ProductItem;
+import com.miage.bigdata.models.graph.Post;
 import com.miage.bigdata.models.keyvalue.FeedbackItem;
 
 import java.util.List;
@@ -18,15 +20,18 @@ public class LoadDataFileMain {
     private static ItemController<FeedbackItem> feedbackItemItemController = modelController.getItemController(FeedbackItem.class);
     private static ItemController<InvoiceLine> invoiceLineItemController = modelController.getItemController(InvoiceLine.class);
     private static ItemController<InvoiceItem> invoiceItemItemController = modelController.getItemController(InvoiceItem.class);
+    private static GraphItemController<Post> postGraphItemController = (GraphItemController<Post>) modelController.getItemController(Post.class);
 
     public static void main(String args[]) {
         initController();
+
+        loadPost();
 
         //loadOrders();
 
         //loadProducts();
 
-        loadFeedbacks();
+        //loadFeedbacks();
 
         //loadInvoices();
 
@@ -36,12 +41,17 @@ public class LoadDataFileMain {
         }*/
     }
 
+    public static void loadPost() {
+        postGraphItemController.populateTable();
+    }
+
     public static void initController() {
         ItemController[] controllers = new ItemController[]{orderItemItemController,
                 productItemItemController,
                 feedbackItemItemController,
                 invoiceItemItemController,
-                invoiceLineItemController
+                invoiceLineItemController,
+                postGraphItemController
         };
 
         for (ItemController ctrl : controllers) {
