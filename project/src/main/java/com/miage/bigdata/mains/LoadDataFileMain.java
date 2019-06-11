@@ -72,7 +72,6 @@ public class LoadDataFileMain {
         }
     }
 
-    // TODO : Waiting Victor for run it
     public static void loadFeedbacks() {
         System.out.println("Loading Feedbacks data on DB...");
 

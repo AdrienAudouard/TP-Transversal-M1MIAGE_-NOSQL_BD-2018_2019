@@ -34,28 +34,34 @@ public class FeedbackItem extends KeyValueItem {
     //endregion
 
     //region Constructors
-    public FeedbackItem() {}
+    public FeedbackItem() {
+        initCsvConfig();
+    }
 
     public FeedbackItem(String partitionKey, String rowKey) {
         super(partitionKey, rowKey);
+        initCsvConfig();
     }
 
     public FeedbackItem(String partitionKey, String rowKey, double rating, String review) {
         super(partitionKey, rowKey);
         this.rating = rating;
         this.review = review;
+        initCsvConfig();
     }
 
     public FeedbackItem(String partitionKey, String rowKey, Date timestamp, double rating, String review) {
         super(partitionKey, rowKey, timestamp);
         this.rating = rating;
         this.review = review;
+        initCsvConfig();
     }
 
     public FeedbackItem(String partitionKey, String rowKey, Date timestamp, String eTag, double rating, String review) {
         super(partitionKey, rowKey, timestamp, eTag);
         this.rating = rating;
         this.review = review;
+        initCsvConfig();
     }
     //endregion
 
