@@ -1,9 +1,12 @@
 package com.miage.bigdata.models;
 
+import com.opencsv.bean.CsvBindByName;
+
 import javax.xml.bind.annotation.XmlElement;
 import java.io.File;
 
 public abstract class Item {
+    @CsvBindByName(column = "id")
     protected String itemId;
 
     public Item() {}
@@ -12,7 +15,7 @@ public abstract class Item {
 
     @XmlElement(name = "OrderId")
     public String getItemId() {
-        return itemId;
+        return itemId.replace("\"", "");
     }
 
     public void setItemId(String itemId) {

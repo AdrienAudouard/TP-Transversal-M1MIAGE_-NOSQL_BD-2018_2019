@@ -2,11 +2,12 @@ package com.miage.bigdata.mains;
 
 import com.miage.bigdata.controllers.item.GraphItemController;
 import com.miage.bigdata.controllers.item.ItemController;
-import com.miage.bigdata.controllers.models.*;
+import com.miage.bigdata.controllers.models.ModelController;
 import com.miage.bigdata.models.column.InvoiceItem;
 import com.miage.bigdata.models.column.InvoiceLine;
 import com.miage.bigdata.models.document.OrderItem;
 import com.miage.bigdata.models.document.ProductItem;
+import com.miage.bigdata.models.graph.Person;
 import com.miage.bigdata.models.graph.Post;
 import com.miage.bigdata.models.keyvalue.FeedbackItem;
 
@@ -21,11 +22,14 @@ public class LoadDataFileMain {
     private static ItemController<InvoiceLine> invoiceLineItemController = modelController.getItemController(InvoiceLine.class);
     private static ItemController<InvoiceItem> invoiceItemItemController = modelController.getItemController(InvoiceItem.class);
     private static GraphItemController<Post> postGraphItemController = (GraphItemController<Post>) modelController.getItemController(Post.class);
+    private static GraphItemController<Person> personGraphItemController = (GraphItemController<Person>) modelController.getItemController(Person.class);
 
     public static void main(String args[]) {
         initController();
 
-        loadPost();
+        //loadPost();
+
+        loadGraphData();
 
         //loadOrders();
 
@@ -41,17 +45,29 @@ public class LoadDataFileMain {
         }*/
     }
 
-    public static void loadPost() {
+    public static void loadGraphData() {
+        personGraphItemController.populateTable();
         postGraphItemController.populateTable();
+
+        System.out.println(personGraphItemController.readAll().size() + "persons found on db");
+        System.out.println(postGraphItemController.readAll().size() + "posts found on db");
+
+        List<Post> posts = postGraphItemController.readAll();
+        List<Person> persons = personGraphItemController.readAll();
+
+        personGraphItemController.createPersonKnowsPerson(persons);
+
+        personGraphItemController.createpostHasCreator(persons, posts);
     }
 
     public static void initController() {
-        ItemController[] controllers = new ItemController[]{orderItemItemController,
-                productItemItemController,
-                feedbackItemItemController,
-                invoiceItemItemController,
-                invoiceLineItemController,
-                postGraphItemController
+        ItemController[] controllers = new ItemController[]{//orderItemItemController,
+               // productItemItemController,
+               // feedbackItemItemController,
+                //invoiceItemItemController,
+                //invoiceLineItemController,
+                postGraphItemController,
+                personGraphItemController
         };
 
         for (ItemController ctrl : controllers) {

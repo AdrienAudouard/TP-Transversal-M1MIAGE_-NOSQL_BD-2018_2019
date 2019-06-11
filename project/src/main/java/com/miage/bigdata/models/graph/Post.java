@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.miage.bigdata.models.Item;
 import com.miage.bigdata.utils.CsvConfig;
+import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.HeaderColumnNameMappingStrategy;
 
 import java.text.ParseException;
@@ -12,20 +13,21 @@ import java.util.Date;
 import java.util.Locale;
 
 public class Post extends GraphItem {
-    private Date createDate;
-    private final String location;
-    private final String browserUsed;
-    private final String content;
-    private final int length;
+    //@CsvBindByName(column = "creationDate")
+    //@CsvDate
+    private Date createDate = new Date();
+    @CsvBindByName
+    public String location;
+    @CsvBindByName
+    private String browserUsed;
+    @CsvBindByName
+    private String content;
+    @CsvBindByName
+    private int length;
     private CsvConfig csvConfig;
 
     public Post() {
         initCsvConfig();
-
-        location = "";
-        browserUsed = "";
-        content = "";
-        length = 0;
     }
 
     public Post(String json) {
@@ -99,7 +101,11 @@ public class Post extends GraphItem {
     private void initCsvConfig() {
         HeaderColumnNameMappingStrategy strategy = new HeaderColumnNameMappingStrategy<>();
         strategy.setType(this.getClass());
-        csvConfig = new CsvConfig('|','\"',strategy);
+        csvConfig = new CsvConfig('|','\'',strategy);
+    }
+
+    public CsvConfig getCsvConfig() {
+        return csvConfig;
     }
 
     @Override

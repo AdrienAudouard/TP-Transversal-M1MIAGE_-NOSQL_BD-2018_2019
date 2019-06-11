@@ -19,11 +19,6 @@ public class PersonObjectDao extends GraphObjectDao<Person> {
     }
 
     @Override
-    public boolean populateTable() {
-        return false;
-    }
-
-    @Override
     protected Class<Person> getItemClass() {
         return Person.class;
     }

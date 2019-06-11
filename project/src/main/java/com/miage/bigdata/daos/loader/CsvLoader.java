@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class CsvLoader<T extends Item> extends Loader<T> {
-
+//([0-9]{2}:[0-9]{2}:[0-9]{2}).[0-9]{3}\+[0-9]{4}
     @Override
     public List<T> load(Class<T> cl, String path) {
         try {

@@ -6,7 +6,6 @@ import com.microsoft.azure.storage.StorageException;
 import com.microsoft.azure.storage.table.CloudTable;
 
 import java.net.URISyntaxException;
-import java.util.List;
 import java.util.UUID;
 
 public class FeedbackObjectDao extends KeyValueObjectDao<FeedbackItem> {
@@ -50,17 +49,6 @@ public class FeedbackObjectDao extends KeyValueObjectDao<FeedbackItem> {
 
         return false;
     }
-
-    @Override
-    public boolean populateTable() {
-        List<FeedbackItem> feedbacks = loadDataFile();
-        for (FeedbackItem feedback : feedbacks) {
-            if(feedback != null) {
-                create(feedback);
-            }
-            return false;
-        }
-        return true;    }
 
     @Override
     public boolean deleteTable() {

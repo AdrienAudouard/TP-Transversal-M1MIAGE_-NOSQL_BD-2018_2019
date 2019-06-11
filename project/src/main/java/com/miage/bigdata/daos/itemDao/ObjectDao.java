@@ -104,10 +104,15 @@ public abstract class ObjectDao<T extends Item, U extends ModelDbDao> {
         List<T> items = loadDataFile();
         for (T item : items) {
             if(item != null) {
-                item.setItemId(generateID());
+                if (item.getItemId() == null) {
+                    item.setItemId(generateID());
+                }
+
                 create(item);
             }
         }
+
+        System.out.println(items.size() + " " + getItemClass().getSimpleName() + " inserted");
         return true;
     }
 

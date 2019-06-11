@@ -19,11 +19,6 @@ public class PostObjectDao extends GraphObjectDao<Post> {
     }
 
     @Override
-    public boolean populateTable() {
-        return false;
-    }
-
-    @Override
     protected Class<Post> getItemClass() {
         return Post.class;
     }

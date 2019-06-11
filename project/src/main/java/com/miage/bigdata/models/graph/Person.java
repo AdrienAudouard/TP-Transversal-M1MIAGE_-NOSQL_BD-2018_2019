@@ -2,6 +2,11 @@ package com.miage.bigdata.models.graph;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.miage.bigdata.models.Item;
+import com.miage.bigdata.utils.CsvConfig;
+import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvDate;
+import com.opencsv.bean.HeaderColumnNameMappingStrategy;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,14 +14,27 @@ import java.util.Date;
 import java.util.Locale;
 
 public class Person extends GraphItem {
+    @CsvBindByName
     private String firstName;
+    @CsvBindByName
     private String lastName;
+    @CsvBindByName
     private String gender;
-    private Date birthdate;
-    private Date createDate;
+    @CsvBindByName
+    @CsvDate
+    private Date birthdate = new Date();
+    private Date createDate = new Date();
+    @CsvBindByName(column = "locationIP")
     private String location;
+    @CsvBindByName
     private String browserUsed;
+    @CsvBindByName
     private int place;
+    private CsvConfig csvConfig;
+
+    public Person() {
+        initCsvConfig();
+    }
 
     public Person(String id, String firstName, String lastName, String gender, Date birthdate, String location, String browserUsed, int place) {
         this.createDate = new Date();
@@ -162,5 +180,20 @@ public class Person extends GraphItem {
                 ".property('location', '"+ location +"')" +
                 ".property('browserUsed', '"+ browserUsed +"')" +
                 ".property('place', "+ place +")";
+    }
+
+    private void initCsvConfig() {
+        HeaderColumnNameMappingStrategy strategy = new HeaderColumnNameMappingStrategy<>();
+        strategy.setType(this.getClass());
+        csvConfig = new CsvConfig('|','\'',strategy);
+    }
+
+    public CsvConfig getCsvConfig() {
+        return csvConfig;
+    }
+
+    @Override
+    public String getPathFileData() {
+        return Item.getDataPath() + "customer/person_0_0.csv";
     }
 }
