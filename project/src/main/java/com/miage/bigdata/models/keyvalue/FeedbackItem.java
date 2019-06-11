@@ -3,6 +3,7 @@ package com.miage.bigdata.models.keyvalue;
 import com.miage.bigdata.models.Item;
 import com.miage.bigdata.utils.CsvConfig;
 import com.opencsv.bean.ColumnPositionMappingStrategy;
+import com.opencsv.bean.HeaderColumnNameMappingStrategy;
 
 import java.util.Date;
 
@@ -35,6 +36,7 @@ public class FeedbackItem extends KeyValueItem {
 
     //region Constructors
     public FeedbackItem() {
+        super();
         initCsvConfig();
     }
 
@@ -67,10 +69,9 @@ public class FeedbackItem extends KeyValueItem {
 
     //region Methods
     private void initCsvConfig() {
-        ColumnPositionMappingStrategy strategy = new ColumnPositionMappingStrategy<>();
+        HeaderColumnNameMappingStrategy strategy = new HeaderColumnNameMappingStrategy<>();
         strategy.setType(this.getClass());
-        strategy.setColumnMapping(CsvConfig.getColumns(this.getClass()));
-        csvConfig = new CsvConfig('|','\'',strategy);
+        csvConfig = new CsvConfig(',','\'',strategy);
     }
 
     @Override

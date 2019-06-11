@@ -9,8 +9,6 @@ import com.microsoft.azure.storage.table.TableEntity;
 import com.microsoft.azure.storage.table.TableServiceEntity;
 
 import java.lang.reflect.InvocationTargetException;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -67,13 +65,14 @@ public abstract class KeyValueItem extends Item implements TableEntity {
     //endregion
 
     //region Constructors
-    public KeyValueItem() {}
+    public KeyValueItem() {
+        this.timestamp = new Date();
+    }
 
     public KeyValueItem(String partitionKey, String rowKey) {
         this.partitionKey = partitionKey;
         this.rowKey = rowKey;
         this.timestamp = new Date();
-        this.timestamp = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
 
     public KeyValueItem(String partitionKey, String rowKey, Date timestamp) {

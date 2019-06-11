@@ -30,7 +30,9 @@ public class CsvLoader<T extends Item> extends Loader<T> {
                     .build();
             CsvToBean<T> csv = new CsvToBean<>();
 
-            return csv.parse(csvConfig.getStrategy(), reader);
+            csv.setMappingStrategy(csvConfig.getStrategy());
+            csv.setCsvReader(reader);
+            return csv.parse();
         } catch (FileNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }

@@ -3,6 +3,9 @@ package com.miage.bigdata.utils;
 import com.opencsv.bean.AbstractMappingStrategy;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class CsvConfig {
     private char separator;
@@ -43,11 +46,20 @@ public class CsvConfig {
     }
 
     public static String[] getColumns(Class cl) {
-        Field[] fields = cl.getDeclaredFields();
-        String[] columns = new String[fields.length];
+        List<Field> declaredFields = Arrays.asList(cl.getDeclaredFields());
+        List<Field> fields = Arrays.asList(cl.getFields());
 
-        for (int i = 0; i < fields.length; i++) {
-            columns[i] = fields[i].getName();
+        ArrayList<Field> allFields = new ArrayList<>(declaredFields);
+        for (Field field : fields) {
+            if (!allFields.contains(field)) {
+                allFields.add(field);
+            }
+        }
+
+        String[] columns = new String[allFields.size()];
+
+        for (int i = 0; i < allFields.size(); i++) {
+            columns[i] = allFields.get(i).getName();
         }
 
         return columns;

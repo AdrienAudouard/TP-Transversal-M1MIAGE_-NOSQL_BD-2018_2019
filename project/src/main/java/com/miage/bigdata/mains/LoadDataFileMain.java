@@ -26,7 +26,7 @@ public class LoadDataFileMain {
 
         //loadProducts();
 
-        loadFeedbacks();
+        loadFeedbacks(); //FIXME
 
         //loadInvoices();
 
