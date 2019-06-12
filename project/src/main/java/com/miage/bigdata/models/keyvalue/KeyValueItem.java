@@ -20,6 +20,11 @@ public abstract class KeyValueItem extends Item implements TableEntity {
     protected String eTag;
 
     @Override
+    public String getItemId() {
+        return getFullKey();
+    }
+
+    @Override
     public String getPartitionKey() {
         return partitionKey;
     }
