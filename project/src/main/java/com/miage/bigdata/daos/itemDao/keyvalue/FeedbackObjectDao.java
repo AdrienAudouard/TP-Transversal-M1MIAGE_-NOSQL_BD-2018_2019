@@ -60,7 +60,8 @@ public class FeedbackObjectDao extends KeyValueObjectDao<FeedbackItem> {
             e.printStackTrace();
         }
 
-        return false;    }
+        return false;
+    }
 
     @Override
     protected Class<FeedbackItem> getItemClass() {
