@@ -2,6 +2,7 @@ package com.miage.bigdata.daos.itemDao.column;
 
 import com.datastax.driver.core.BoundStatement;
 import com.datastax.driver.core.PreparedStatement;
+import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Row;
 import com.miage.bigdata.controllers.item.ItemController;
 import com.miage.bigdata.controllers.models.ModelController;
@@ -166,13 +167,13 @@ public class InvoiceObjectDao extends ColumnObjectDao<InvoiceItem> {
     public boolean delete(String id) {
         prepareStatements();
 
-        Row row = getLineById(id);
+        // Row row = getLineById(id);
 
         BoundStatement boundStatement = new BoundStatement(deleteInvoiceStatement);
         cassandraSession.execute(boundStatement.bind(id));
 
-        boundStatement = new BoundStatement(deleteLineStatement);
-        cassandraSession.execute(boundStatement.bind(row.getString("productId")));
+        // boundStatement = new BoundStatement(deleteLineStatement);
+        // cassandraSession.execute(boundStatement.bind(row.getString("productId")));
 
         return true;
     }
@@ -223,8 +224,11 @@ public class InvoiceObjectDao extends ColumnObjectDao<InvoiceItem> {
                 "price DOUBLE, " +
                 "brand TEXT);";
 
-        this.cassandraSession.execute(createInvoice);
+        ResultSet res = this.cassandraSession.execute(createInvoice);
         this.cassandraSession.execute(createLine);
+
+        res.toString();
+
 
         return true;
     }

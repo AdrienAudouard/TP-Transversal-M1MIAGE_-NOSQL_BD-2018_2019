@@ -8,7 +8,7 @@ import com.miage.bigdata.models.column.InvoiceLine;
 import java.util.Date;
 
 public class ColumnMain {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         System.out.println(System.getProperty("java.home"));
         ColumnModelDbDao columnModelDbDao = new ColumnModelDbDao();
         InvoiceObjectDao invoiceObjectDao = new InvoiceObjectDao(columnModelDbDao);
@@ -23,9 +23,13 @@ public class ColumnMain {
 
         System.out.println("Success: " + invoiceObjectDao.deleteTable());
 
+        Thread.sleep(1000);
+
         System.out.println("------------ Create table ------------");
 
         System.out.println("Success: " + invoiceObjectDao.createTable());
+
+        Thread.sleep(1000);
 
         System.out.println("------------ Add Items ------------");
 
